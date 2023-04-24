@@ -40,10 +40,10 @@ public class Game extends Application {
 
             }
         });
-        Image icon = new Image(new FileInputStream("D:\\study\\java\\air_hockey_with_java\\src\\main\\java\\com\\example\\air_hockey_with_java\\icon.png"));
 
         // Add the icon to the list of icons for the stage
-        stage.getIcons().add(icon);
+        // Image icon = new Image(new FileInputStream("D:\\study\\java\\air_hockey_with_java\\src\\main\\java\\com\\example\\air_hockey_with_java\\icon.png"));
+        // stage.getIcons().add(icon);
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
         stage.setResizable(false);
