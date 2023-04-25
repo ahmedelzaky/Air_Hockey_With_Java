@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+
 public class Game extends Application {
     public final static int Height = 700;
     public final static int Width = (int) (Height * 0.5);
@@ -26,16 +27,26 @@ public class Game extends Application {
         scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case UP:
-                    p1.setCenterY(p1.getY() - 10);
+                    if (p1.getY() > 30) {
+                        p1.setCenterY(p1.getY() - 10);
+                    }
                     break;
                 case DOWN:
-                    p1.setCenterY(p1.getY() + 10);
+                    if (p1.getY() < Height / 2 - 30) {
+                        p1.setCenterY(p1.getY() + 10);
+                    }
                     break;
                 case LEFT:
-                    p1.setCenterX(p1.getX() - 10);
+                    if (p1.getX() > 35) {
+                        p1.setCenterX(p1.getX() - 10);
+                    }
+
                     break;
                 case RIGHT:
-                    p1.setCenterX(p1.getX() + 10);
+                    if (p1.getX() < Width - 35) {
+
+                        p1.setCenterX(p1.getX() + 10);
+                    }
                     break;
 
             }
@@ -53,5 +64,6 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 
 }
