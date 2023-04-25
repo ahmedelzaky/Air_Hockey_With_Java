@@ -27,8 +27,8 @@ public class Game extends Application {
         Scene scene = new Scene(game, Width, Height);
 
         // Add the icon to the list of icons for the stage
-        Image icon = new Image(new FileInputStream("D:\\study\\java\\air_hockey_with_java\\src\\main\\java\\com\\example\\air_hockey_with_java\\icon.png"));
-        stage.getIcons().add(icon);
+    //    Image icon = new Image(new FileInputStream("D:\\study\\java\\air_hockey_with_java\\src\\main\\java\\com\\example\\air_hockey_with_java\\icon.png"));
+     //   stage.getIcons().add(icon);
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
         stage.setResizable(false);
