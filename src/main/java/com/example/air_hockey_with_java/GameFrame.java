@@ -1,7 +1,5 @@
 package com.example.air_hockey_with_java;
 
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.effect.Bloom;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -22,30 +20,7 @@ public class GameFrame extends Pane {
         //center line
         Line line = new Line(0, (double) Height / 2, Width, (double) Height / 2);
         line.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
-/*
-        //corners lines
-        Line topLine = new Line(0, 0, Width, 0);
-        LinearGradient linearGradient = new LinearGradient(0, (double) Height / 2, Width, (double) Height / 2, false, CycleMethod.REFLECT, new Stop(0, Color.RED), new Stop(0.5, Color.BLUE), new Stop(1, Color.GREEN));
-        topLine.setStroke(linearGradient);
-        topLine.setStrokeWidth(10);
 
-
-        Line leftLine = new Line(0, 0, 0, Height);
-        LinearGradient leftlinearGradient = new LinearGradient(0, 0, 0, Height, false, CycleMethod.REFLECT, new Stop(0, Color.RED), new Stop(0.5, Color.BLUE), new Stop(1, Color.GREEN));
-        leftLine.setStroke(leftlinearGradient);
-        leftLine.setStrokeWidth(10);
-
-        Line bottomLine = new Line(Width, Height, 0, Height);
-        LinearGradient bottomlinearGradient = new LinearGradient(Width, Height, 0, Height, false, CycleMethod.REFLECT, new Stop(0, Color.RED), new Stop(0.5, Color.BLUE), new Stop(1, Color.GREEN));
-        bottomLine.setStroke(bottomlinearGradient);
-        bottomLine.setStrokeWidth(10);
-
-        Line rightLine = new Line(Width, Height, Width, 0);
-        LinearGradient rightlinearGradient = new LinearGradient(Width, Height, Width, 0, false, CycleMethod.REFLECT, new Stop(0, Color.RED), new Stop(0.5, Color.BLUE), new Stop(1, Color.GREEN));
-        rightLine.setStroke(rightlinearGradient);
-        rightLine.setStrokeWidth(10);
-
-       */
 
         //center circle
         Circle c = new Circle();
@@ -66,16 +41,12 @@ public class GameFrame extends Pane {
         this.getChildren().add(gline(Width, Height, Width, 0));
         //Bottom Border
         this.getChildren().add(gline(Width, Height, 0, Height));
-       /* this.getChildren().add(rightLine);
-        this.getChildren().add(leftLine);
-        this.getChildren().add(topLine);
-        this.getChildren().add(bottomLine);*/
+        //Top Arc
         this.getChildren().add(gArc(Width / 2, -1, 50, 52, 180, 180));
+        //Bottom Arc
         this.getChildren().add(gArc(Width / 2, Height + 1, 50, 52, 0, 180));
 
     }
-
-
 
 
     private Arc gArc(int x, int y, int xR, int yR, int a1, int a2) {

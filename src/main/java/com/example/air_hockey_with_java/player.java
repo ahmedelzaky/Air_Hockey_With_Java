@@ -1,15 +1,23 @@
 package com.example.air_hockey_with_java;
 
 import javafx.scene.effect.Bloom;
-import javafx.scene.paint.*;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class player extends Circle {
+    private int id;
+    private int step = 5;
 
-
-    player(int Y, int R, int G, int B) {
+    player(int id, int Y, int R, int G, int B) {
+        this.id = id;
         this.setCenterX((double) Width / 2);
         this.setCenterY(Y);
         this.setRadius(30);
@@ -21,22 +29,15 @@ public class player extends Circle {
         this.setFill(gradientFill);
     }
 
+ /*   public void keyPreesd(KeyEvent e) {
+        switch (id) {
+            case 1:
+                if (e.getCode() == KeyCode.UP ) {
+                    this.setCenterY(-step);
+                }
+        }
 
+    }*/
 
-    public double getX() {
-        return this.getCenterX();
-    }
-
-    public double getY() {
-        return this.getCenterY();
-    }
-
-    public void setY(int y) {
-        this.setCenterY(y);
-    }
-
-    public void setx(int x) {
-        this.setCenterX(x);
-    }
 
 }
