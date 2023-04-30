@@ -11,8 +11,8 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) {
-        player p1 = new player(1, 90, 0, 255, 255);
-        player p2 = new player(2, Height - 90, 102, 255, 51);
+        player p1 = new player(30, 1, 90, 0, 255, 255);
+        player p2 = new player(30, 2, Height - 90, 102, 255, 51);
         Ball ball = new Ball();
         GameFrame game = new GameFrame();
 

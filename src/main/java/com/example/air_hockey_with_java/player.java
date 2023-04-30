@@ -13,13 +13,13 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class player extends Circle {
     private final int id;
-    private double radius = 30;
 
-    player(int id, int Y, int R, int G, int B) {
+    player(double radius, int id, int Y, int R, int G, int B) {
+        super(radius);
         this.id = id;
         this.setCenterX((double) Width / 2);
         this.setCenterY(Y);
-        this.setRadius(radius);
+
 
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)),
                 new Stop(0.25, Color.rgb(0, 0, 0, 1)),
@@ -44,22 +44,22 @@ public class player extends Circle {
             }
             switch (event.getCode()) {
                 case UP:
-                    if (y - step >= radius) {
+                    if (y - step >= this.getRadius()) {
                         y -= step;
                     }
                     break;
                 case DOWN:
-                    if (y + step <= (double) Height / 2 - radius / 2) {
+                    if (y + step <= (double) Height / 2) {
                         y += step;
                     }
                     break;
                 case LEFT:
-                    if (x - step >= radius) {
+                    if (x - step >= this.getRadius()) {
                         x -= step;
                     }
                     break;
                 case RIGHT:
-                    if (x + step <= Width - radius) {
+                    if (x + step <= Width - this.getRadius()) {
                         x += step;
                     }
                     break;
@@ -75,22 +75,22 @@ public class player extends Circle {
             }
             switch (event.getCode()) {
                 case W:
-                    if (y - step >= (double) Height / 2 + radius / 2) {
+                    if (y - step >= (double) Height / 2 ) {
                         y -= step;
                     }
                     break;
                 case S:
-                    if (y + step <= Height - radius) {
+                    if (y + step <= Height - this.getRadius()) {
                         y += step;
                     }
                     break;
                 case A:
-                    if (x - step >= radius) {
+                    if (x - step >= this.getRadius()) {
                         x -= step;
                     }
                     break;
                 case D:
-                    if (x + step <= Width - radius) {
+                    if (x + step <= Width - this.getRadius()) {
                         x += step;
                     }
                     break;
