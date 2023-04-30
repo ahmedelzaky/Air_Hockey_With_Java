@@ -13,18 +13,20 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class player extends Circle {
     private final int id;
-    private int step;
-    private double x;
-    private double y;
-    private double radius;
+    private double radius = 30;
 
     player(int id, int Y, int R, int G, int B) {
         this.id = id;
         this.setCenterX((double) Width / 2);
         this.setCenterY(Y);
-        this.setRadius(30);
-        RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .8)));
-        // Set the fill and stroke of the player circle
+        this.setRadius(radius);
+
+        RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)),
+                new Stop(0.25, Color.rgb(0, 0, 0, 1)),
+                new Stop(0.3, Color.rgb(0, 0, 0, 1)),
+                new Stop(0.75, Color.rgb(R, G, B, 1)),
+                new Stop(1, Color.rgb(R, G, B, .5)));
+
         Bloom bloom = new Bloom();
         bloom.setThreshold(0.5);
         this.setEffect(bloom);
@@ -32,12 +34,9 @@ public class player extends Circle {
     }
 
     public void keyPreesd(KeyEvent event) {
-        x = this.getCenterX();
-        y = this.getCenterY();
-        radius = this.getRadius();
-        System.out.println(this.id);
-        step = 5;
-
+        double x = this.getCenterX();
+        double y = this.getCenterY();
+        int step = 5;
 
         if (id == 1) {
             if (event.isShiftDown()) {
@@ -50,7 +49,7 @@ public class player extends Circle {
                     }
                     break;
                 case DOWN:
-                    if (y + step <= (double) Height / 2 - radius) {
+                    if (y + step <= (double) Height / 2 - radius / 2) {
                         y += step;
                     }
                     break;
@@ -76,7 +75,7 @@ public class player extends Circle {
             }
             switch (event.getCode()) {
                 case W:
-                    if (y - step >= (double) Height / 2 + radius) {
+                    if (y - step >= (double) Height / 2 + radius / 2) {
                         y -= step;
                     }
                     break;

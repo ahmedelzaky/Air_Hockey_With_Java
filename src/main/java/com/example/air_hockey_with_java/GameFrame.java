@@ -17,6 +17,9 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class GameFrame extends Pane {
 
     GameFrame() {
+        //Background Color
+        this.setStyle("-fx-background-color:black");
+
         //center line
         Line line = new Line(0, (double) Height / 2, Width, (double) Height / 2);
         line.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
@@ -29,8 +32,6 @@ public class GameFrame extends Pane {
         c.setRadius(50);
         c.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
 
-
-        this.setStyle("-fx-background-color:black");
         this.getChildren().add(c);
         this.getChildren().add(line);
         //Top Border
@@ -65,14 +66,11 @@ public class GameFrame extends Pane {
                 new Stop(0.5, Color.rgb(57, 215, 111, 1)),
                 new Stop(.75, Color.rgb(235, 41, 99, 1)),
                 new Stop(1, Color.rgb(219, 18, 18, 1)));
-
         line.setStroke(linearGradient);
         line.setStrokeWidth(10);
         Bloom bloom = new Bloom();
         bloom.setThreshold(.9);
         line.setEffect(bloom);
-
-
         return line;
     }
 
