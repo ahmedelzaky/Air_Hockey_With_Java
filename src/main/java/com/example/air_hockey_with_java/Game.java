@@ -27,7 +27,7 @@ public class Game extends Application {
 //        stage.getIcons().add(icon);
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(false); // you can change size --> no
         stage.show();
 
    /*     scene.setOnMouseMoved(e -> {
