@@ -5,6 +5,10 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -18,6 +22,8 @@ public class Game extends Application {
     Player p1 = new Player(30, 1, 90, 0, 255, 255);
     Player p2 = new Player(30, 2, Height - 90, 102, 255, 51);
     Ball ball = new Ball();
+    Text p1Score = new Text();
+    Text p2Score = new Text();
     private Timeline ballAnimation;
 
 
@@ -29,6 +35,24 @@ public class Game extends Application {
         game.getChildren().add(p1);
         game.getChildren().add(p2);
         game.getChildren().add(ball);
+
+        p1Score.setText(String.valueOf(p1.getScore()));
+        p2Score.setText(String.valueOf(p2.getScore()));
+        p1Score.setFill(Color.WHITE);
+        p2Score.setFill(Color.WHITE);
+        p1Score.setFont(Font.font("Arial", 36));
+        p2Score.setFont(Font.font("Arial", 36));
+        VBox conter = new VBox(20);
+        conter.setPrefWidth(100);
+        conter.setLayoutX(Width - 30);
+        conter.setLayoutY(Height / 2 - 50);
+
+
+        conter.getChildren().add(p1Score);
+        conter.getChildren().add(p2Score);
+
+        game.getChildren().add(conter);
+
 
         Scene scene = new Scene(game, Width, Height);
 
@@ -69,15 +93,18 @@ public class Game extends Application {
                 // handle interrupted exception
             }
             p2.addPoint();
+
+            p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2 - 50);
         }
-        if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() + 2 * ball.getRadius() >= Height) {
+        if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() + 15 + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
             } catch (InterruptedException e) {
                 // handle interrupted exception
             }
             p1.addPoint();
+            p1Score.setText(String.valueOf(p1.getScore()));
             ball.rest(Height / 2 + 50);
         }
 

@@ -58,6 +58,7 @@ public class Player extends Circle {
                     if (y - step >= this.getRadius()) {
                         y -= step;
                         this.xVelocity = 0;
+                        this.yVelocity = -this.yVelocity;
 
                     }
                     break;
@@ -100,6 +101,7 @@ public class Player extends Circle {
                     if (y + step <= Height - this.getRadius()) {
                         y += step;
                         this.xVelocity = 0;
+                        this.yVelocity = -yVelocity;
 
                     }
                     break;
@@ -135,6 +137,7 @@ public class Player extends Circle {
     public int getScore() {
         return score;
     }
+
 
     public void setyVelocity(int yVelocity) {
         this.yVelocity = yVelocity;
