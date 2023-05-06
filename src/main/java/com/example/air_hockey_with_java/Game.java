@@ -33,7 +33,7 @@ public class Game extends Application {
         Scene scene = new Scene(game, Width, Height);
 
         // Add the icon to the list of icons for the stage
-        Image icon = new Image(new FileInputStream("image\\icon.png"));
+        Image icon = new Image(new FileInputStream("images\\icon.png"));
         stage.getIcons().add(icon);
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
@@ -52,7 +52,7 @@ public class Game extends Application {
             p2.keyPressed(e);
         });
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -62,7 +62,6 @@ public class Game extends Application {
 
     public void checkCollision() {
         System.out.println(p1.getScore() + " : " + p2.getScore());
-        //bounce ball off top & bottom window edges
         if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
@@ -92,7 +91,6 @@ public class Game extends Application {
         }
 
 
-        //bounce ball off paddles
         if (ball.intersects(p1)) {
             double ballCenterX = ball.getCenterX();
             double paddleCenterX = p1.getCenterX();
