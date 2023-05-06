@@ -22,13 +22,13 @@ public class Ball extends Circle {
     }
 
 
-    public boolean intersects(Player paddle) {
+    public boolean intersects(Player player) {
         double ballCenterX = getCenterX();
         double ballCenterY = getCenterY();
-        double paddleCenterX = paddle.getCenterX();
-        double paddleCenterY = paddle.getCenterY();
-        double distance = Math.sqrt(Math.pow(ballCenterX - paddleCenterX, 2) + Math.pow(ballCenterY - paddleCenterY, 2));
-        return distance <= getRadius() + paddle.getRadius();
+        double playerCenterX = player.getCenterX();
+        double playerCenterY = player.getCenterY();
+        double distance = Math.sqrt(Math.pow(ballCenterX - playerCenterX, 2) + Math.pow(ballCenterY - playerCenterY, 2));
+        return distance <= getRadius() + player.getRadius();
     }
 
     public void move() {
