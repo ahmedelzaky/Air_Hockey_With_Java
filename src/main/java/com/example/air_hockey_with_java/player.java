@@ -11,8 +11,11 @@ import javafx.scene.shape.Circle;
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
-public class Player extends Circle   {
+public class Player extends Circle {
     private final int id;
+    private int xVelocity = 5;
+    private int yVelocity = 5;
+    private int score = 0;
 
     Player(double radius, int id, int Y, int R, int G, int B) {
         super(radius);
@@ -34,24 +37,35 @@ public class Player extends Circle   {
     }
 
 
+    public int getPlayerId() {
+        return id;
+    }
+
     public void keyPressed(KeyEvent event) {
         double x = this.getCenterX();
         double y = this.getCenterY();
         int step = 5;
 
         if (id == 1) {
+
             if (event.isShiftDown()) {
                 step = 10;
+                xVelocity = 10;
+                yVelocity = 10;
             }
             switch (event.getCode()) {
                 case UP:
                     if (y - step >= this.getRadius()) {
                         y -= step;
+                        this.xVelocity = 0;
+
                     }
                     break;
                 case DOWN:
                     if (y + step <= (double) Height / 2) {
                         y += step;
+                        this.xVelocity = 0;
+
                     }
                     break;
                 case LEFT:
@@ -62,6 +76,7 @@ public class Player extends Circle   {
                 case RIGHT:
                     if (x + step <= Width - this.getRadius()) {
                         x += step;
+
                     }
                     break;
                 default:
@@ -78,21 +93,26 @@ public class Player extends Circle   {
                 case W:
                     if (y - step >= (double) Height / 2) {
                         y -= step;
+                        this.xVelocity = 0;
                     }
                     break;
                 case S:
                     if (y + step <= Height - this.getRadius()) {
                         y += step;
+                        this.xVelocity = 0;
+
                     }
                     break;
                 case A:
                     if (x - step >= this.getRadius()) {
                         x -= step;
+
                     }
                     break;
                 case D:
                     if (x + step <= Width - this.getRadius()) {
                         x += step;
+
                     }
                     break;
                 default:
@@ -102,7 +122,33 @@ public class Player extends Circle   {
             this.setCenterX(x);
         }
 
-    }}
+    }
+
+    public void setxVelocity(int xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public void addPoint() {
+        ++score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setyVelocity(int yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
+
+    public int getxVelocity() {
+        return xVelocity;
+    }
+
+    public int getyVelocity() {
+        return yVelocity;
+    }
+}
 
 
 

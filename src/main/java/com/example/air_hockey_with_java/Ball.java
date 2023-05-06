@@ -3,16 +3,16 @@ package com.example.air_hockey_with_java;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.util.Random;
-
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class Ball extends Circle {
 
-    private int xVelocity;
-    private int yVelocity;
+    private int Velocity = 0;
+    private int xVelocity = 0;
+    private int yVelocity = 0;
     int random;
+
     Ball() {
         this.setCenterX((double) Width / 2);
         this.setCenterY((double) Height / 2);
@@ -20,4 +20,55 @@ public class Ball extends Circle {
         this.setFill(Color.rgb(237, 228, 217));
 
     }
+
+
+    public boolean intersects(Player paddle) {
+        double ballCenterX = getCenterX();
+        double ballCenterY = getCenterY();
+        double paddleCenterX = paddle.getCenterX();
+        double paddleCenterY = paddle.getCenterY();
+        double distance = Math.sqrt(Math.pow(ballCenterX - paddleCenterX, 2) + Math.pow(ballCenterY - paddleCenterY, 2));
+        return distance <= getRadius() + paddle.getRadius();
+    }
+
+    public void move() {
+        double newCenterX = getCenterX() + getxVelocity();
+        double newCenterY = getCenterY() + getyVelocity();
+        setCenterX(newCenterX);
+        setCenterY(newCenterY);
+    }
+
+    public void rest(int y) {
+
+        this.setCenterX((double) Width / 2);
+        this.setCenterY(y);
+        this.xVelocity = 0;
+        this.yVelocity = 0;
+    }
+
+
+    public void setVelocity(int velocity) {
+        Velocity = velocity;
+    }
+
+    public void setxVelocity(int xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public void setyVelocity(int yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
+    public int getVelocity() {
+        return Velocity;
+    }
+
+    public int getxVelocity() {
+        return xVelocity;
+    }
+
+    public int getyVelocity() {
+        return yVelocity;
+    }
+
 }
