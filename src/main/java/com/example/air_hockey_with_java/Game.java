@@ -3,8 +3,11 @@ package com.example.air_hockey_with_java;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -12,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -26,6 +30,7 @@ public class Game extends Application {
     Text p2Score = new Text();
     private Timeline ballAnimation;
 
+    boolean mute = false;
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
@@ -42,14 +47,30 @@ public class Game extends Application {
         p2Score.setFill(Color.WHITE);
         p1Score.setFont(Font.font("Arial", 36));
         p2Score.setFont(Font.font("Arial", 36));
-        VBox conter = new VBox(20);
-        conter.setPrefWidth(100);
+        VBox conter = new VBox(10);
+        conter.setPrefWidth(150);
         conter.setLayoutX(Width - 30);
-        conter.setLayoutY(Height / 2 - 50);
+        conter.setLayoutY(Height / 2 - 75);
+        // music Button
+        Image muteimg = new Image(new FileInputStream("images\\mute.png"));
+        ImageView muteview = new ImageView(muteimg);
+        Image unmuteimg = new Image(new FileInputStream("images\\unmute.png"));
+        ImageView unmuteview = new ImageView(unmuteimg);
+        muteview.setFitHeight(30);
+        muteview.setFitWidth(30);
+        unmuteview.setFitHeight(30);
+        unmuteview.setFitWidth(30);
 
+        Button musicBtn = new Button();
+        musicBtn.setGraphic(unmuteview);
+        musicBtn.setLayoutY(Height/2);
+        musicBtn.setTranslateX(-22);
+        musicBtn.setTranslateY(5);
 
-        conter.getChildren().add(p1Score);
-        conter.getChildren().add(p2Score);
+        musicBtn.setStyle("-fx-background-color: black;");
+         p1Score.setTranslateY(5);
+        conter.getChildren().addAll(p1Score, musicBtn, p2Score);
+
 
         game.getChildren().add(conter);
 
@@ -59,6 +80,18 @@ public class Game extends Application {
         // Add the icon to the list of icons for the stage
         Image icon = new Image(new FileInputStream("images\\icon.png"));
         stage.getIcons().add(icon);
+
+/*
+        Media media = new Media("file:///path/to/audio/file.mp3");
+
+        // Create a MediaPlayer with the Media instance
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        // Play the audio
+        mediaPlayer.play();
+*/
+
+
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -70,10 +103,21 @@ public class Game extends Application {
             p1.setCenterX(e.getX());
         });*/
 
-
+        musicBtn.setOnAction(e -> {
+            mute = !mute;
+            if (mute) {
+                musicBtn.setGraphic(muteview);
+            } else {
+                musicBtn.setGraphic(unmuteview);
+            }
+        });
         scene.setOnKeyPressed(e -> {
             p1.keyPressed(e);
             p2.keyPressed(e);
+        });
+        scene.setOnKeyReleased(e -> {
+            p1.keyReleased(e);
+            p2.keyReleased(e);
         });
 
         ballAnimation = new Timeline(new KeyFrame(Duration.millis(20), e -> {
@@ -85,7 +129,7 @@ public class Game extends Application {
     }
 
     public void checkCollision() {
-        System.out.println(p1.getScore() + " : " + p2.getScore());
+        //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds

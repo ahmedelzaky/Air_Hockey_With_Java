@@ -41,7 +41,7 @@ public class Player extends Circle {
         return id;
     }
 
-    public void keyPressed(KeyEvent event) {
+    public void keyReleased(KeyEvent event) {
         double x = this.getCenterX();
         double y = this.getCenterY();
         int step = 5;
@@ -57,7 +57,7 @@ public class Player extends Circle {
                 case UP:
                     if (y - step >= this.getRadius()) {
                         y -= step;
-                        this.xVelocity = 0;
+                        //   this.xVelocity = 0;
                         this.yVelocity = -this.yVelocity;
 
                     }
@@ -65,7 +65,7 @@ public class Player extends Circle {
                 case DOWN:
                     if (y + step <= (double) Height / 2) {
                         y += step;
-                        this.xVelocity = 0;
+                        //   this.xVelocity = 0;
 
                     }
                     break;
@@ -89,19 +89,107 @@ public class Player extends Circle {
         } else if (id == 2) {
             if (event.isControlDown()) {
                 step = 10;
+                xVelocity = 10;
+                yVelocity = 10;
             }
             switch (event.getCode()) {
                 case W:
                     if (y - step >= (double) Height / 2) {
                         y -= step;
-                        this.xVelocity = 0;
+                        //  this.xVelocity = 0;
                     }
                     break;
                 case S:
                     if (y + step <= Height - this.getRadius()) {
                         y += step;
-                        this.xVelocity = 0;
+                        //  this.xVelocity = 0;
                         this.yVelocity = -yVelocity;
+
+                    }
+                    break;
+                case A:
+                    if (x - step >= this.getRadius()) {
+                        x -= step;
+
+                    }
+                    break;
+                case D:
+                    if (x + step <= Width - this.getRadius()) {
+                        x += step;
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            this.setCenterY(y);
+            this.setCenterX(x);
+        }
+
+    }
+
+
+    public void keyPressed(KeyEvent event) {
+        double x = this.getCenterX();
+        double y = this.getCenterY();
+        int step = 5;
+
+        if (id == 1) {
+
+            if (event.isShiftDown()) {
+                step = 10;
+                xVelocity = 10;
+                yVelocity = 10;
+            }
+            switch (event.getCode()) {
+                case UP:
+                    if (y - step >= this.getRadius()) {
+                        y -= step;
+                        //      this.xVelocity = 0;
+                        this.yVelocity = -this.yVelocity;
+
+                    }
+                    break;
+                case DOWN:
+                    if (y + step <= (double) Height / 2) {
+                        y += step;
+                        //     this.xVelocity = 0;
+
+                    }
+                    break;
+                case LEFT:
+                    if (x - step >= this.getRadius()) {
+                        x -= step;
+                    }
+                    break;
+                case RIGHT:
+                    if (x + step <= Width - this.getRadius()) {
+                        x += step;
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            this.setCenterY(y);
+            this.setCenterX(x);
+        } else if (id == 2) {
+            if (event.isControlDown()) {
+                step = 10;
+            }
+            switch (event.getCode()) {
+                case W:
+                    if (y - step >= (double) Height / 2) {
+                        y -= step;
+                        //  this.xVelocity = 0;
+
+                    }
+                    break;
+                case S:
+                    if (y + step <= Height - this.getRadius()) {
+                        y += step;
+                        //     this.xVelocity = 0;
+                        //   this.yVelocity = -yVelocity;
 
                     }
                     break;
