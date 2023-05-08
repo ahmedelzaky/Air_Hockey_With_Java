@@ -18,8 +18,9 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Player extends Circle {
     private final int id;
-    private int xVelocity = 5;
-    private int yVelocity = 5;
+    private int xVelocity;
+    private int yVelocity;
+    private int step;
     private int score = 0;
 
     private double balldx = 0;
@@ -43,8 +44,6 @@ public class Player extends Circle {
         bloom.setThreshold(0.5);
         this.setEffect(bloom);
         this.setFill(gradientFill);
-
-
 
 
     }
@@ -80,21 +79,27 @@ public class Player extends Circle {
 
 
     public void keyPressed(KeyEvent event) {
-
+        step = 5;
+        xVelocity = 5;
+        yVelocity = 5;
         if (id == 1) {
-
+            if (event.isShiftDown()) {
+                step = 10;
+                xVelocity = 10;
+                yVelocity = 10;
+            }
             switch (event.getCode()) {
                 case I:
-                    this.balldy = -3;
+                    this.balldy = -step;
                     break;
                 case K:
-                    this.balldy = 3;
+                    this.balldy = step;
                     break;
                 case J:
-                    this.balldx = -3;
+                    this.balldx = -step;
                     break;
                 case L:
-                    this.balldx = 3;
+                    this.balldx = step;
                     break;
                 default:
                     break;
@@ -102,18 +107,24 @@ public class Player extends Circle {
 
         } else if (id == 2) {
 
+            if (event.isControlDown()) {
+                step = 10;
+                xVelocity = 10;
+                yVelocity = 10;
+            }
+
             switch (event.getCode()) {
                 case W:
-                        this.balldy = -3;
+                    this.balldy = -step;
                     break;
                 case S:
-                       this.balldy = 3;
+                    this.balldy = step;
                     break;
                 case A:
-                        this.balldx = -3;
+                    this.balldx = -step;
                     break;
                 case D:
-                        this.balldx = 3;
+                    this.balldx = step;
                     break;
                 default:
                     break;
@@ -151,19 +162,17 @@ public class Player extends Circle {
     }
 
 
-
-    public void setlayout(ActionEvent event){
-        if(id ==1){
-            if(this.getCenterX() + this.balldx<(Width-this.getRadius()) && this.getCenterX() + this.balldx>this.getRadius())
+    public void Move(ActionEvent event) {
+        if (id == 1) {
+            if (this.getCenterX() + this.balldx < (Width - this.getRadius()) && this.getCenterX() + this.balldx > this.getRadius())
                 this.setCenterX(this.getCenterX() + this.balldx);
-            if(this.getCenterY() + this.balldy>this.getRadius() && this.getCenterY() + this.balldy<Height/2-this.getRadius())
+            if (this.getCenterY() + this.balldy > this.getRadius() && this.getCenterY() + this.balldy < Height / 2 - this.getRadius())
                 this.setCenterY(this.getCenterY() + this.balldy);
 
-        }
-        else if(id==2){
-            if(this.getCenterX() + this.balldx<(Width-this.getRadius()) && this.getCenterX() + this.balldx>this.getRadius())
+        } else if (id == 2) {
+            if (this.getCenterX() + this.balldx < (Width - this.getRadius()) && this.getCenterX() + this.balldx > this.getRadius())
                 this.setCenterX(this.getCenterX() + this.balldx);
-            if(this.getCenterY() + this.balldy>(Height/2 +this.getRadius()) && this.getCenterY() + this.balldy<Height-this.getRadius())
+            if (this.getCenterY() + this.balldy > (Height / 2 + this.getRadius()) && this.getCenterY() + this.balldy < Height - this.getRadius())
                 this.setCenterY(this.getCenterY() + this.balldy);
 
         }
