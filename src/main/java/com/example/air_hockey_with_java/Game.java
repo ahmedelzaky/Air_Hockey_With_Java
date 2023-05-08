@@ -120,6 +120,16 @@ public class Game extends Application {
             p2.keyReleased(e);
         });
 
+        Timeline panimation = new Timeline(new KeyFrame(Duration.millis(5),e ->{
+
+            p1.setlayout(e);
+            p2.setlayout(e);
+
+        })
+        );
+        panimation.setCycleCount(Timeline.INDEFINITE);
+        panimation.play();
+
         ballAnimation = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             checkCollision();
         }));
