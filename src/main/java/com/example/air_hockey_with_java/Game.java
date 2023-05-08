@@ -3,7 +3,6 @@ package com.example.air_hockey_with_java;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -15,7 +14,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -28,9 +26,7 @@ public class Game extends Application {
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
-    private Timeline ballAnimation;
 
-    boolean mute = false;
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
@@ -51,25 +47,17 @@ public class Game extends Application {
         conter.setPrefWidth(150);
         conter.setLayoutX(Width - 30);
         conter.setLayoutY(Height / 2 - 75);
-        // music Button
-        Image muteimg = new Image(new FileInputStream("images\\mute.png"));
-        ImageView muteview = new ImageView(muteimg);
-        Image unmuteimg = new Image(new FileInputStream("images\\unmute.png"));
-        ImageView unmuteview = new ImageView(unmuteimg);
-        muteview.setFitHeight(30);
-        muteview.setFitWidth(30);
-        unmuteview.setFitHeight(30);
-        unmuteview.setFitWidth(30);
 
-        Button musicBtn = new Button();
-        musicBtn.setGraphic(unmuteview);
-        musicBtn.setLayoutY(Height/2);
-        musicBtn.setTranslateX(-22);
-        musicBtn.setTranslateY(5);
+        Button menuBtn = new Button();
+        Image menuimg = new Image(new FileInputStream("images\\menu.png"));
+        ImageView menuview = new ImageView(menuimg);
+        menuBtn.setGraphic(menuview);
+        menuBtn.setTranslateX(-19);
+        menuBtn.setTranslateY(4);
+        menuBtn.setStyle("-fx-background-color: transparent;");
+        p2Score.setTranslateY(10);
 
-        musicBtn.setStyle("-fx-background-color: black;");
-         p1Score.setTranslateY(5);
-        conter.getChildren().addAll(p1Score, musicBtn, p2Score);
+        conter.getChildren().addAll(p1Score, menuBtn, p2Score);
 
 
         game.getChildren().add(conter);
@@ -103,14 +91,7 @@ public class Game extends Application {
             p1.setCenterX(e.getX());
         });*/
 
-        musicBtn.setOnAction(e -> {
-            mute = !mute;
-            if (mute) {
-                musicBtn.setGraphic(muteview);
-            } else {
-                musicBtn.setGraphic(unmuteview);
-            }
-        });
+
         scene.setOnKeyPressed(e -> {
             p1.keyPressed(e);
             p2.keyPressed(e);
@@ -119,18 +100,14 @@ public class Game extends Application {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
+        Timeline playersAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+            p1.Move(e);
+            p2.Move(e);
+        }));
+        playersAnimation.setCycleCount(Timeline.INDEFINITE);
+        playersAnimation.play();
 
-        Timeline panimation = new Timeline(new KeyFrame(Duration.millis(5),e ->{
-
-            p1.setlayout(e);
-            p2.setlayout(e);
-
-        })
-        );
-        panimation.setCycleCount(Timeline.INDEFINITE);
-        panimation.play();
-
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(20), e -> {
+        Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -164,35 +141,21 @@ public class Game extends Application {
 
         if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - 2 * ball.getRadius()) {
             ball.setyVelocity(-ball.getyVelocity());
-
         }
-        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
 
+        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
             ball.setxVelocity(-ball.getxVelocity());
         }
 
-
         if (ball.intersects(p1)) {
-            double ballCenterX = ball.getCenterX();
-            double paddleCenterX = p1.getCenterX();
-            double ballVelocityX = ball.getxVelocity();
-            double ballVelocityY = ball.getyVelocity();
-            double newVelocityX = (ballCenterX - paddleCenterX) / 5;
-            double newVelocityY = Math.sqrt(25 - Math.pow(newVelocityX, 2));
             ball.setxVelocity(p1.getxVelocity());
             ball.setyVelocity(p1.getyVelocity());
         }
+
         if (ball.intersects(p2)) {
-            double ballCenterX = ball.getCenterX();
-            double paddleCenterX = p2.getCenterX();
-            double ballVelocityX = ball.getxVelocity();
-            double ballVelocityY = ball.getyVelocity();
-            double newVelocityX = (ballCenterX - paddleCenterX) / 5;
-            double newVelocityY = -Math.sqrt(25 - Math.pow(newVelocityX, 2));
             ball.setxVelocity(p2.getxVelocity());
             ball.setyVelocity(-p2.getyVelocity());
         }
-
         // move the ball
         ball.move();
     }
