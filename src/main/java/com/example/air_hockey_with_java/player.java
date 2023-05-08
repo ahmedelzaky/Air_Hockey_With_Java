@@ -41,7 +41,7 @@ public class Player extends Circle {
                 new Stop(1, Color.rgb(R, G, B, .5)));
 
         Bloom bloom = new Bloom();
-        bloom.setThreshold(0.5);
+        bloom.setThreshold(0.6);
         this.setEffect(bloom);
         this.setFill(gradientFill);
 

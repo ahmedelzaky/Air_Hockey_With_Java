@@ -21,8 +21,8 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
-    Player p1 = new Player(30, 1, 90, 0, 255, 255);
-    Player p2 = new Player(30, 2, Height - 90, 102, 255, 51);
+    Player p1 = new Player(30, 1, 90, 9, 251, 211);
+    Player p2 = new Player(30, 2, Height - 90, 235, 248, 117);
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
@@ -55,6 +55,13 @@ public class Game extends Application {
         menuBtn.setTranslateX(-19);
         menuBtn.setTranslateY(4);
         menuBtn.setStyle("-fx-background-color: transparent;");
+
+        menuBtn.setOnAction( e->{
+
+        });
+
+
+
         p2Score.setTranslateY(10);
 
         conter.getChildren().addAll(p1Score, menuBtn, p2Score);
@@ -95,6 +102,7 @@ public class Game extends Application {
         scene.setOnKeyPressed(e -> {
             p1.keyPressed(e);
             p2.keyPressed(e);
+
         });
         scene.setOnKeyReleased(e -> {
             p1.keyReleased(e);
