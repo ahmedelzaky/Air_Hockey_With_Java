@@ -18,7 +18,7 @@ public class Player extends Circle {
     private int xVelocity;
     private int yVelocity;
     private int score = 0;
-    private double bloomValue  = .6;
+    private double bloomValue = .6;
 
     private double Xoffset = 0;
     private double Yoffset = 0;
@@ -31,11 +31,7 @@ public class Player extends Circle {
         this.setCenterY(Y);
 
 
-        RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)),
-                new Stop(0.25, Color.rgb(0, 0, 0, 1)),
-                new Stop(0.3, Color.rgb(0, 0, 0, 1)),
-                new Stop(0.75, Color.rgb(R, G, B, 1)),
-                new Stop(1, Color.rgb(R, G, B, .5)));
+        RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .5)));
 
         Bloom bloom = new Bloom();
         bloom.setThreshold(bloomValue);
@@ -90,7 +86,7 @@ public class Player extends Circle {
             switch (event.getCode()) {
                 case I:
                     this.Yoffset = -step;
-                    yVelocity = -yVelocity;
+
 
                     break;
                 case K:
@@ -121,7 +117,7 @@ public class Player extends Circle {
                     break;
                 case S:
                     this.Yoffset = step;
-                    yVelocity = -yVelocity;
+
                     break;
                 case A:
                     this.Xoffset = -step;
