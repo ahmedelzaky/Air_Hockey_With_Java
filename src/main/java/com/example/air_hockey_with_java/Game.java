@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -22,13 +21,13 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
-    GameFrame game = new GameFrame();
-
-    Player p1 = new Player(30, 1, 90, 9, 251, 211);
-    Player p2 = new Player(30, 2, Height - 90, 235, 248, 117);
+    Player p1 = new Player(30, 1, 90, 0, 255, 255);
+    Player p2 = new Player(30, 2, Height - 90, 102, 255, 51);
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
+    private Timeline ballAnimation;
+    GameFrame game = new GameFrame();
 
 
     @Override
@@ -49,22 +48,21 @@ public class Game extends Application {
         conter.setPrefWidth(150);
         conter.setLayoutX(Width - 30);
         conter.setLayoutY(Height / 2 - 75);
-
+        // menu Button
         Button menuBtn = new Button();
         Image menuimg = new Image(new FileInputStream("images\\menu.png"));
-        ImageView menuview = new ImageView(menuimg);
-        menuBtn.setGraphic(menuview);
-        menuBtn.setTranslateX(-19);
-        menuBtn.setTranslateY(4);
+        ImageView menueview = new ImageView(menuimg);
+        menueview.setFitHeight(30);
+        menueview.setFitWidth(30);
+
+
+        menuBtn.setGraphic(menueview);
+        menuBtn.setLayoutY(Height / 2);
+        menuBtn.setTranslateX(-15);
+        menuBtn.setTranslateY(5);
+
         menuBtn.setStyle("-fx-background-color: transparent;");
-
-        menuBtn.setOnAction(e -> {
-
-        });
-
-
-        p2Score.setTranslateY(10);
-
+        p1Score.setTranslateY(5);
         conter.getChildren().addAll(p1Score, menuBtn, p2Score);
 
 
@@ -99,24 +97,26 @@ public class Game extends Application {
             p1.setCenterX(e.getX());
         });*/
 
-
         scene.setOnKeyPressed(e -> {
             p1.keyPressed(e);
             p2.keyPressed(e);
-
         });
         scene.setOnKeyReleased(e -> {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
-        Timeline playersAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+
+        Timeline panimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+
             p1.Move();
             p2.Move();
-        }));
-        playersAnimation.setCycleCount(Timeline.INDEFINITE);
-        playersAnimation.play();
 
-        Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+        })
+        );
+        panimation.setCycleCount(Timeline.INDEFINITE);
+        panimation.play();
+
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
