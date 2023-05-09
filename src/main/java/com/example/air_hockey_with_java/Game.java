@@ -5,6 +5,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -29,10 +30,10 @@ public class Game extends Application {
     private Timeline ballAnimation;
     GameFrame game = new GameFrame();
 
+    LoadingBar progressBar = new LoadingBar();
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
-
 
         game.getChildren().add(p1);
         game.getChildren().add(p2);
@@ -67,6 +68,9 @@ public class Game extends Application {
 
 
         game.getChildren().add(conter);
+
+        game.getChildren().add(progressBar);
+        progressBar.animationPlay();
 
 
         Scene scene = new Scene(game, Width, Height);
@@ -125,6 +129,9 @@ public class Game extends Application {
     }
 
     public void checkCollision() {
+        if (progressBar.finish()){
+            game.getChildren().remove(progressBar);
+        }
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
@@ -220,6 +227,7 @@ public class Game extends Application {
         // move the ball
         ball.move();
     }
+
 
 
     public static void main(String[] args) {
