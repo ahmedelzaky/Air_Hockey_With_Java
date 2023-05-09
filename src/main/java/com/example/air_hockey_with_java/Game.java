@@ -27,8 +27,9 @@ public class Game extends Application {
     Text p1Score = new Text();
     Text p2Score = new Text();
     private Timeline ballAnimation;
-    private Timeline panimation;
-    private Timeline loading;
+    private Timeline playerAnimation;
+
+    private Timeline resetChecker;
     private boolean clicked = false;
     Menu menu = new Menu();
     GameFrame game = new GameFrame();
@@ -121,12 +122,12 @@ public class Game extends Application {
         });
 
 
-        panimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+        playerAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             p1.Move();
             p2.Move();
         })
         );
-        panimation.setCycleCount(Timeline.INDEFINITE);
+        playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
         ballAnimation = new Timeline(new KeyFrame(Duration.millis(13), e -> {
@@ -140,6 +141,12 @@ public class Game extends Application {
         }));
         loading.setCycleCount(Timeline.INDEFINITE);
         loading.play();
+
+        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+            gameReset();
+        }));
+        resetChecker.setCycleCount(Timeline.INDEFINITE);
+        resetChecker.play();
 
     }
 
@@ -256,13 +263,13 @@ public class Game extends Application {
         if (!clicked) {
             game.getChildren().add(menu);
             clicked = !clicked;
-            panimation.pause();
+            playerAnimation.pause();
             ballAnimation.pause();
 
         } else {
             game.getChildren().remove(menu);
             clicked = !clicked;
-            panimation.play();
+            playerAnimation.play();
             ballAnimation.play();
         }
     }
@@ -272,14 +279,17 @@ public class Game extends Application {
     public void loadingAnimation() {
         if (progressBar.finish() && !visited) {
             game.getChildren().remove(progressBar);
-            panimation.play();
+            playerAnimation.play();
             ballAnimation.play();
             visited = !visited;
 
         }
+
+    }
+
+    public void gameReset() {
         if (menu.isResetValue()) {
             menu.setResetValue(false);
-
             p1.rest();
             p2.rest();
             p1Score.setText(String.valueOf(p1.getScore()));
@@ -287,7 +297,7 @@ public class Game extends Application {
             ball.rest(Height / 2);
             game.getChildren().remove(menu);
             clicked = !clicked;
-            panimation.play();
+            playerAnimation.play();
             ballAnimation.play();
         }
     }
