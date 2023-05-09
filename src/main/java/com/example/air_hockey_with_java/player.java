@@ -1,7 +1,5 @@
 package com.example.air_hockey_with_java;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.scene.effect.Bloom;
 import javafx.scene.input.KeyCode;
@@ -11,7 +9,6 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
@@ -20,11 +17,11 @@ public class Player extends Circle {
     private final int id;
     private int xVelocity;
     private int yVelocity;
-    private int step;
     private int score = 0;
+    private double bloomValue  = .6;
 
-    private double balldx = 0;
-    private double balldy = 0;
+    private double Xoffset = 0;
+    private double Yoffset = 0;
 
 
     Player(double radius, int id, int Y, int R, int G, int B) {
@@ -41,13 +38,15 @@ public class Player extends Circle {
                 new Stop(1, Color.rgb(R, G, B, .5)));
 
         Bloom bloom = new Bloom();
-        bloom.setThreshold(0.6);
+        bloom.setThreshold(bloomValue);
         this.setEffect(bloom);
         this.setFill(gradientFill);
 
-
     }
 
+    public void setBloomValue(double bloomValue) {
+        this.bloomValue = bloomValue;
+    }
 
     public int getPlayerId() {
         return id;
@@ -59,18 +58,18 @@ public class Player extends Circle {
         if (id == 1) {
 
             if (event.getCode() == KeyCode.I || event.getCode() == KeyCode.K) {
-                this.balldy = 0;
+                this.Yoffset = 0;
             } else if (event.getCode() == KeyCode.J || event.getCode() == KeyCode.L) {
-                this.balldx = 0;
+                this.Xoffset = 0;
             }
 
 
         } else if (id == 2) {
 
             if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.S) {
-                this.balldy = 0;
+                this.Yoffset = 0;
             } else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.D) {
-                this.balldx = 0;
+                this.Xoffset = 0;
             }
 
         }
@@ -79,7 +78,7 @@ public class Player extends Circle {
 
 
     public void keyPressed(KeyEvent event) {
-        step = 5;
+        int step = 5;
         xVelocity = 5;
         yVelocity = 5;
         if (id == 1) {
@@ -90,16 +89,19 @@ public class Player extends Circle {
             }
             switch (event.getCode()) {
                 case I:
-                    this.balldy = -step;
+                    this.Yoffset = -step;
+                    yVelocity = -yVelocity;
+
                     break;
                 case K:
-                    this.balldy = step;
+                    this.Yoffset = step;
+
                     break;
                 case J:
-                    this.balldx = -step;
+                    this.Xoffset = -step;
                     break;
                 case L:
-                    this.balldx = step;
+                    this.Xoffset = step;
                     break;
                 default:
                     break;
@@ -115,16 +117,17 @@ public class Player extends Circle {
 
             switch (event.getCode()) {
                 case W:
-                    this.balldy = -step;
+                    this.Yoffset = -step;
                     break;
                 case S:
-                    this.balldy = step;
+                    this.Yoffset = step;
+                    yVelocity = -yVelocity;
                     break;
                 case A:
-                    this.balldx = -step;
+                    this.Xoffset = -step;
                     break;
                 case D:
-                    this.balldx = step;
+                    this.Xoffset = step;
                     break;
                 default:
                     break;
@@ -135,21 +138,12 @@ public class Player extends Circle {
 
     }
 
-    public void setxVelocity(int xVelocity) {
-        this.xVelocity = xVelocity;
-    }
-
     public void addPoint() {
         ++score;
     }
 
     public int getScore() {
         return score;
-    }
-
-
-    public void setyVelocity(int yVelocity) {
-        this.yVelocity = yVelocity;
     }
 
 
@@ -162,18 +156,18 @@ public class Player extends Circle {
     }
 
 
-    public void Move(ActionEvent event) {
+    public void Move() {
         if (id == 1) {
-            if (this.getCenterX() + this.balldx < (Width - this.getRadius()) && this.getCenterX() + this.balldx > this.getRadius())
-                this.setCenterX(this.getCenterX() + this.balldx);
-            if (this.getCenterY() + this.balldy > this.getRadius() && this.getCenterY() + this.balldy < Height / 2 - this.getRadius())
-                this.setCenterY(this.getCenterY() + this.balldy);
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
+                this.setCenterX(this.getCenterX() + this.Xoffset);
+            if (this.getCenterY() + this.Yoffset > this.getRadius() && this.getCenterY() + this.Yoffset < (double) Height / 2)
+                this.setCenterY(this.getCenterY() + this.Yoffset);
 
         } else if (id == 2) {
-            if (this.getCenterX() + this.balldx < (Width - this.getRadius()) && this.getCenterX() + this.balldx > this.getRadius())
-                this.setCenterX(this.getCenterX() + this.balldx);
-            if (this.getCenterY() + this.balldy > (Height / 2 + this.getRadius()) && this.getCenterY() + this.balldy < Height - this.getRadius())
-                this.setCenterY(this.getCenterY() + this.balldy);
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
+                this.setCenterX(this.getCenterX() + this.Xoffset);
+            if (this.getCenterY() + this.Yoffset > ((double) Height / 2) && this.getCenterY() + this.Yoffset < Height - this.getRadius())
+                this.setCenterY(this.getCenterY() + this.Yoffset);
 
         }
 

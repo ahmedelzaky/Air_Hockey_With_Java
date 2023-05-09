@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -21,6 +22,8 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
+    GameFrame game = new GameFrame();
+
     Player p1 = new Player(30, 1, 90, 9, 251, 211);
     Player p2 = new Player(30, 2, Height - 90, 235, 248, 117);
     Ball ball = new Ball();
@@ -31,7 +34,6 @@ public class Game extends Application {
     @Override
     public void start(Stage stage) throws FileNotFoundException {
 
-        GameFrame game = new GameFrame();
 
         game.getChildren().add(p1);
         game.getChildren().add(p2);
@@ -56,10 +58,9 @@ public class Game extends Application {
         menuBtn.setTranslateY(4);
         menuBtn.setStyle("-fx-background-color: transparent;");
 
-        menuBtn.setOnAction( e->{
+        menuBtn.setOnAction(e -> {
 
         });
-
 
 
         p2Score.setTranslateY(10);
@@ -109,8 +110,8 @@ public class Game extends Application {
             p2.keyReleased(e);
         });
         Timeline playersAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
-            p1.Move(e);
-            p2.Move(e);
+            p1.Move();
+            p2.Move();
         }));
         playersAnimation.setCycleCount(Timeline.INDEFINITE);
         playersAnimation.play();
@@ -125,18 +126,17 @@ public class Game extends Application {
 
     public void checkCollision() {
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
             } catch (InterruptedException e) {
                 // handle interrupted exception
             }
             p2.addPoint();
-
             p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2 - 50);
         }
-        if (ball.getCenterX() < Width / 2 + 25 && ball.getCenterX() > Width / 2 - 25 && ball.getCenterY() + 15 + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
             } catch (InterruptedException e) {
@@ -147,22 +147,49 @@ public class Game extends Application {
             ball.rest(Height / 2 + 50);
         }
 
-        if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - 2 * ball.getRadius()) {
+        if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
             ball.setyVelocity(-ball.getyVelocity());
         }
 
-        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
+        if (ball.getCenterX() - ball.getRadius() + 5 <= 0 || ball.getCenterX() >= Width - ball.getRadius() - 5) {
             ball.setxVelocity(-ball.getxVelocity());
         }
 
         if (ball.intersects(p1)) {
-            ball.setxVelocity(p1.getxVelocity());
-            ball.setyVelocity(p1.getyVelocity());
+            if (ball.getCenterY() < p2.getCenterY()) {
+                ball.setxVelocity(p2.getxVelocity());
+                ball.setyVelocity(-p2.getyVelocity());
+            }
+            if (ball.getCenterX() - p1.getCenterX() == 0) {
+                ball.setxVelocity(0);
+                ball.setyVelocity(p1.getyVelocity());
+            } else if (ball.getCenterX() < p1.getCenterX()) {
+                ball.setxVelocity(-p1.getxVelocity());
+                ball.setyVelocity(p1.getyVelocity());
+
+            } else {
+                ball.setxVelocity(p1.getxVelocity());
+                ball.setyVelocity(p1.getyVelocity());
+            }
+
         }
 
         if (ball.intersects(p2)) {
-            ball.setxVelocity(p2.getxVelocity());
-            ball.setyVelocity(-p2.getyVelocity());
+            if (ball.getCenterY() > p2.getCenterY()) {
+                ball.setxVelocity(p2.getxVelocity());
+                ball.setyVelocity(p2.getyVelocity());
+            }
+            if (ball.getCenterX() - p2.getCenterX() == 0) {
+                ball.setxVelocity(0);
+                ball.setyVelocity(-p2.getyVelocity());
+            } else if (ball.getCenterX() < p2.getCenterX()) {
+                ball.setxVelocity(-p2.getxVelocity());
+                ball.setyVelocity(-p2.getyVelocity());
+
+            } else {
+                ball.setxVelocity(p2.getxVelocity());
+                ball.setyVelocity(-p2.getyVelocity());
+            }
         }
         // move the ball
         ball.move();

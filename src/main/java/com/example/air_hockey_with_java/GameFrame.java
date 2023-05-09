@@ -15,6 +15,8 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
+    private int arcRaduis = 50;
+
 
     GameFrame() {
         //Background Color
@@ -43,9 +45,9 @@ public class GameFrame extends Pane {
         //Bottom Border
         this.getChildren().add(gline(Width, Height, 0, Height));
         //Top Arc
-        this.getChildren().add(gArc(Width / 2, -1, 50, 52, 180, 180));
+        this.getChildren().add(gArc(Width / 2, -1, arcRaduis, arcRaduis, 180, 180));
         //Bottom Arc
-        this.getChildren().add(gArc(Width / 2, Height + 1, 50, 52, 0, 180));
+        this.getChildren().add(gArc(Width / 2, Height + 1, arcRaduis, arcRaduis, 0, 180));
 
     }
 
@@ -74,5 +76,8 @@ public class GameFrame extends Pane {
         return line;
     }
 
+    public int getArcRaduis() {
+        return arcRaduis;
+    }
 
 }
