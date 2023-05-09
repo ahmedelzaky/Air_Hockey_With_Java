@@ -156,39 +156,65 @@ public class Game extends Application {
         }
 
         if (ball.intersects(p1)) {
-            if (ball.getCenterY() < p2.getCenterY()) {
-                ball.setxVelocity(p2.getxVelocity());
-                ball.setyVelocity(-p2.getyVelocity());
-            }
+
             if (ball.getCenterX() - p1.getCenterX() == 0) {
-                ball.setxVelocity(0);
-                ball.setyVelocity(p1.getyVelocity());
+                if (ball.getCenterY() < p1.getCenterY()) {
+                    ball.setxVelocity(0);
+                    ball.setyVelocity(-p1.getyVelocity());
+                } else {
+                    ball.setxVelocity(0);
+                    ball.setyVelocity(p1.getyVelocity());
+                }
             } else if (ball.getCenterX() < p1.getCenterX()) {
-                ball.setxVelocity(-p1.getxVelocity());
-                ball.setyVelocity(p1.getyVelocity());
+                if (ball.getCenterY() < p1.getCenterY()) {
+                    ball.setxVelocity(-p1.getxVelocity());
+                    ball.setyVelocity(-p1.getyVelocity());
+                } else {
+                    ball.setxVelocity(-p1.getxVelocity());
+                    ball.setyVelocity(p1.getyVelocity());
+                }
+
 
             } else {
-                ball.setxVelocity(p1.getxVelocity());
-                ball.setyVelocity(p1.getyVelocity());
+                if (ball.getCenterY() < p1.getCenterY()) {
+                    ball.setxVelocity(p1.getxVelocity());
+                    ball.setyVelocity(-p1.getyVelocity());
+                } else {
+                    ball.setxVelocity(p1.getxVelocity());
+                    ball.setyVelocity(p1.getyVelocity());
+                }
+
             }
 
         }
 
         if (ball.intersects(p2)) {
-            if (ball.getCenterY() > p2.getCenterY()) {
-                ball.setxVelocity(p2.getxVelocity());
-                ball.setyVelocity(p2.getyVelocity());
-            }
+
             if (ball.getCenterX() - p2.getCenterX() == 0) {
-                ball.setxVelocity(0);
-                ball.setyVelocity(-p2.getyVelocity());
+                if (ball.getCenterY() > p2.getCenterY()) {
+                    ball.setxVelocity(0);
+                    ball.setyVelocity(p2.getyVelocity());
+                } else {
+                    ball.setxVelocity(0);
+                    ball.setyVelocity(-p2.getyVelocity());
+                }
             } else if (ball.getCenterX() < p2.getCenterX()) {
-                ball.setxVelocity(-p2.getxVelocity());
-                ball.setyVelocity(-p2.getyVelocity());
+                if (ball.getCenterY() > p2.getCenterY()) {
+                    ball.setxVelocity(-p2.getxVelocity());
+                    ball.setyVelocity(p2.getyVelocity());
+                } else {
+                    ball.setxVelocity(-p2.getxVelocity());
+                    ball.setyVelocity(-p2.getyVelocity());
+                }
 
             } else {
-                ball.setxVelocity(p2.getxVelocity());
-                ball.setyVelocity(-p2.getyVelocity());
+                if (ball.getCenterY() > p2.getCenterY()) {
+                    ball.setxVelocity(p2.getxVelocity());
+                    ball.setyVelocity(p2.getyVelocity());
+                } else {
+                    ball.setxVelocity(p2.getxVelocity());
+                    ball.setyVelocity(-p2.getyVelocity());
+                }
             }
         }
         // move the ball

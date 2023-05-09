@@ -77,7 +77,7 @@ public class GameFrame extends Pane {
     }
 
     public int getArcRaduis() {
-        return arcRaduis;
+        return arcRaduis - 2;
     }
 
 }
