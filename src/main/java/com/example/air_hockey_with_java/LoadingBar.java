@@ -29,10 +29,9 @@ public class LoadingBar extends BorderPane {
         loadingBar.setProgress(0);
         loadingBar.setPrefSize(Width - 50, 20);
         loadingBar.setStyle("-fx-accent: #FF3131 ");
-        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(50), e -> {
+        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(1), e -> {
             loadingBar.setProgress(i);
             i += .01;
-            System.out.println(i);
         })
         );
         loadingAnimation.setCycleCount(100);

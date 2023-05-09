@@ -22,17 +22,22 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
-    Player p1 = new Player(30, 1, 90, 0, 255, 255);
-    Player p2 = new Player(30, 2, Height - 90, 102, 255, 51);
+    Player p1 = new Player(30, 1, 90, 57, 255, 20);
+    Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
     private Timeline ballAnimation;
     private Timeline panimation;
     private Timeline loading;
+    private boolean clicked = false;
+    Menu menu = new Menu();
     GameFrame game = new GameFrame();
 
     LoadingBar progressBar = new LoadingBar();
+
+    public Game() throws FileNotFoundException {
+    }
 
     @Override
     public void start(Stage stage) throws FileNotFoundException {
@@ -43,26 +48,26 @@ public class Game extends Application {
 
         p1Score.setText(String.valueOf(p1.getScore()));
         p2Score.setText(String.valueOf(p2.getScore()));
-        p1Score.setFill(Color.WHITE);
-        p2Score.setFill(Color.WHITE);
-        p1Score.setFont(Font.font("Arial", 36));
-        p2Score.setFont(Font.font("Arial", 36));
-        VBox conter = new VBox(10);
+        p1Score.setFill(Color.RED);
+        p2Score.setFill(Color.BLUE);
+        p1Score.setFont(Font.font("Arial", 30));
+        p2Score.setFont(Font.font("Arial", 30));
+        VBox conter = new VBox(5);
         conter.setPrefWidth(150);
         conter.setLayoutX(Width - 30);
-        conter.setLayoutY(Height / 2 - 75);
+        conter.setLayoutY(Height / 2 - 65);
         // menu Button
         Button menuBtn = new Button();
-        Image menuimg = new Image(new FileInputStream("images\\menu.png"));
+        Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
         ImageView menueview = new ImageView(menuimg);
-        menueview.setFitHeight(30);
-        menueview.setFitWidth(30);
+        menueview.setFitHeight(45);
+        menueview.setFitWidth(45);
 
 
         menuBtn.setGraphic(menueview);
         menuBtn.setLayoutY(Height / 2);
-        menuBtn.setTranslateX(-15);
-        menuBtn.setTranslateY(5);
+        menuBtn.setTranslateX(-25);
+
 
         menuBtn.setStyle("-fx-background-color: transparent;");
         p1Score.setTranslateY(5);
@@ -111,6 +116,10 @@ public class Game extends Application {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
+        //toggle menu button
+        menuBtn.setOnAction(e -> {
+            isClicked();
+        });
 
 
         panimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
@@ -121,7 +130,7 @@ public class Game extends Application {
         panimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(14), e -> {
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(13), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -165,7 +174,7 @@ public class Game extends Application {
             ball.setyVelocity(-ball.getyVelocity());
         }
         // check if the ball hit the right or left side
-        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius() ) {
+        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
             ball.setxVelocity(-ball.getxVelocity());
         }
 
@@ -241,6 +250,21 @@ public class Game extends Application {
         }
         // move the ball
         ball.move();
+    }
+
+    public void isClicked() {
+        if (!clicked) {
+            game.getChildren().add(menu);
+            clicked = !clicked;
+            panimation.pause();
+            ballAnimation.pause();
+
+        } else {
+            game.getChildren().remove(menu);
+            clicked = !clicked;
+            panimation.play();
+            ballAnimation.play();
+        }
     }
 
     public void loadingAnimation() {
