@@ -28,6 +28,8 @@ public class Game extends Application {
     Text p1Score = new Text();
     Text p2Score = new Text();
     private Timeline ballAnimation;
+    private Timeline panimation;
+    private Timeline loading;
     GameFrame game = new GameFrame();
 
     LoadingBar progressBar = new LoadingBar();
@@ -110,28 +112,31 @@ public class Game extends Application {
             p2.keyReleased(e);
         });
 
-        Timeline panimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
 
+        panimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             p1.Move();
             p2.Move();
-
         })
         );
         panimation.setCycleCount(Timeline.INDEFINITE);
-        panimation.play();
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(14), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
-        ballAnimation.play();
+
+
+        Timeline loading = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+            loadingAnimation();
+        }));
+        loading.setCycleCount(Timeline.INDEFINITE);
+        loading.play();
 
     }
 
     public void checkCollision() {
-        if (progressBar.finish()){
-            game.getChildren().remove(progressBar);
-        }
+
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
@@ -140,6 +145,7 @@ public class Game extends Application {
                 // handle interrupted exception
             }
             p2.addPoint();
+            //update counter
             p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2 - 50);
         }
@@ -150,21 +156,23 @@ public class Game extends Application {
                 // handle interrupted exception
             }
             p1.addPoint();
+            //update counter
             p1Score.setText(String.valueOf(p1.getScore()));
             ball.rest(Height / 2 + 50);
         }
-
+        // check if the ball hit the top or bottom side
         if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
             ball.setyVelocity(-ball.getyVelocity());
         }
-
-        if (ball.getCenterX() - ball.getRadius() + 5 <= 0 || ball.getCenterX() >= Width - ball.getRadius() - 5) {
+        // check if the ball hit the right or left side
+        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius() ) {
             ball.setxVelocity(-ball.getxVelocity());
         }
 
         if (ball.intersects(p1)) {
-
+            //check if the ball hit the player in the middle
             if (ball.getCenterX() - p1.getCenterX() == 0) {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
                     ball.setxVelocity(0);
                     ball.setyVelocity(-p1.getyVelocity());
@@ -172,7 +180,9 @@ public class Game extends Application {
                     ball.setxVelocity(0);
                     ball.setyVelocity(p1.getyVelocity());
                 }
-            } else if (ball.getCenterX() < p1.getCenterX()) {
+            } //check if the ball hit player left side
+            else if (ball.getCenterX() < p1.getCenterX()) {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
                     ball.setxVelocity(-p1.getxVelocity());
                     ball.setyVelocity(-p1.getyVelocity());
@@ -183,6 +193,7 @@ public class Game extends Application {
 
 
             } else {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
                     ball.setxVelocity(p1.getxVelocity());
                     ball.setyVelocity(-p1.getyVelocity());
@@ -198,6 +209,7 @@ public class Game extends Application {
         if (ball.intersects(p2)) {
 
             if (ball.getCenterX() - p2.getCenterX() == 0) {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
                     ball.setxVelocity(0);
                     ball.setyVelocity(p2.getyVelocity());
@@ -205,7 +217,9 @@ public class Game extends Application {
                     ball.setxVelocity(0);
                     ball.setyVelocity(-p2.getyVelocity());
                 }
-            } else if (ball.getCenterX() < p2.getCenterX()) {
+            }  //check if the ball hit player left side
+            else if (ball.getCenterX() < p2.getCenterX()) {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
                     ball.setxVelocity(-p2.getxVelocity());
                     ball.setyVelocity(p2.getyVelocity());
@@ -215,6 +229,7 @@ public class Game extends Application {
                 }
 
             } else {
+                //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
                     ball.setxVelocity(p2.getxVelocity());
                     ball.setyVelocity(p2.getyVelocity());
@@ -228,7 +243,14 @@ public class Game extends Application {
         ball.move();
     }
 
-
+    public void loadingAnimation() {
+        if (progressBar.finish()) {
+            game.getChildren().remove(progressBar);
+            panimation.play();
+            ballAnimation.play();
+            //   loading.pause();
+        }
+    }
 
     public static void main(String[] args) {
         launch();
