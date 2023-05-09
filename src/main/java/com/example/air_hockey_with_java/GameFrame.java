@@ -1,7 +1,6 @@
 package com.example.air_hockey_with_java;
 
 import javafx.scene.effect.Bloom;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -16,7 +15,7 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
-    private int arcRaduis = 50;
+    private final int arcRaduis = 50;
 
 
     GameFrame() {

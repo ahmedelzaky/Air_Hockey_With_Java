@@ -18,6 +18,7 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Menu extends Pane {
     boolean mute = false;
+    boolean resetValue = false;
 
     Menu() throws FileNotFoundException {
         // music Button
@@ -33,22 +34,22 @@ public class Menu extends Pane {
         musicBtn.setGraphic(unmuteview);
         musicBtn.setStyle("-fx-background-color: transparent ;");
 
-        Button resumeBtn = new Button("Resume");
-        resumeBtn.setPrefSize(100, 20);
+        Button resetBtn = new Button("Reset");
+        resetBtn.setPrefSize(100, 20);
         this.setPrefSize(Width - 100, Height - 400);
-        resumeBtn.setTextFill(Color.WHITE);
-        resumeBtn.setStyle("-fx-background-color:  transparent;" + " -fx-font-size: 18px; " + "-fx-border-color:  rgb(5, 195, 221 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
+        resetBtn.setTextFill(Color.WHITE);
+        resetBtn.setStyle("-fx-background-color:  transparent;" + " -fx-font-size: 18px; " + "-fx-border-color:  rgb(5, 195, 221 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
 
 
-        this.getChildren().addAll(musicBtn, resumeBtn);
-        resumeBtn.setLayoutY((Height - 400) / 2 - 15);
-        resumeBtn.setLayoutX((Width - 100) / 2 - 50);
+        this.getChildren().addAll(musicBtn, resetBtn);
+        resetBtn.setLayoutY((double) (Height - 400) / 2 - 15);
+        resetBtn.setLayoutX((double) (Width - 100) / 2 - 50);
         musicBtn.setLayoutX((Width - 100) - 60);
 
-        this.setLayoutX(Width / 2);
-        this.setLayoutY(Height / 2);
-        this.setTranslateX(-(Width - 100) / 2);
-        this.setTranslateY(-(Height - 400) / 2);
+        this.setLayoutX((double) Width / 2);
+        this.setLayoutY((double) Height / 2);
+        this.setTranslateX((double) -(Width - 100) / 2);
+        this.setTranslateY((double) -(Height - 400) / 2);
 
         this.setStyle("-fx-background-color: rgb(5, 195, 221 , .3); " + "-fx-border-radius:50;");
         this.setBorder(Border.stroke(Color.GREEN));
@@ -61,7 +62,20 @@ public class Menu extends Pane {
                 musicBtn.setGraphic(unmuteview);
             }
         });
+
+        resetBtn.setOnAction(e ->{
+            reset();
+        });
+    }
+    public void reset( ) {
+        resetValue = true;
     }
 
+    public boolean isResetValue() {
+        return resetValue;
+    }
 
+    public void setResetValue(boolean resetValue) {
+        this.resetValue = resetValue;
+    }
 }

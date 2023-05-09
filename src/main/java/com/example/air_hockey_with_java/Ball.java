@@ -8,10 +8,9 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Ball extends Circle {
 
-    private int Velocity = 0;
     private int xVelocity = 0;
     private int yVelocity = 0;
-    int random;
+
 
     Ball() {
         this.setCenterX((double) Width / 2);
@@ -47,9 +46,6 @@ public class Ball extends Circle {
     }
 
 
-    public void setVelocity(int velocity) {
-        Velocity = velocity;
-    }
 
     public void setxVelocity(int xVelocity) {
         this.xVelocity = xVelocity;
@@ -59,9 +55,6 @@ public class Ball extends Circle {
         this.yVelocity = yVelocity;
     }
 
-    public int getVelocity() {
-        return Velocity;
-    }
 
     public int getxVelocity() {
         return xVelocity;

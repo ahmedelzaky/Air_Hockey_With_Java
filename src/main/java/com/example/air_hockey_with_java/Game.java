@@ -5,7 +5,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -145,6 +144,7 @@ public class Game extends Application {
     }
 
     public void checkCollision() {
+        p2Score.setText(String.valueOf(p2.getScore()));
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
@@ -155,7 +155,7 @@ public class Game extends Application {
             }
             p2.addPoint();
             //update counter
-            p2Score.setText(String.valueOf(p2.getScore()));
+
             ball.rest(Height / 2 - 50);
         }
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() + ball.getRadius() >= Height) {
@@ -267,12 +267,28 @@ public class Game extends Application {
         }
     }
 
+    boolean visited = false;
+
     public void loadingAnimation() {
-        if (progressBar.finish()) {
+        if (progressBar.finish() && !visited) {
             game.getChildren().remove(progressBar);
             panimation.play();
             ballAnimation.play();
-            //   loading.pause();
+            visited = !visited;
+
+        }
+        if (menu.isResetValue()) {
+            menu.setResetValue(false);
+
+            p1.rest();
+            p2.rest();
+            p1Score.setText(String.valueOf(p1.getScore()));
+            p2Score.setText(String.valueOf(p2.getScore()));
+            ball.rest(Height / 2);
+            game.getChildren().remove(menu);
+            clicked = !clicked;
+            panimation.play();
+            ballAnimation.play();
         }
     }
 

@@ -3,13 +3,11 @@ package com.example.air_hockey_with_java;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import static com.example.air_hockey_with_java.Game.Height;
@@ -29,7 +27,7 @@ public class LoadingBar extends BorderPane {
         loadingBar.setProgress(0);
         loadingBar.setPrefSize(Width - 50, 20);
         loadingBar.setStyle("-fx-accent: #FF3131 ");
-        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(1), e -> {
+        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(10), e -> {
             loadingBar.setProgress(i);
             i += .01;
         })

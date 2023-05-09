@@ -1,6 +1,5 @@
 package com.example.air_hockey_with_java;
 
-import javafx.event.ActionEvent;
 import javafx.scene.effect.Bloom;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,34 +17,30 @@ public class Player extends Circle {
     private int xVelocity;
     private int yVelocity;
     private int score = 0;
-    private double bloomValue = .6;
 
     private double Xoffset = 0;
     private double Yoffset = 0;
 
+    private double y;
+    private double x;
 
     Player(double radius, int id, int Y, int R, int G, int B) {
         super(radius);
         this.id = id;
+        this.x = ((double) Width / 2);
+
         this.setCenterX((double) Width / 2);
         this.setCenterY(Y);
+        this.y = this.getCenterY();
 
 
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .5)));
 
         Bloom bloom = new Bloom();
-        bloom.setThreshold(bloomValue);
+        bloom.setThreshold(.6);
         this.setEffect(bloom);
         this.setFill(gradientFill);
 
-    }
-
-    public void setBloomValue(double bloomValue) {
-        this.bloomValue = bloomValue;
-    }
-
-    public int getPlayerId() {
-        return id;
     }
 
     public void keyReleased(KeyEvent event) {
@@ -132,6 +127,13 @@ public class Player extends Circle {
 
         }
 
+    }
+
+
+    public void rest() {
+        this.setCenterY(y);
+        this.setCenterX(x);
+        this.score = 0;
     }
 
     public void addPoint() {
