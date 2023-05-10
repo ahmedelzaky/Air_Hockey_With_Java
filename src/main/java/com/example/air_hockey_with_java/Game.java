@@ -120,16 +120,16 @@ public class Game extends Application {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
-        scene.setOnKeyReleased(e -> {
+        menuBtn.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 isClicked();
             }
-
         });
         //toggle menu button
         menuBtn.setOnMouseClicked(e -> {
             isClicked();
         });
+
 
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             p1.Move();
@@ -318,6 +318,8 @@ public class Game extends Application {
         }
     }
 
+    boolean checked = false;
+
     public void checkScore() {
         if (p1.getScore() == 7) {
             p1status.setText("You Win");
@@ -348,8 +350,6 @@ public class Game extends Application {
             ballAnimation.pause();
         } else {
             game.getChildren().removeAll(p1status, p2status);
-            playerAnimation.play();
-            ballAnimation.play();
         }
     }
 
