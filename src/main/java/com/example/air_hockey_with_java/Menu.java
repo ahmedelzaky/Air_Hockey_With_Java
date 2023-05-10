@@ -67,7 +67,7 @@ public class Menu extends Pane {
 
         //add elements to pane
         this.setPrefSize(Width, Height);
-        this.setStyle("-fx-background-color: transparent;");
+        this.setStyle("-fx-background-color:  rgb(0, 0, 0 , .6);");
         this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn);
 
         // organise buttons

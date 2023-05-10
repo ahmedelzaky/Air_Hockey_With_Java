@@ -170,7 +170,6 @@ public class Game extends Application {
 
     public void checkCollision() {
         p2Score.setText(String.valueOf(p2.getScore()));
-
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
@@ -202,7 +201,6 @@ public class Game extends Application {
         if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
             ball.setxVelocity(-ball.getxVelocity());
         }
-
         if (ball.intersects(p1)) {
             //check if the ball hit the player in the middle
             if (ball.getCenterX() - p1.getCenterX() == 0) {
@@ -239,7 +237,6 @@ public class Game extends Application {
             }
 
         }
-
         if (ball.intersects(p2)) {
 
             if (ball.getCenterX() - p2.getCenterX() == 0) {
@@ -295,7 +292,6 @@ public class Game extends Application {
 
     }
 
-
     public void loadingAnimation() {
         if (progressBar.finish()) {
             game.getChildren().remove(progressBar);
@@ -319,8 +315,6 @@ public class Game extends Application {
             ballAnimation.play();
         }
     }
-
-    boolean checked = false;
 
     public void checkScore() {
         if (p1.getScore() == 7) {
@@ -364,5 +358,4 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
