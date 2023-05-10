@@ -56,5 +56,9 @@ public class LoadingBar extends BorderPane {
 
         return i >= 1;
     }
+
+    public void setI(double i) {
+        this.i = i;
+    }
 }
 

@@ -7,8 +7,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +24,8 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Menu extends Pane {
     boolean mute = false;
+    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
+
     boolean resetValue = false;
 
     Menu() throws FileNotFoundException {
@@ -35,24 +43,30 @@ public class Menu extends Pane {
         musicBtn.setStyle("-fx-background-color: transparent ;");
 
         Button resetBtn = new Button("Reset");
-        resetBtn.setPrefSize(100, 20);
-        this.setPrefSize(Width - 100, Height - 400);
+        resetBtn.setPrefSize(100, 25);
+
         resetBtn.setTextFill(Color.WHITE);
-        resetBtn.setStyle("-fx-background-color:  transparent;" + " -fx-font-size: 18px; " + "-fx-border-color:  rgb(5, 195, 221 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
+        resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(15, 240, 252 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
 
+        resetBtn.setFont(fnt);
+        double recWidth = Width - 100;
+        double recHeight = Height - 550;
+        Rectangle rectangle = new Rectangle(recWidth, recHeight);
+        rectangle.setLayoutX(Width / 2 - recWidth / 2);
+        rectangle.setLayoutY(Height / 2 - recHeight / 2);
+        rectangle.setStyle("-fx-border-radius:50;");
+        rectangle.setFill(Color.rgb(15, 240, 252, .2));
+        rectangle.setStroke(Color.rgb(15, 240, 252));
+        rectangle.setStrokeWidth(5);
 
-        this.getChildren().addAll(musicBtn, resetBtn);
-        resetBtn.setLayoutY((double) (Height - 400) / 2 - 15);
-        resetBtn.setLayoutX((double) (Width - 100) / 2 - 50);
-        musicBtn.setLayoutX((Width - 100) - 60);
+        this.setPrefSize(Width, Height);
+        this.setStyle("-fx-background-color: transparent;");
+        this.getChildren().addAll(rectangle, musicBtn, resetBtn);
+        resetBtn.setLayoutY(Height / 2 - 20);
+        resetBtn.setLayoutX(Width / 2 - 50);
+        musicBtn.setLayoutX(recWidth - 10);
+        musicBtn.setLayoutY(Height - 2 * recHeight - 120);
 
-        this.setLayoutX((double) Width / 2);
-        this.setLayoutY((double) Height / 2);
-        this.setTranslateX((double) -(Width - 100) / 2);
-        this.setTranslateY((double) -(Height - 400) / 2);
-
-        this.setStyle("-fx-background-color: rgb(5, 195, 221 , .3); " + "-fx-border-radius:50;");
-        this.setBorder(Border.stroke(Color.GREEN));
 
         musicBtn.setOnAction(e -> {
             mute = !mute;
@@ -63,11 +77,12 @@ public class Menu extends Pane {
             }
         });
 
-        resetBtn.setOnAction(e ->{
+        resetBtn.setOnAction(e -> {
             reset();
         });
     }
-    public void reset( ) {
+
+    public void reset() {
         resetValue = true;
     }
 

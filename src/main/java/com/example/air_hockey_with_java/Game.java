@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,6 +15,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -23,14 +25,16 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
+    Button menuBtn;
+    Scene scene;
     Player p1 = new Player(30, 1, 90, 57, 255, 20);
     Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
-    Text p1status = new Text(100,200,"");
-    Text p2status = new Text(100,530,"");
-    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC,40);
+    Text p1status = new Text(100, 200, "");
+    Text p2status = new Text(100, 530, "");
+    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
 
     private Timeline ballAnimation;
     private Timeline playerAnimation;
@@ -63,7 +67,7 @@ public class Game extends Application {
         conter.setLayoutX(Width - 30);
         conter.setLayoutY(Height / 2 - 85);
         // menu Button
-        Button menuBtn = new Button();
+        menuBtn = new Button();
         Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
         ImageView menueview = new ImageView(menuimg);
         menueview.setFitHeight(45);
@@ -80,7 +84,7 @@ public class Game extends Application {
         progressBar.animationPlay();
 
 
-        Scene scene = new Scene(game, Width, Height);
+        scene = new Scene(game, Width, Height);
 
         // Add the icon to the list of icons for the stage
         Image icon = new Image(new FileInputStream("images\\icon.png"));
@@ -116,11 +120,16 @@ public class Game extends Application {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
+        scene.setOnKeyReleased(e -> {
+            if (e.getCode() == KeyCode.ESCAPE) {
+                isClicked();
+            }
+
+        });
         //toggle menu button
-        menuBtn.setOnAction(e -> {
+        menuBtn.setOnMouseClicked(e -> {
             isClicked();
         });
-
 
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             p1.Move();
@@ -139,7 +148,7 @@ public class Game extends Application {
         Timeline loading = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             loadingAnimation();
         }));
-        loading.setCycleCount(Timeline.INDEFINITE);
+        loading.setCycleCount(200);
         loading.play();
 
         Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
@@ -148,7 +157,7 @@ public class Game extends Application {
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
 
-        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(1), e -> {
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             checkScore();
         }));
         gameOver.setCycleCount(Timeline.INDEFINITE);
@@ -267,9 +276,11 @@ public class Game extends Application {
     }
 
     public void isClicked() {
+        System.out.println(clicked);
         if (!clicked) {
             game.getChildren().add(menu);
             clicked = !clicked;
+
             playerAnimation.pause();
             ballAnimation.pause();
 
@@ -279,6 +290,7 @@ public class Game extends Application {
             playerAnimation.play();
             ballAnimation.play();
         }
+
     }
 
 
@@ -287,10 +299,8 @@ public class Game extends Application {
             game.getChildren().remove(progressBar);
             playerAnimation.play();
             ballAnimation.play();
-
-
+            progressBar.setI(0);
         }
-
     }
 
     public void gameReset() {
@@ -308,32 +318,38 @@ public class Game extends Application {
         }
     }
 
-    public void checkScore(){
-        if(p1.getScore()==7 ){
+    public void checkScore() {
+        if (p1.getScore() == 7) {
             p1status.setText("You Win");
             p1status.setFont(fnt);
             p1status.setStroke(Color.BLUE);
             p2status.setText("You Lose");
             p2status.setFont(fnt);
             p2status.setStroke(Color.RED);
-            p1.setScore(0);
-            p2.setScore(0);
-
-            game.getChildren().addAll(menu,p1status,p2status);
+            try {
+                game.getChildren().addAll(menu, p1status, p2status);
+            } catch (Exception e) {
+            }
             playerAnimation.pause();
             ballAnimation.pause();
-        }else if(p2.getScore()==7){
+        } else if (p2.getScore() == 7) {
             p1status.setText("You Lose");
             p1status.setFont(fnt);
             p1status.setStroke(Color.RED);
             p2status.setText("You Win");
             p2status.setFont(fnt);
             p2status.setStroke(Color.BLUE);
-            p1.setScore(0);
-            p2.setScore(0);
-            game.getChildren().addAll(menu,p1status,p2status);
+            try {
+                game.getChildren().addAll(menu, p1status, p2status);
+            } catch (Exception e) {
+
+            }
             playerAnimation.pause();
             ballAnimation.pause();
+        } else {
+            game.getChildren().removeAll(p1status, p2status);
+            playerAnimation.play();
+            ballAnimation.play();
         }
     }
 
