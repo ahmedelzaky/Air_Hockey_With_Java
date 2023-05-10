@@ -56,12 +56,12 @@ public class Game extends Application {
         p2Score.setText(String.valueOf(p2.getScore()));
         p1Score.setFill(Color.RED);
         p2Score.setFill(Color.BLUE);
-        p1Score.setFont(Font.font("Arial", 30));
-        p2Score.setFont(Font.font("Arial", 30));
+        p1Score.setFont(fnt);
+        p2Score.setFont(fnt);
         VBox conter = new VBox(5);
-        conter.setPrefWidth(150);
+        conter.setPrefWidth(140);
         conter.setLayoutX(Width - 30);
-        conter.setLayoutY(Height / 2 - 65);
+        conter.setLayoutY(Height / 2 - 85);
         // menu Button
         Button menuBtn = new Button();
         Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
@@ -71,17 +71,11 @@ public class Game extends Application {
 
 
         menuBtn.setGraphic(menueview);
-        menuBtn.setLayoutY(Height / 2);
         menuBtn.setTranslateX(-25);
-
-
         menuBtn.setStyle("-fx-background-color: transparent;");
-        p1Score.setTranslateY(5);
+
         conter.getChildren().addAll(p1Score, menuBtn, p2Score);
-
-
         game.getChildren().add(conter);
-
         game.getChildren().add(progressBar);
         progressBar.animationPlay();
 
@@ -287,14 +281,13 @@ public class Game extends Application {
         }
     }
 
-    boolean visited = false;
 
     public void loadingAnimation() {
-        if (progressBar.finish() && !visited) {
+        if (progressBar.finish()) {
             game.getChildren().remove(progressBar);
             playerAnimation.play();
             ballAnimation.play();
-            visited = !visited;
+
 
         }
 
@@ -314,14 +307,17 @@ public class Game extends Application {
             ballAnimation.play();
         }
     }
+
     public void checkScore(){
-        if(p1.getScore()==7){
+        if(p1.getScore()==7 ){
             p1status.setText("You Win");
             p1status.setFont(fnt);
             p1status.setStroke(Color.BLUE);
             p2status.setText("You Lose");
             p2status.setFont(fnt);
             p2status.setStroke(Color.RED);
+            p1.setScore(0);
+            p2.setScore(0);
 
             game.getChildren().addAll(menu,p1status,p2status);
             playerAnimation.pause();
@@ -333,14 +329,11 @@ public class Game extends Application {
             p2status.setText("You Win");
             p2status.setFont(fnt);
             p2status.setStroke(Color.BLUE);
-
+            p1.setScore(0);
+            p2.setScore(0);
             game.getChildren().addAll(menu,p1status,p2status);
             playerAnimation.pause();
             ballAnimation.pause();
-        }else {
-            game.getChildren().removeAll(p1status,p2status);
-            playerAnimation.play();
-            ballAnimation.play();
         }
     }
 
