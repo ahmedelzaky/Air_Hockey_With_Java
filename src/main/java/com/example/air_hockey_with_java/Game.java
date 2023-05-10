@@ -15,7 +15,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
@@ -25,26 +24,25 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
-    Button menuBtn;
-    Scene scene;
-    Player p1 = new Player(30, 1, 90, 57, 255, 20);
-    Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
-    Ball ball = new Ball();
-    Text p1Score = new Text();
-    Text p2Score = new Text();
-    Text p1status = new Text(100, 200, "");
-    Text p2status = new Text(100, 530, "");
-    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
+    private Player p1 = new Player(30, 1, 90, 57, 255, 20);
+    private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
+    private Ball ball = new Ball();
+    private Text p1Score = new Text();
+    private Text p2Score = new Text();
+    private Text p1status = new Text(100, 200, "");
+    private Text p2status = new Text(100, 530, "");
+    private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
 
     private Timeline ballAnimation;
     private Timeline playerAnimation;
 
-    private Timeline resetChecker;
+    private Timeline closeChecker;
     private boolean clicked = false;
-    Menu menu = new Menu();
-    GameFrame game = new GameFrame();
+    private Menu menu = new Menu();
+    private GameFrame game = new GameFrame();
 
-    LoadingBar progressBar = new LoadingBar();
+    private LoadingBar progressBar = new LoadingBar();
+
 
     public Game() throws FileNotFoundException {
     }
@@ -67,7 +65,7 @@ public class Game extends Application {
         conter.setLayoutX(Width - 30);
         conter.setLayoutY(Height / 2 - 85);
         // menu Button
-        menuBtn = new Button();
+        Button menuBtn = new Button();
         Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
         ImageView menueview = new ImageView(menuimg);
         menueview.setFitHeight(45);
@@ -84,7 +82,7 @@ public class Game extends Application {
         progressBar.animationPlay();
 
 
-        scene = new Scene(game, Width, Height);
+        Scene scene = new Scene(game, Width, Height);
 
         // Add the icon to the list of icons for the stage
         Image icon = new Image(new FileInputStream("images\\icon.png"));
@@ -162,7 +160,11 @@ public class Game extends Application {
         }));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
-
+        Timeline closeChecker = new Timeline(new KeyFrame(Duration.millis(20), e -> {
+            closeCheck(stage);
+        }));
+        closeChecker.setCycleCount(Timeline.INDEFINITE);
+        closeChecker.play();
 
     }
 
@@ -350,6 +352,12 @@ public class Game extends Application {
             ballAnimation.pause();
         } else {
             game.getChildren().removeAll(p1status, p2status);
+        }
+    }
+
+    public void closeCheck(Stage stage) {
+        if (menu.isClose()) {
+            stage.close();
         }
     }
 

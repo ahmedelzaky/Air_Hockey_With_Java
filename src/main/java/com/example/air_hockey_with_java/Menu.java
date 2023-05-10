@@ -1,17 +1,11 @@
 package com.example.air_hockey_with_java;
 
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -22,8 +16,10 @@ import java.io.FileNotFoundException;
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
+
 public class Menu extends Pane {
-    boolean mute = false;
+    private boolean mute = false;
+    private boolean close = false;
     Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
 
     boolean resetValue = false;
@@ -42,15 +38,25 @@ public class Menu extends Pane {
         musicBtn.setGraphic(unmuteview);
         musicBtn.setStyle("-fx-background-color: transparent ;");
 
+        // Close  Button
+        Button closeBtn = new Button();
+        Image closeImg = new Image(new FileInputStream("images\\close64.png"));
+        ImageView closeView = new ImageView(closeImg);
+        closeView.setFitHeight(40);
+        closeView.setFitWidth(40);
+        closeBtn.setGraphic(closeView);
+        closeBtn.setStyle("-fx-background-color: transparent ;");
+
+        //Reset Button
         Button resetBtn = new Button("Reset");
         resetBtn.setPrefSize(100, 25);
-
         resetBtn.setTextFill(Color.WHITE);
         resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(15, 240, 252 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
-
         resetBtn.setFont(fnt);
         double recWidth = Width - 100;
         double recHeight = Height - 550;
+
+        //Create a Rectangle to add button on it
         Rectangle rectangle = new Rectangle(recWidth, recHeight);
         rectangle.setLayoutX(Width / 2 - recWidth / 2);
         rectangle.setLayoutY(Height / 2 - recHeight / 2);
@@ -59,13 +65,18 @@ public class Menu extends Pane {
         rectangle.setStroke(Color.rgb(15, 240, 252));
         rectangle.setStrokeWidth(5);
 
+        //add elements to pane
         this.setPrefSize(Width, Height);
         this.setStyle("-fx-background-color: transparent;");
-        this.getChildren().addAll(rectangle, musicBtn, resetBtn);
+        this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn);
+
+        // organise buttons
         resetBtn.setLayoutY(Height / 2 - 20);
         resetBtn.setLayoutX(Width / 2 - 50);
-        musicBtn.setLayoutX(recWidth - 10);
-        musicBtn.setLayoutY(Height - 2 * recHeight - 120);
+        musicBtn.setLayoutX(recWidth - 5);
+        musicBtn.setLayoutY(Height - 2 * recHeight - 125);
+        closeBtn.setLayoutX(Width - recWidth - 55);
+        closeBtn.setLayoutY(Height - 2 * recHeight - 127);
 
 
         musicBtn.setOnAction(e -> {
@@ -80,10 +91,22 @@ public class Menu extends Pane {
         resetBtn.setOnAction(e -> {
             reset();
         });
+
+        closeBtn.setOnAction(e -> {
+            close();
+        });
     }
 
     public void reset() {
         resetValue = true;
+    }
+
+    public void close() {
+        close = true;
+    }
+
+    public boolean isClose() {
+        return close;
     }
 
     public boolean isResetValue() {
