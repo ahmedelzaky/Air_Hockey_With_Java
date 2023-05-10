@@ -169,7 +169,7 @@ public class Game extends Application {
     }
 
     public void checkCollision() {
-        p2Score.setText(String.valueOf(p2.getScore()));
+
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
@@ -179,7 +179,10 @@ public class Game extends Application {
             }
             p2.addPoint();
             //update counter
-
+            p2Score.setText(String.valueOf(p2.getScore()));
+            //reset players and ball
+            p1.rest();
+            p2.rest();
             ball.rest(Height / 2 - 50);
         }
         if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() + ball.getRadius() >= Height) {
@@ -191,6 +194,9 @@ public class Game extends Application {
             p1.addPoint();
             //update counter
             p1Score.setText(String.valueOf(p1.getScore()));
+            //reset players and ball
+            p1.rest();
+            p2.rest();
             ball.rest(Height / 2 + 50);
         }
         // check if the ball hit the top or bottom side
