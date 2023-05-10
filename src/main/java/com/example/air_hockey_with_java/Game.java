@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -26,6 +28,10 @@ public class Game extends Application {
     Ball ball = new Ball();
     Text p1Score = new Text();
     Text p2Score = new Text();
+    Text p1status = new Text(100,200,"");
+    Text p2status = new Text(100,530,"");
+    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC,40);
+
     private Timeline ballAnimation;
     private Timeline playerAnimation;
 
@@ -147,6 +153,13 @@ public class Game extends Application {
         }));
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
+
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(1), e -> {
+            checkScore();
+        }));
+        gameOver.setCycleCount(Timeline.INDEFINITE);
+        gameOver.play();
+
 
     }
 
@@ -297,6 +310,35 @@ public class Game extends Application {
             ball.rest(Height / 2);
             game.getChildren().remove(menu);
             clicked = !clicked;
+            playerAnimation.play();
+            ballAnimation.play();
+        }
+    }
+    public void checkScore(){
+        if(p1.getScore()==7){
+            p1status.setText("You Win");
+            p1status.setFont(fnt);
+            p1status.setStroke(Color.BLUE);
+            p2status.setText("You Lose");
+            p2status.setFont(fnt);
+            p2status.setStroke(Color.RED);
+
+            game.getChildren().addAll(menu,p1status,p2status);
+            playerAnimation.pause();
+            ballAnimation.pause();
+        }else if(p2.getScore()==7){
+            p1status.setText("You Lose");
+            p1status.setFont(fnt);
+            p1status.setStroke(Color.RED);
+            p2status.setText("You Win");
+            p2status.setFont(fnt);
+            p2status.setStroke(Color.BLUE);
+
+            game.getChildren().addAll(menu,p1status,p2status);
+            playerAnimation.pause();
+            ballAnimation.pause();
+        }else {
+            game.getChildren().removeAll(p1status,p2status);
             playerAnimation.play();
             ballAnimation.play();
         }
