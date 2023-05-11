@@ -137,7 +137,7 @@ public class Game extends Application {
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(13), e -> {
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(12), e -> {
             checkCollision();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -303,7 +303,7 @@ public class Game extends Application {
             game.getChildren().remove(progressBar);
             playerAnimation.play();
             ballAnimation.play();
-            progressBar.setI(0);
+            progressBar.setLoadingP(0);
         }
     }
 
@@ -312,10 +312,12 @@ public class Game extends Application {
             menu.setResetValue(false);
             p1.rest();
             p2.rest();
+            p1.setScore(0);
+            p2.setScore(0);
             p1Score.setText(String.valueOf(p1.getScore()));
             p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2);
-            game.getChildren().remove(menu);
+            game.getChildren().removeAll(menu, p1status, p2status);
             clicked = !clicked;
             playerAnimation.play();
             ballAnimation.play();

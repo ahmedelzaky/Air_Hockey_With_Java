@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -15,11 +16,11 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class LoadingBar extends BorderPane {
 
-    Label label = new Label("Loading...");
-    javafx.scene.control.ProgressBar loadingBar = new javafx.scene.control.ProgressBar();
+    private Label label = new Label("Loading...");
+    private ProgressBar loadingBar = new ProgressBar();
 
-    double i = .01;
-    Timeline loadingAnimation;
+    private double loadingP = .01;
+    private Timeline loadingAnimation;
 
     LoadingBar() {
         this.setPrefSize(Width, Height);
@@ -28,8 +29,8 @@ public class LoadingBar extends BorderPane {
         loadingBar.setPrefSize(Width - 50, 20);
         loadingBar.setStyle("-fx-accent: #FF3131 ");
         loadingAnimation = new Timeline(new KeyFrame(Duration.millis(10), e -> {
-            loadingBar.setProgress(i);
-            i += .01;
+            loadingBar.setProgress(loadingP);
+            loadingP += .01;
         })
         );
         loadingAnimation.setCycleCount(100);
@@ -54,11 +55,11 @@ public class LoadingBar extends BorderPane {
 
     public boolean finish() {
 
-        return i >= 1;
+        return loadingP >= 1;
     }
 
-    public void setI(double i) {
-        this.i = i;
+    public void setLoadingP(double loadingP) {
+        this.loadingP = loadingP;
     }
 }
 

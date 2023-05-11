@@ -133,7 +133,6 @@ public class Player extends Circle {
     public void rest() {
         this.setCenterY(y);
         this.setCenterX(x);
-        this.score = 0;
     }
 
     public void addPoint() {
