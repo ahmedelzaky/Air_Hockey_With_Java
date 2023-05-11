@@ -1,5 +1,6 @@
 package com.example.air_hockey_with_java;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Pos;
@@ -14,7 +15,7 @@ import javafx.util.Duration;
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
-public class LoadingBar extends BorderPane {
+public class LoadingScreen extends BorderPane {
 
     private Label label = new Label("Loading...");
     private ProgressBar loadingBar = new ProgressBar();
@@ -22,7 +23,7 @@ public class LoadingBar extends BorderPane {
     private double loadingP = .01;
     private Timeline loadingAnimation;
 
-    LoadingBar() {
+    LoadingScreen() {
         this.setPrefSize(Width, Height);
 
         loadingBar.setProgress(0);
@@ -39,11 +40,20 @@ public class LoadingBar extends BorderPane {
         hbox.setAlignment(Pos.CENTER);
         hbox.setTranslateY(-300);
         label.setFont(Font.font("Arial", 18));
+        label.setTextFill(Color.RED);
 
         this.setCenter(loadingBar);
         this.setBottom(hbox);
         this.setStyle("-fx-background-color : black;");
-        label.setTextFill(Color.RED);
+
+
+        FadeTransition textFad = new FadeTransition(Duration.millis(400),label);
+        textFad.setFromValue(.3);
+        textFad.setToValue(1);
+        textFad.setCycleCount(10);
+        textFad.play();
+
+
 
 
     }

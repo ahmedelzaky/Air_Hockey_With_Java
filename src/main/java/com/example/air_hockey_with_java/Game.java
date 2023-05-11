@@ -41,7 +41,7 @@ public class Game extends Application {
     private Menu menu = new Menu();
     private GameFrame game = new GameFrame();
 
-    private LoadingBar progressBar = new LoadingBar();
+    private LoadingScreen loadingScreen = new LoadingScreen();
 
 
     public Game() throws FileNotFoundException {
@@ -78,8 +78,8 @@ public class Game extends Application {
 
         conter.getChildren().addAll(p1Score, menuBtn, p2Score);
         game.getChildren().add(conter);
-        game.getChildren().add(progressBar);
-        progressBar.animationPlay();
+        game.getChildren().add(loadingScreen);
+        loadingScreen.animationPlay();
 
 
         Scene scene = new Scene(game, Width, Height);
@@ -300,11 +300,11 @@ public class Game extends Application {
     }
 
     public void loadingAnimation() {
-        if (progressBar.finish()) {
-            game.getChildren().remove(progressBar);
+        if (loadingScreen.finish()) {
+            game.getChildren().remove(loadingScreen);
             playerAnimation.play();
             ballAnimation.play();
-            progressBar.setLoadingP(0);
+            loadingScreen.setLoadingP(0);
         }
     }
 

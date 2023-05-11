@@ -1,5 +1,6 @@
 package com.example.air_hockey_with_java;
 
+import javafx.animation.FadeTransition;
 import javafx.scene.effect.Bloom;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -8,6 +9,7 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
@@ -133,6 +135,11 @@ public class Player extends Circle {
     public void rest() {
         this.setCenterY(y);
         this.setCenterX(x);
+        FadeTransition playerFad = new FadeTransition(Duration.millis(400), this);
+        playerFad.setFromValue(.3);
+        playerFad.setToValue(1);
+        playerFad.setCycleCount(5);
+        playerFad.play();
     }
 
     public void addPoint() {
@@ -160,13 +167,13 @@ public class Player extends Circle {
         if (id == 1) {
             if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset > this.getRadius() && this.getCenterY() + this.Yoffset < (double) Height / 2)
+            if (this.getCenterY() + this.Yoffset > this.getRadius() && this.getCenterY() + this.Yoffset + this.getRadius() - 5 < (double) Height / 2)
                 this.setCenterY(this.getCenterY() + this.Yoffset);
 
         } else if (id == 2) {
             if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset > ((double) Height / 2) && this.getCenterY() + this.Yoffset < Height - this.getRadius())
+            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - 5 && this.getCenterY() + this.Yoffset < Height - this.getRadius())
                 this.setCenterY(this.getCenterY() + this.Yoffset);
 
         }

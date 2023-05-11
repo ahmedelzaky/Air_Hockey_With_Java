@@ -1,11 +1,13 @@
 package com.example.air_hockey_with_java;
 
+import javafx.animation.FadeTransition;
 import javafx.scene.effect.Bloom;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
@@ -23,7 +25,7 @@ public class Ball extends Circle {
         this.setRadius(15);
         RadialGradient gradientFill = new RadialGradient(
                 0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.rgb(252, 243, 64 , .5)),
+                new Stop(0, Color.rgb(252, 243, 64, .5)),
                 new Stop(0.25, Color.rgb(252, 243, 64)),
                 new Stop(0.3, Color.rgb(252, 243, 64)),
                 new Stop(0.75, Color.rgb(252, 243, 64)),
@@ -59,8 +61,12 @@ public class Ball extends Circle {
         this.setCenterY(y);
         this.xVelocity = 0;
         this.yVelocity = 0;
+        FadeTransition ballFad = new FadeTransition(Duration.millis(400), this);
+        ballFad.setFromValue(.3);
+        ballFad.setToValue(1);
+        ballFad.setCycleCount(5);
+        ballFad.play();
     }
-
 
 
     public void setxVelocity(int xVelocity) {
