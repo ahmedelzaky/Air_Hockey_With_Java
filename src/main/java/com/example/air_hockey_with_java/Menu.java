@@ -20,7 +20,10 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class Menu extends Pane {
     private boolean mute = false;
     private boolean close = false;
-    private boolean mini = false;
+    private boolean mini = true;
+
+
+    private boolean MiniClicked = false;
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
 
     private boolean resetValue = false;
@@ -110,6 +113,7 @@ public class Menu extends Pane {
         });
         miniBtn.setOnAction(e -> {
             minimize();
+            MiniClicked = true;
         });
     }
 
@@ -133,12 +137,20 @@ public class Menu extends Pane {
         return mini;
     }
 
+    public boolean isMiniClicked() {
+        return MiniClicked;
+    }
+
     public void setMini(boolean mini) {
         this.mini = mini;
     }
 
     public boolean isResetValue() {
         return resetValue;
+    }
+
+    public void setMiniClicked(boolean miniClicked) {
+        MiniClicked = miniClicked;
     }
 
     public void setResetValue(boolean resetValue) {

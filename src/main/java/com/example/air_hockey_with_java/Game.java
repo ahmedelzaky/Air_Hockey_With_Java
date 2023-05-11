@@ -282,6 +282,7 @@ public class Game extends Application {
     }
 
     public void isClicked() {
+        System.out.println("Clicked :" + clicked);
         if (!clicked) {
             game.getChildren().add(menu);
             clicked = !clicked;
@@ -363,11 +364,17 @@ public class Game extends Application {
         }
     }
 
+
     public void miniCheck() {
         if (menu.isMinimize()) {
             game.getChildren().remove(menu);
             menu.setMini(false);
-            clicked = !clicked;
+            playerAnimation.play();
+            ballAnimation.play();
+            if (menu.isMiniClicked()) {
+                clicked = !clicked;
+            }
+
         }
     }
 
