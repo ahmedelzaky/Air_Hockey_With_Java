@@ -56,14 +56,14 @@ public class Game extends Application {
 
         p1Score.setText(String.valueOf(p1.getScore()));
         p2Score.setText(String.valueOf(p2.getScore()));
-        p1Score.setFill(Color.RED);
-        p2Score.setFill(Color.BLUE);
+        p1Score.setStroke(Color.RED);
+        p2Score.setStroke(Color.BLUE);
         p1Score.setFont(fnt);
         p2Score.setFont(fnt);
         VBox conter = new VBox(5);
         conter.setPrefWidth(140);
-        conter.setLayoutX(Width - 30);
-        conter.setLayoutY(Height / 2 - 85);
+        conter.setLayoutX(Width - 35);
+        conter.setLayoutY((double) Height / 2 - 85);
         // menu Button
         Button menuBtn = new Button();
         Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
@@ -160,18 +160,19 @@ public class Game extends Application {
         }));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
-        Timeline closeChecker = new Timeline(new KeyFrame(Duration.millis(20), e -> {
+        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             closeCheck(stage);
+            miniCheck();
         }));
-        closeChecker.setCycleCount(Timeline.INDEFINITE);
-        closeChecker.play();
+        closeAndMiniChecker.setCycleCount(Timeline.INDEFINITE);
+        closeAndMiniChecker.play();
 
     }
 
     public void checkCollision() {
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
             } catch (InterruptedException e) {
@@ -185,7 +186,7 @@ public class Game extends Application {
             p2.rest();
             ball.rest(Height / 2 - 50);
         }
-        if (ball.getCenterX() < Width / 2 + game.getArcRaduis() && ball.getCenterX() > Width / 2 - game.getArcRaduis() && ball.getCenterY() + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(1000); // sleep for 10 milliseconds
             } catch (InterruptedException e) {
@@ -281,7 +282,6 @@ public class Game extends Application {
     }
 
     public void isClicked() {
-        System.out.println(clicked);
         if (!clicked) {
             game.getChildren().add(menu);
             clicked = !clicked;
@@ -334,7 +334,7 @@ public class Game extends Application {
             p2status.setStroke(Color.RED);
             try {
                 game.getChildren().addAll(menu, p1status, p2status);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
             playerAnimation.pause();
             ballAnimation.pause();
@@ -347,7 +347,7 @@ public class Game extends Application {
             p2status.setStroke(Color.BLUE);
             try {
                 game.getChildren().addAll(menu, p1status, p2status);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
             playerAnimation.pause();
@@ -360,6 +360,14 @@ public class Game extends Application {
     public void closeCheck(Stage stage) {
         if (menu.isClose()) {
             stage.close();
+        }
+    }
+
+    public void miniCheck() {
+        if (menu.isMinimize()) {
+            game.getChildren().remove(menu);
+            menu.setMini(false);
+            clicked = !clicked;
         }
     }
 

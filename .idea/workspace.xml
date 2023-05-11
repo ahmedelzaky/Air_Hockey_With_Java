@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58062ae-744d-4516-a39d-8cb1fc3a7a61" name="Changes" comment="V0.92">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game_structure.puml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/close64.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/close64.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/minimize64.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/minimize64.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/mute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/mute.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/unmute.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/unmute.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +50,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zekwa/Desktop/Snake&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/git/Air_Hockey_With_Java",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Air_Hockey_With_Java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Air_Hockey_With_Java" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -65,6 +91,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1682796602979</updated>
+      <workItem from="1683831907638" duration="21000" />
+      <workItem from="1683831938890" duration="3391000" />
     </task>
     <task id="LOCAL-00001" summary="V0.35">
       <created>1682880710675</created>
@@ -103,6 +131,9 @@
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

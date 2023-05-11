@@ -20,9 +20,11 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class Menu extends Pane {
     private boolean mute = false;
     private boolean close = false;
-    Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
+    private boolean mini = false;
+    private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
 
-    boolean resetValue = false;
+    private boolean resetValue = false;
+
 
     Menu() throws FileNotFoundException {
         // music Button
@@ -42,16 +44,25 @@ public class Menu extends Pane {
         Button closeBtn = new Button();
         Image closeImg = new Image(new FileInputStream("images\\close64.png"));
         ImageView closeView = new ImageView(closeImg);
-        closeView.setFitHeight(40);
-        closeView.setFitWidth(40);
+        closeView.setFitHeight(30);
+        closeView.setFitWidth(30);
         closeBtn.setGraphic(closeView);
         closeBtn.setStyle("-fx-background-color: transparent ;");
 
-        //Reset Button
-        Button resetBtn = new Button("Reset");
+        // minimize  Button
+        Button miniBtn = new Button();
+        Image miniImg = new Image(new FileInputStream("images\\minimize64.png"));
+        ImageView miniView = new ImageView(miniImg);
+        miniView.setFitHeight(30);
+        miniView.setFitWidth(30);
+        miniBtn.setGraphic(miniView);
+        miniBtn.setStyle("-fx-background-color: transparent ;");
+
+        //Restart Button
+        Button resetBtn = new Button("Restart");
         resetBtn.setPrefSize(100, 25);
         resetBtn.setTextFill(Color.WHITE);
-        resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(15, 240, 252 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
+        resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
         resetBtn.setFont(fnt);
         double recWidth = Width - 100;
         double recHeight = Height - 550;
@@ -61,14 +72,14 @@ public class Menu extends Pane {
         rectangle.setLayoutX(Width / 2 - recWidth / 2);
         rectangle.setLayoutY(Height / 2 - recHeight / 2);
         rectangle.setStyle("-fx-border-radius:50;");
-        rectangle.setFill(Color.rgb(15, 240, 252, .2));
-        rectangle.setStroke(Color.rgb(15, 240, 252));
+        rectangle.setFill(Color.rgb(200, 34, 255, .2));
+        rectangle.setStroke(Color.rgb(200, 34, 255, .8));
         rectangle.setStrokeWidth(5);
 
         //add elements to pane
         this.setPrefSize(Width, Height);
         this.setStyle("-fx-background-color:  rgb(0, 0, 0 , .6);");
-        this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn);
+        this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn, miniBtn);
 
         // organise buttons
         resetBtn.setLayoutY(Height / 2 - 20);
@@ -76,7 +87,9 @@ public class Menu extends Pane {
         musicBtn.setLayoutX(recWidth - 5);
         musicBtn.setLayoutY(Height - 2 * recHeight - 125);
         closeBtn.setLayoutX(Width - recWidth - 55);
-        closeBtn.setLayoutY(Height - 2 * recHeight - 127);
+        closeBtn.setLayoutY(Height - 2 * recHeight - 125);
+        miniBtn.setLayoutX(Width - recWidth - 27);
+        miniBtn.setLayoutY(Height - 2 * recHeight - 125);
 
 
         musicBtn.setOnAction(e -> {
@@ -95,6 +108,9 @@ public class Menu extends Pane {
         closeBtn.setOnAction(e -> {
             close();
         });
+        miniBtn.setOnAction(e -> {
+            minimize();
+        });
     }
 
     public void reset() {
@@ -105,8 +121,20 @@ public class Menu extends Pane {
         close = true;
     }
 
+    public void minimize() {
+        mini = true;
+    }
+
     public boolean isClose() {
         return close;
+    }
+
+    public boolean isMinimize() {
+        return mini;
+    }
+
+    public void setMini(boolean mini) {
+        this.mini = mini;
     }
 
     public boolean isResetValue() {

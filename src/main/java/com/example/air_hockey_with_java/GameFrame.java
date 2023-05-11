@@ -45,9 +45,9 @@ public class GameFrame extends Pane {
         //Bottom Border
         this.getChildren().add(gline(Width, Height, 0, Height));
         //Top Arc
-        this.getChildren().add(gArc(Width / 2, -1, arcRaduis, arcRaduis, 180, 180));
+        this.getChildren().add(gArc(Width / 2, 0, arcRaduis, arcRaduis, 180, 180));
         //Bottom Arc
-        this.getChildren().add(gArc(Width / 2, Height + 1, arcRaduis, arcRaduis, 0, 180));
+        this.getChildren().add(gArc(Width / 2, Height , arcRaduis, arcRaduis, 0, 180));
 
     }
 
@@ -55,8 +55,6 @@ public class GameFrame extends Pane {
     private Arc gArc(int x, int y, int xR, int yR, int a1, int a2) {
         Arc arc = new Arc(x, y, xR, yR, a1, a2);
         arc.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
-        arc.setType(ArcType.ROUND);
-
         return arc;
     }
 
