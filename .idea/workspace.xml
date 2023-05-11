@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +90,7 @@
       <workItem from="1683831938890" duration="3391000" />
       <workItem from="1683835447167" duration="2140000" />
       <workItem from="1683839019569" duration="1023000" />
+      <workItem from="1683840189311" duration="452000" />
     </task>
     <task id="LOCAL-00001" summary="V0.35">
       <created>1682880710675</created>

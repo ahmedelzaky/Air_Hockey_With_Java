@@ -64,7 +64,7 @@ public class Ball extends Circle {
         FadeTransition ballFad = new FadeTransition(Duration.millis(400), this);
         ballFad.setFromValue(.3);
         ballFad.setToValue(1);
-        ballFad.setCycleCount(5);
+        ballFad.setCycleCount(4);
         ballFad.play();
     }
 

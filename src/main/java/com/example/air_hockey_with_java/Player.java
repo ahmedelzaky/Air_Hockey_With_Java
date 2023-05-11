@@ -138,7 +138,7 @@ public class Player extends Circle {
         FadeTransition playerFad = new FadeTransition(Duration.millis(400), this);
         playerFad.setFromValue(.3);
         playerFad.setToValue(1);
-        playerFad.setCycleCount(5);
+        playerFad.setCycleCount(4);
         playerFad.play();
     }
 

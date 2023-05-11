@@ -87,18 +87,6 @@ public class Game extends Application {
         // Add the icon to the list of icons for the stage
         Image icon = new Image(new FileInputStream("images\\icon.png"));
         stage.getIcons().add(icon);
-
-/*
-        Media media = new Media("file:///path/to/audio/file.mp3");
-
-        // Create a MediaPlayer with the Media instance
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-        // Play the audio
-        mediaPlayer.play();
-*/
-
-
         stage.setTitle("Air Hockey Game");
         stage.setScene(scene);
         stage.setResizable(false);
@@ -174,7 +162,7 @@ public class Game extends Application {
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
-                Thread.sleep(1000); // sleep for 10 milliseconds
+                Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
                 // handle interrupted exception
             }
@@ -182,13 +170,16 @@ public class Game extends Application {
             //update counter
             p2Score.setText(String.valueOf(p2.getScore()));
             //reset players and ball
-            p1.rest();
-            p2.rest();
-            ball.rest(Height / 2 - 50);
+            if (p2.getScore() < 7) {
+                p1.rest();
+                p2.rest();
+                ball.rest(Height / 2 - 50);
+            }
+
         }
         if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
-                Thread.sleep(1000); // sleep for 10 milliseconds
+                Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
                 // handle interrupted exception
             }
@@ -196,9 +187,11 @@ public class Game extends Application {
             //update counter
             p1Score.setText(String.valueOf(p1.getScore()));
             //reset players and ball
-            p1.rest();
-            p2.rest();
-            ball.rest(Height / 2 + 50);
+            if (p1.getScore() < 7) {
+                p1.rest();
+                p2.rest();
+                ball.rest(Height / 2 + 50);
+            }
         }
         // check if the ball hit the top or bottom side
         if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
