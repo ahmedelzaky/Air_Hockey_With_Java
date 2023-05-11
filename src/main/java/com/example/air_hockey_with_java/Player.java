@@ -138,28 +138,8 @@ public class Player extends Circle {
         FadeTransition playerFad = new FadeTransition(Duration.millis(400), this);
         playerFad.setFromValue(.3);
         playerFad.setToValue(1);
-        playerFad.setCycleCount(4);
+        playerFad.setCycleCount(3);
         playerFad.play();
-    }
-
-    public void addPoint() {
-        ++score;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getxVelocity() {
-        return xVelocity;
-    }
-
-    public int getyVelocity() {
-        return yVelocity;
     }
 
 
@@ -178,6 +158,26 @@ public class Player extends Circle {
 
         }
 
+    }
+
+    public void addPoint() {
+        ++score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getXVelocity() {
+        return xVelocity;
+    }
+
+    public int getYVelocity() {
+        return yVelocity;
     }
 }
 

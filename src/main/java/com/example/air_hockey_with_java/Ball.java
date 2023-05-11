@@ -11,7 +11,6 @@ import javafx.util.Duration;
 
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
-import static javafx.scene.paint.Color.rgb;
 
 public class Ball extends Circle {
 
@@ -49,8 +48,8 @@ public class Ball extends Circle {
     }
 
     public void move() {
-        double newCenterX = getCenterX() + getxVelocity();
-        double newCenterY = getCenterY() + getyVelocity();
+        double newCenterX = getCenterX() + getXVelocity();
+        double newCenterY = getCenterY() + getYVelocity();
         setCenterX(newCenterX);
         setCenterY(newCenterY);
     }
@@ -69,20 +68,20 @@ public class Ball extends Circle {
     }
 
 
-    public void setxVelocity(int xVelocity) {
+    public void setXVelocity(int xVelocity) {
         this.xVelocity = xVelocity;
     }
 
-    public void setyVelocity(int yVelocity) {
+    public void setYVelocity(int yVelocity) {
         this.yVelocity = yVelocity;
     }
 
 
-    public int getxVelocity() {
+    public int getXVelocity() {
         return xVelocity;
     }
 
-    public int getyVelocity() {
+    public int getYVelocity() {
         return yVelocity;
     }
 

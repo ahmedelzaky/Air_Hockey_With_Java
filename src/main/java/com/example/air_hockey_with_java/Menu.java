@@ -32,15 +32,15 @@ public class Menu extends Pane {
     Menu() throws FileNotFoundException {
         // music Button
         Button musicBtn = new Button();
-        Image muteimg = new Image(new FileInputStream("images\\mute.png"));
-        ImageView muteview = new ImageView(muteimg);
-        Image unmuteimg = new Image(new FileInputStream("images\\unmute.png"));
-        ImageView unmuteview = new ImageView(unmuteimg);
-        muteview.setFitHeight(30);
-        muteview.setFitWidth(30);
-        unmuteview.setFitHeight(30);
-        unmuteview.setFitWidth(30);
-        musicBtn.setGraphic(unmuteview);
+        Image muteImg = new Image(new FileInputStream("images\\mute.png"));
+        ImageView muteView = new ImageView(muteImg);
+        Image unmuteImg = new Image(new FileInputStream("images\\unmute.png"));
+        ImageView unmuteView = new ImageView(unmuteImg);
+        muteView.setFitHeight(30);
+        muteView.setFitWidth(30);
+        unmuteView.setFitHeight(30);
+        unmuteView.setFitWidth(30);
+        musicBtn.setGraphic(unmuteView);
         musicBtn.setStyle("-fx-background-color: transparent ;");
 
         // Close  Button
@@ -72,8 +72,8 @@ public class Menu extends Pane {
 
         //Create a Rectangle to add button on it
         Rectangle rectangle = new Rectangle(recWidth, recHeight);
-        rectangle.setLayoutX(Width / 2 - recWidth / 2);
-        rectangle.setLayoutY(Height / 2 - recHeight / 2);
+        rectangle.setLayoutX((double) Width / 2 - recWidth / 2);
+        rectangle.setLayoutY((double) Height / 2 - recHeight / 2);
         rectangle.setStyle("-fx-border-radius:50;");
         rectangle.setFill(Color.rgb(200, 34, 255, .2));
         rectangle.setStroke(Color.rgb(200, 34, 255, .8));
@@ -85,8 +85,8 @@ public class Menu extends Pane {
         this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn, miniBtn);
 
         // organise buttons
-        resetBtn.setLayoutY(Height / 2 - 20);
-        resetBtn.setLayoutX(Width / 2 - 50);
+        resetBtn.setLayoutY((double) Height / 2 - 20);
+        resetBtn.setLayoutX((double) Width / 2 - 50);
         musicBtn.setLayoutX(recWidth - 5);
         musicBtn.setLayoutY(Height - 2 * recHeight - 125);
         closeBtn.setLayoutX(Width - recWidth - 55);
@@ -98,9 +98,9 @@ public class Menu extends Pane {
         musicBtn.setOnAction(e -> {
             mute = !mute;
             if (mute) {
-                musicBtn.setGraphic(muteview);
+                musicBtn.setGraphic(muteView);
             } else {
-                musicBtn.setGraphic(unmuteview);
+                musicBtn.setGraphic(unmuteView);
             }
         });
 
@@ -149,9 +149,7 @@ public class Menu extends Pane {
         return resetValue;
     }
 
-    public void setMiniClicked(boolean miniClicked) {
-        MiniClicked = miniClicked;
-    }
+
 
     public void setResetValue(boolean resetValue) {
         this.resetValue = resetValue;

@@ -7,7 +7,6 @@ import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Arc;
-import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
@@ -15,7 +14,6 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
-    private final int arcRaduis = 50;
 
 
     GameFrame() {
@@ -45,15 +43,15 @@ public class GameFrame extends Pane {
         //Bottom Border
         this.getChildren().add(gline(Width, Height, 0, Height));
         //Top Arc
-        this.getChildren().add(gArc(Width / 2, 0, arcRaduis, arcRaduis, 180, 180));
+        this.getChildren().add(gArc(0, 180));
         //Bottom Arc
-        this.getChildren().add(gArc(Width / 2, Height , arcRaduis, arcRaduis, 0, 180));
+        this.getChildren().add(gArc(Height, 0));
 
     }
 
 
-    private Arc gArc(int x, int y, int xR, int yR, int a1, int a2) {
-        Arc arc = new Arc(x, y, xR, yR, a1, a2);
+    private Arc gArc(int y, int a1) {
+        Arc arc = new Arc(175, y, 50, 50, a1, 180);
         arc.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
         return arc;
     }
@@ -74,8 +72,9 @@ public class GameFrame extends Pane {
         return line;
     }
 
-    public int getArcRaduis() {
-        return arcRaduis - 2;
+    public int getArcRadius() {
+        int arcRadius = 50;
+        return arcRadius - 2;
     }
 
 }

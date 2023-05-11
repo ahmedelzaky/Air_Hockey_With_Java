@@ -32,11 +32,8 @@ public class Game extends Application {
     private Text p1status = new Text(100, 200, "");
     private Text p2status = new Text(100, 530, "");
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
-
     private Timeline ballAnimation;
     private Timeline playerAnimation;
-
-    private Timeline closeChecker;
     private boolean clicked = false;
     private Menu menu = new Menu();
     private GameFrame game = new GameFrame();
@@ -60,24 +57,24 @@ public class Game extends Application {
         p2Score.setStroke(Color.BLUE);
         p1Score.setFont(fnt);
         p2Score.setFont(fnt);
-        VBox conter = new VBox(5);
-        conter.setPrefWidth(140);
-        conter.setLayoutX(Width - 35);
-        conter.setLayoutY((double) Height / 2 - 85);
+        VBox counter = new VBox(5);
+        counter.setPrefWidth(140);
+        counter.setLayoutX(Width - 35);
+        counter.setLayoutY((double) Height / 2 - 85);
         // menu Button
         Button menuBtn = new Button();
-        Image menuimg = new Image(new FileInputStream("images\\menu64.png"));
-        ImageView menueview = new ImageView(menuimg);
-        menueview.setFitHeight(45);
-        menueview.setFitWidth(45);
+        Image menuImg = new Image(new FileInputStream("images\\menu64.png"));
+        ImageView menuView = new ImageView(menuImg);
+        menuView.setFitHeight(45);
+        menuView.setFitWidth(45);
 
 
-        menuBtn.setGraphic(menueview);
+        menuBtn.setGraphic(menuView);
         menuBtn.setTranslateX(-25);
         menuBtn.setStyle("-fx-background-color: transparent;");
 
-        conter.getChildren().addAll(p1Score, menuBtn, p2Score);
-        game.getChildren().add(conter);
+        counter.getChildren().addAll(p1Score, menuBtn, p2Score);
+        game.getChildren().add(counter);
         game.getChildren().add(loadingScreen);
         loadingScreen.animationPlay();
 
@@ -106,15 +103,13 @@ public class Game extends Application {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
+        //toggle menu
         menuBtn.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 isClicked();
             }
         });
-        //toggle menu button
-        menuBtn.setOnMouseClicked(e -> {
-            isClicked();
-        });
+        menuBtn.setOnMouseClicked(e -> isClicked());
 
 
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
@@ -125,29 +120,22 @@ public class Game extends Application {
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(12), e -> {
-            checkCollision();
-        }));
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(12), e -> checkCollision()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        Timeline loading = new Timeline(new KeyFrame(Duration.millis(16), e -> {
-            loadingAnimation();
-        }));
+        Timeline loading = new Timeline(new KeyFrame(Duration.millis(16), e -> loadingAnimation()));
         loading.setCycleCount(200);
         loading.play();
 
-        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
-            gameReset();
-        }));
+        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> gameReset()));
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
 
-        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(20), e -> {
-            checkScore();
-        }));
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(20), e -> checkScore()));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
+
         Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             closeCheck(stage);
             miniCheck();
@@ -160,7 +148,7 @@ public class Game extends Application {
     public void checkCollision() {
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + 2 && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -177,7 +165,7 @@ public class Game extends Application {
             }
 
         }
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRaduis() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRaduis() + 2 && ball.getCenterY() + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + 2 && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -195,43 +183,43 @@ public class Game extends Application {
         }
         // check if the ball hit the top or bottom side
         if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
-            ball.setyVelocity(-ball.getyVelocity());
+            ball.setYVelocity(-ball.getYVelocity());
         }
         // check if the ball hit the right or left side
         if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
-            ball.setxVelocity(-ball.getxVelocity());
+            ball.setXVelocity(-ball.getXVelocity());
         }
         if (ball.intersects(p1)) {
             //check if the ball hit the player in the middle
             if (ball.getCenterX() - p1.getCenterX() == 0) {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
-                    ball.setxVelocity(0);
-                    ball.setyVelocity(-p1.getyVelocity());
+                    ball.setXVelocity(0);
+                    ball.setYVelocity(-p1.getYVelocity());
                 } else {
-                    ball.setxVelocity(0);
-                    ball.setyVelocity(p1.getyVelocity());
+                    ball.setXVelocity(0);
+                    ball.setYVelocity(p1.getYVelocity());
                 }
             } //check if the ball hit player left side
             else if (ball.getCenterX() < p1.getCenterX()) {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
-                    ball.setxVelocity(-p1.getxVelocity());
-                    ball.setyVelocity(-p1.getyVelocity());
+                    ball.setXVelocity(-p1.getXVelocity());
+                    ball.setYVelocity(-p1.getYVelocity());
                 } else {
-                    ball.setxVelocity(-p1.getxVelocity());
-                    ball.setyVelocity(p1.getyVelocity());
+                    ball.setXVelocity(-p1.getXVelocity());
+                    ball.setYVelocity(p1.getYVelocity());
                 }
 
 
             } else {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
-                    ball.setxVelocity(p1.getxVelocity());
-                    ball.setyVelocity(-p1.getyVelocity());
+                    ball.setXVelocity(p1.getXVelocity());
+                    ball.setYVelocity(-p1.getYVelocity());
                 } else {
-                    ball.setxVelocity(p1.getxVelocity());
-                    ball.setyVelocity(p1.getyVelocity());
+                    ball.setXVelocity(p1.getXVelocity());
+                    ball.setYVelocity(p1.getYVelocity());
                 }
 
             }
@@ -242,31 +230,31 @@ public class Game extends Application {
             if (ball.getCenterX() - p2.getCenterX() == 0) {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
-                    ball.setxVelocity(0);
-                    ball.setyVelocity(p2.getyVelocity());
+                    ball.setXVelocity(0);
+                    ball.setYVelocity(p2.getYVelocity());
                 } else {
-                    ball.setxVelocity(0);
-                    ball.setyVelocity(-p2.getyVelocity());
+                    ball.setXVelocity(0);
+                    ball.setYVelocity(-p2.getYVelocity());
                 }
             }  //check if the ball hit player left side
             else if (ball.getCenterX() < p2.getCenterX()) {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
-                    ball.setxVelocity(-p2.getxVelocity());
-                    ball.setyVelocity(p2.getyVelocity());
+                    ball.setXVelocity(-p2.getXVelocity());
+                    ball.setYVelocity(p2.getYVelocity());
                 } else {
-                    ball.setxVelocity(-p2.getxVelocity());
-                    ball.setyVelocity(-p2.getyVelocity());
+                    ball.setXVelocity(-p2.getXVelocity());
+                    ball.setYVelocity(-p2.getYVelocity());
                 }
 
             } else {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
-                    ball.setxVelocity(p2.getxVelocity());
-                    ball.setyVelocity(p2.getyVelocity());
+                    ball.setXVelocity(p2.getXVelocity());
+                    ball.setYVelocity(p2.getYVelocity());
                 } else {
-                    ball.setxVelocity(p2.getxVelocity());
-                    ball.setyVelocity(-p2.getyVelocity());
+                    ball.setXVelocity(p2.getXVelocity());
+                    ball.setYVelocity(-p2.getYVelocity());
                 }
             }
         }
