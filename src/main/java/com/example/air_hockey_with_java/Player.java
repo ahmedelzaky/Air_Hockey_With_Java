@@ -1,6 +1,9 @@
 package com.example.air_hockey_with_java;
 
+import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.effect.Bloom;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -19,6 +22,8 @@ public class Player extends Circle {
     private int xVelocity;
     private int yVelocity;
     private int score = 0;
+    private Timeline bloomAnimation;
+    private Bloom bloom;
 
     private double Xoffset = 0;
     private double Yoffset = 0;
@@ -38,12 +43,34 @@ public class Player extends Circle {
 
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .5)));
 
-        Bloom bloom = new Bloom();
+        bloom = new Bloom();
         bloom.setThreshold(.6);
         this.setEffect(bloom);
         this.setFill(gradientFill);
 
+        Timeline hitAnimationChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+            try {
+                if (bloomAnimation.getStatus() != Animation.Status.RUNNING) {
+                    this.setEffect(bloom);
+                }
+            } catch (Exception ignored) {
+            }
+        }));
+        hitAnimationChecker.setCycleCount(Timeline.INDEFINITE);
+        hitAnimationChecker.play();
     }
+
+
+    public void hit() {
+        Bloom bloom = new Bloom();
+        bloom.setThreshold(0.1);
+        this.setEffect(bloom);
+        bloomAnimation = new Timeline(new KeyFrame(Duration.millis(200)));
+        bloomAnimation.play();
+
+
+    }
+
 
     public void keyReleased(KeyEvent event) {
 
@@ -72,13 +99,13 @@ public class Player extends Circle {
 
     public void keyPressed(KeyEvent event) {
         int step = 5;
-        xVelocity = 7;
-        yVelocity = 7;
+        xVelocity = step + 1;
+        yVelocity = step + 1;
         if (id == 1) {
             if (event.isShiftDown()) {
                 step = 10;
-                xVelocity = 12;
-                yVelocity = 12;
+                xVelocity = step + 1;
+                yVelocity = step + 1;
             }
             switch (event.getCode()) {
                 case I:
@@ -104,8 +131,8 @@ public class Player extends Circle {
 
             if (event.isControlDown()) {
                 step = 10;
-                xVelocity = 12;
-                yVelocity = 12;
+                xVelocity = step + 1;
+                yVelocity = step + 1;
             }
 
             switch (event.getCode()) {

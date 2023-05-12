@@ -190,6 +190,7 @@ public class Game extends Application {
             ball.setXVelocity(-ball.getXVelocity());
         }
         if (ball.intersects(p1)) {
+            p1.hit();
             //check if the ball hit the player in the middle
             if (ball.getCenterX() - p1.getCenterX() == 0) {
                 //check if the ball hit the player from behind
@@ -226,6 +227,7 @@ public class Game extends Application {
 
         }
         if (ball.intersects(p2)) {
+            p2.hit();
 
             if (ball.getCenterX() - p2.getCenterX() == 0) {
                 //check if the ball hit the player from behind
