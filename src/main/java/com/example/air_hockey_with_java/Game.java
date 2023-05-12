@@ -148,7 +148,7 @@ public class Game extends Application {
     public void checkCollision() {
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + 2 && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -165,7 +165,7 @@ public class Game extends Application {
             }
 
         }
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - 2 && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + 2 && ball.getCenterY() + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
