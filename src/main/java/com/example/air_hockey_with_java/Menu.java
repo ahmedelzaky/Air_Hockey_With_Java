@@ -24,6 +24,7 @@ public class Menu extends GridPane {
     private boolean mute = false;
     private boolean close = false;
     private boolean mini = true;
+    private int iconSize = 30;
 
 
     private boolean MiniClicked = false;
@@ -39,10 +40,10 @@ public class Menu extends GridPane {
         ImageView muteView = new ImageView(muteImg);
         Image unmuteImg = new Image(new FileInputStream("images\\unmute.png"));
         ImageView unmuteView = new ImageView(unmuteImg);
-        muteView.setFitHeight(30);
-        muteView.setFitWidth(30);
-        unmuteView.setFitHeight(30);
-        unmuteView.setFitWidth(30);
+        muteView.setFitHeight(iconSize);
+        muteView.setFitWidth(iconSize);
+        unmuteView.setFitHeight(iconSize);
+        unmuteView.setFitWidth(iconSize);
         musicBtn.setGraphic(unmuteView);
         musicBtn.setStyle("-fx-background-color: transparent ;");
 
@@ -50,8 +51,8 @@ public class Menu extends GridPane {
         Button closeBtn = new Button();
         Image closeImg = new Image(new FileInputStream("images\\close64.png"));
         ImageView closeView = new ImageView(closeImg);
-        closeView.setFitHeight(30);
-        closeView.setFitWidth(30);
+        closeView.setFitHeight(iconSize);
+        closeView.setFitWidth(iconSize);
         closeBtn.setGraphic(closeView);
         closeBtn.setStyle("-fx-background-color: transparent ;");
 
@@ -59,8 +60,8 @@ public class Menu extends GridPane {
         Button miniBtn = new Button();
         Image miniImg = new Image(new FileInputStream("images\\minimize64.png"));
         ImageView miniView = new ImageView(miniImg);
-        miniView.setFitHeight(30);
-        miniView.setFitWidth(30);
+        miniView.setFitHeight(iconSize);
+        miniView.setFitWidth(iconSize);
         miniBtn.setGraphic(miniView);
         miniBtn.setStyle("-fx-background-color: transparent ;");
 
