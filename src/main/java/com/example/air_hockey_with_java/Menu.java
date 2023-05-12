@@ -1,8 +1,11 @@
 package com.example.air_hockey_with_java;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -17,7 +20,7 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 
-public class Menu extends Pane {
+public class Menu extends GridPane {
     private boolean mute = false;
     private boolean close = false;
     private boolean mini = true;
@@ -82,17 +85,21 @@ public class Menu extends Pane {
         //add elements to pane
         this.setPrefSize(Width, Height);
         this.setStyle("-fx-background-color:  rgb(0, 0, 0 , .6);");
-        this.getChildren().addAll(rectangle, musicBtn, resetBtn, closeBtn, miniBtn);
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().add(rectangle);
 
-        // organise buttons
-        resetBtn.setLayoutY((double) Height / 2 - 20);
-        resetBtn.setLayoutX((double) Width / 2 - 50);
-        musicBtn.setLayoutX(recWidth - 5);
-        musicBtn.setLayoutY(Height - 2 * recHeight - 125);
-        closeBtn.setLayoutX(Width - recWidth - 55);
-        closeBtn.setLayoutY(Height - 2 * recHeight - 125);
-        miniBtn.setLayoutX(Width - recWidth - 27);
-        miniBtn.setLayoutY(Height - 2 * recHeight - 125);
+        //make a box for close and minimuize
+        HBox controlBox = new HBox(0);
+        controlBox.getChildren().addAll(closeBtn, miniBtn);
+        this.add(controlBox, 0, 0);
+
+        HBox musicBox = new HBox();
+        musicBox.getChildren().add(musicBtn);
+        musicBox.setTranslateX(recWidth - 45);
+        this.add(musicBox, 0, 0);
+
+        this.add(resetBtn, 0, 0);
+        resetBtn.setTranslateX(recWidth / 2 - 50);
 
 
         musicBtn.setOnAction(e -> {
@@ -148,7 +155,6 @@ public class Menu extends Pane {
     public boolean isResetValue() {
         return resetValue;
     }
-
 
 
     public void setResetValue(boolean resetValue) {

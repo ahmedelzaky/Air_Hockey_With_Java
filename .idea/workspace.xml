@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58062ae-744d-4516-a39d-8cb1fc3a7a61" name="Changes" comment="V0.98">
+    <list default="true" id="b58062ae-744d-4516-a39d-8cb1fc3a7a61" name="Changes" comment="V0.99">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +49,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/git/Air_Hockey_With_Java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/study/java/Calc&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -93,7 +89,9 @@
       <workItem from="1683835447167" duration="2140000" />
       <workItem from="1683839019569" duration="1023000" />
       <workItem from="1683840189311" duration="637000" />
-      <workItem from="1683842424125" duration="1277000" />
+      <workItem from="1683842424125" duration="1593000" />
+      <workItem from="1683849154033" duration="166000" />
+      <workItem from="1683850137175" duration="667000" />
     </task>
     <task id="LOCAL-00001" summary="V0.35">
       <created>1682880710675</created>
@@ -137,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683840807387</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="V0.99">
+      <created>1683843890939</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683843890939</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +164,8 @@
     <MESSAGE value="V0.7" />
     <MESSAGE value="V0.92" />
     <MESSAGE value="V0.98" />
-    <option name="LAST_COMMIT_MESSAGE" value="V0.98" />
+    <MESSAGE value="V0.99" />
+    <option name="LAST_COMMIT_MESSAGE" value="V0.99" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Air_Hockey_With_Java$Game.ic" NAME="Game Coverage Results" MODIFIED="1682788975749" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -265,15 +265,14 @@ public class Game extends Application {
     public void isClicked() {
         System.out.println("Clicked :" + clicked);
         if (!clicked) {
-            game.getChildren().add(menu);
             clicked = !clicked;
-
+            game.getChildren().add(menu);
             playerAnimation.pause();
             ballAnimation.pause();
 
         } else {
-            game.getChildren().remove(menu);
             clicked = !clicked;
+            game.getChildren().remove(menu);
             playerAnimation.play();
             ballAnimation.play();
         }
