@@ -120,7 +120,7 @@ public class Game extends Application {
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(12), e -> checkCollision()));
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> checkCollision()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
@@ -132,11 +132,11 @@ public class Game extends Application {
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
 
-        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(20), e -> checkScore()));
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(16), e -> checkScore()));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
 
-        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(20), e -> {
+        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
             closeCheck(stage);
             miniCheck();
         }));

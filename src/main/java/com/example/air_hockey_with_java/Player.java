@@ -72,13 +72,13 @@ public class Player extends Circle {
 
     public void keyPressed(KeyEvent event) {
         int step = 5;
-        xVelocity = 5;
-        yVelocity = 5;
+        xVelocity = 7;
+        yVelocity = 7;
         if (id == 1) {
             if (event.isShiftDown()) {
                 step = 10;
-                xVelocity = 10;
-                yVelocity = 10;
+                xVelocity = 12;
+                yVelocity = 12;
             }
             switch (event.getCode()) {
                 case I:
@@ -104,8 +104,8 @@ public class Player extends Circle {
 
             if (event.isControlDown()) {
                 step = 10;
-                xVelocity = 10;
-                yVelocity = 10;
+                xVelocity = 12;
+                yVelocity = 12;
             }
 
             switch (event.getCode()) {
