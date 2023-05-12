@@ -102,13 +102,18 @@ public class Menu extends GridPane {
         this.add(resetBtn, 0, 0);
         resetBtn.setTranslateX(recWidth / 2 - 50);
 
+       //  Media sound = new Media(getClass().getResource("Clown.mp3").toString());
+       //  MediaPlayer mediaPlayer = new MediaPlayer(sound);
+       //  mediaPlayer.play();
 
         musicBtn.setOnAction(e -> {
             mute = !mute;
             if (mute) {
                 musicBtn.setGraphic(muteView);
+                //mediaPlayer.pause();
             } else {
                 musicBtn.setGraphic(unmuteView);
+                //mediaPlayer.play();
             }
         });
 
