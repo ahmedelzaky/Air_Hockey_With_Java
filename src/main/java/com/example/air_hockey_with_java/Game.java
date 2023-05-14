@@ -149,7 +149,7 @@ public class Game extends Application {
     public void checkCollision() {
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() - game.getStrokeWidth() <= 0) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -166,7 +166,7 @@ public class Game extends Application {
             }
 
         }
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height - 5) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -183,11 +183,11 @@ public class Game extends Application {
             }
         }
         // check if the ball hit the top or bottom side
-        if (ball.getCenterY() - ball.getRadius() - game.getStrokeWidth() <= 0 || ball.getCenterY() >= Height - ball.getRadius() - game.getStrokeWidth()) {
+        if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
             ball.setYVelocity(-ball.getYVelocity());
         }
         // check if the ball hit the right or left side
-        if (ball.getCenterX() - game.getStrokeWidth() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius() - game.getStrokeWidth()) {
+        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
             ball.setXVelocity(-ball.getXVelocity());
         }
         if (ball.intersects(p1)) {
