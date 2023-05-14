@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
+    double angle;
     private Player p1 = new Player(30, 1, 90, 57, 255, 20);
     private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
     private Ball ball = new Ball();
@@ -112,7 +113,7 @@ public class Game extends Application {
         menuBtn.setOnMouseClicked(e -> isClicked());
 
 
-        playerAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+        playerAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
             p1.Move();
             p2.Move();
         })
@@ -120,23 +121,23 @@ public class Game extends Application {
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(16), e -> checkCollision()));
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> checkCollision()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        Timeline loading = new Timeline(new KeyFrame(Duration.millis(16), e -> loadingAnimation()));
+        Timeline loading = new Timeline(new KeyFrame(Duration.millis(5), e -> loadingAnimation()));
         loading.setCycleCount(200);
         loading.play();
 
-        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> gameReset()));
+        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(5), e -> gameReset()));
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
 
-        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(16), e -> checkScore()));
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(5), e -> checkScore()));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
 
-        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
+        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(5), e -> {
             closeCheck(stage);
             miniCheck();
         }));
@@ -148,7 +149,7 @@ public class Game extends Application {
     public void checkCollision() {
 
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() - game.getStrokeWidth() <= 0) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -165,7 +166,7 @@ public class Game extends Application {
             }
 
         }
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height - 5) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -182,11 +183,11 @@ public class Game extends Application {
             }
         }
         // check if the ball hit the top or bottom side
-        if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
+        if (ball.getCenterY() - ball.getRadius() - game.getStrokeWidth() <= 0 || ball.getCenterY() >= Height - ball.getRadius() - game.getStrokeWidth()) {
             ball.setYVelocity(-ball.getYVelocity());
         }
         // check if the ball hit the right or left side
-        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
+        if (ball.getCenterX() - game.getStrokeWidth() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius() - game.getStrokeWidth()) {
             ball.setXVelocity(-ball.getXVelocity());
         }
         if (ball.intersects(p1)) {
@@ -196,35 +197,25 @@ public class Game extends Application {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() < p1.getCenterY()) {
                     ball.setXVelocity(0);
-                    ball.setYVelocity(-p1.getYVelocity());
+                    ball.setYVelocity(-p1.getVelocity());
                 } else {
                     ball.setXVelocity(0);
-                    ball.setYVelocity(p1.getYVelocity());
+                    ball.setYVelocity(p1.getVelocity());
                 }
-            } //check if the ball hit player left side
-            else if (ball.getCenterX() < p1.getCenterX()) {
-                //check if the ball hit the player from behind
-                if (ball.getCenterY() < p1.getCenterY()) {
-                    ball.setXVelocity(-p1.getXVelocity());
-                    ball.setYVelocity(-p1.getYVelocity());
-                } else {
-                    ball.setXVelocity(-p1.getXVelocity());
-                    ball.setYVelocity(p1.getYVelocity());
-                }
-
-
             } else {
-                //check if the ball hit the player from behind
-                if (ball.getCenterY() < p1.getCenterY()) {
-                    ball.setXVelocity(p1.getXVelocity());
-                    ball.setYVelocity(-p1.getYVelocity());
+                // calc angle of collision
+                angle = Math.atan((ball.getCenterY() - p1.getCenterY()) / (ball.getCenterX() - p1.getCenterX()));
+
+                //check if the ball hit the player from left side
+                if (ball.getCenterX() < p1.getCenterX()) {
+                    ball.setXVelocity(-(Math.cos(angle) * p1.getVelocity()));
+                    ball.setYVelocity(-(Math.sin(angle) * p1.getVelocity()));
                 } else {
-                    ball.setXVelocity(p1.getXVelocity());
-                    ball.setYVelocity(p1.getYVelocity());
+                    ball.setXVelocity((Math.cos(angle) * p1.getVelocity()));
+                    ball.setYVelocity((Math.sin(angle) * p1.getVelocity()));
                 }
 
             }
-
         }
         if (ball.intersects(p2)) {
             p2.hit();
@@ -233,31 +224,23 @@ public class Game extends Application {
                 //check if the ball hit the player from behind
                 if (ball.getCenterY() > p2.getCenterY()) {
                     ball.setXVelocity(0);
-                    ball.setYVelocity(p2.getYVelocity());
+                    ball.setYVelocity(p2.getVelocity());
                 } else {
                     ball.setXVelocity(0);
-                    ball.setYVelocity(-p2.getYVelocity());
+                    ball.setYVelocity(-p2.getVelocity());
                 }
-            }  //check if the ball hit player left side
-            else if (ball.getCenterX() < p2.getCenterX()) {
-                //check if the ball hit the player from behind
-                if (ball.getCenterY() > p2.getCenterY()) {
-                    ball.setXVelocity(-p2.getXVelocity());
-                    ball.setYVelocity(p2.getYVelocity());
+            } else {
+                // calc angle of collision
+                angle = Math.atan((ball.getCenterY() - p2.getCenterY()) / (ball.getCenterX() - p2.getCenterX()));
+                //check if the ball hit the player from left side
+                if (ball.getCenterX() < p2.getCenterX()) {
+                    ball.setXVelocity(-(Math.cos(angle) * p2.getVelocity()));
+                    ball.setYVelocity(-(Math.sin(angle) * p2.getVelocity()));
                 } else {
-                    ball.setXVelocity(-p2.getXVelocity());
-                    ball.setYVelocity(-p2.getYVelocity());
+                    ball.setXVelocity((Math.cos(angle) * p2.getVelocity()));
+                    ball.setYVelocity((Math.sin(angle) * p2.getVelocity()));
                 }
 
-            } else {
-                //check if the ball hit the player from behind
-                if (ball.getCenterY() > p2.getCenterY()) {
-                    ball.setXVelocity(p2.getXVelocity());
-                    ball.setYVelocity(p2.getYVelocity());
-                } else {
-                    ball.setXVelocity(p2.getXVelocity());
-                    ball.setYVelocity(-p2.getYVelocity());
-                }
             }
         }
         // move the ball
@@ -265,7 +248,6 @@ public class Game extends Application {
     }
 
     public void isClicked() {
-        System.out.println("Clicked :" + clicked);
         if (!clicked) {
             clicked = !clicked;
             game.getChildren().add(menu);

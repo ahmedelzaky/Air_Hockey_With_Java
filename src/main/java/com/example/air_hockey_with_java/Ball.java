@@ -14,8 +14,8 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Ball extends Circle {
 
-    private int xVelocity = 0;
-    private int yVelocity = 0;
+    private double xVelocity = 0;
+    private double yVelocity = 0;
 
 
     Ball() {
@@ -68,20 +68,20 @@ public class Ball extends Circle {
     }
 
 
-    public void setXVelocity(int xVelocity) {
+    public void setXVelocity(double xVelocity) {
         this.xVelocity = xVelocity;
     }
 
-    public void setYVelocity(int yVelocity) {
+    public void setYVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
     }
 
 
-    public int getXVelocity() {
+    public double getXVelocity() {
         return xVelocity;
     }
 
-    public int getYVelocity() {
+    public double getYVelocity() {
         return yVelocity;
     }
 

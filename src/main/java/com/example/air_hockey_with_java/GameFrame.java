@@ -15,6 +15,7 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
 
+    private double strokeWidth = 5;
 
     GameFrame() {
         //Background Color
@@ -65,7 +66,7 @@ public class GameFrame extends Pane {
                 new Stop(.75, Color.rgb(235, 41, 99, 1)),
                 new Stop(1, Color.rgb(219, 18, 18, 1)));
         line.setStroke(linearGradient);
-        line.setStrokeWidth(10);
+        line.setStrokeWidth(strokeWidth * 2);
         Bloom bloom = new Bloom();
         bloom.setThreshold(.9);
         line.setEffect(bloom);
@@ -77,4 +78,7 @@ public class GameFrame extends Pane {
         return arcRadius - 2;
     }
 
+    public double getStrokeWidth() {
+        return strokeWidth;
+    }
 }

@@ -19,8 +19,7 @@ import static com.example.air_hockey_with_java.Game.Width;
 
 public class Player extends Circle {
     private final int id;
-    private int xVelocity;
-    private int yVelocity;
+    private double Velocity;
     private int score = 0;
     private Timeline bloomAnimation;
     private Bloom bloom;
@@ -98,14 +97,13 @@ public class Player extends Circle {
 
 
     public void keyPressed(KeyEvent event) {
-        int step = 5;
-        xVelocity = step + 1;
-        yVelocity = step + 1;
+        int step = 2;
+        Velocity = 1.5 * step;
+
         if (id == 1) {
             if (event.isShiftDown()) {
                 step = 10;
-                xVelocity = step + 1;
-                yVelocity = step + 1;
+                Velocity = 1.5 * step;
             }
             switch (event.getCode()) {
                 case I:
@@ -130,11 +128,9 @@ public class Player extends Circle {
         } else if (id == 2) {
 
             if (event.isControlDown()) {
-                step = 10;
-                xVelocity = step + 1;
-                yVelocity = step + 1;
+                step = 3;
+                Velocity = 1.5 * step;
             }
-
             switch (event.getCode()) {
                 case W:
                     this.Yoffset = -step;
@@ -152,10 +148,7 @@ public class Player extends Circle {
                 default:
                     break;
             }
-
-
         }
-
     }
 
 
@@ -172,19 +165,17 @@ public class Player extends Circle {
 
     public void Move() {
         if (id == 1) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - 5) && this.getCenterX() + this.Xoffset > this.getRadius() + 5)
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset > this.getRadius() && this.getCenterY() + this.Yoffset + this.getRadius() - 5 < (double) Height / 2)
+            if (this.getCenterY() + this.Yoffset > this.getRadius() + 5 && this.getCenterY() + this.Yoffset + this.getRadius() - 5 < (double) Height / 2)
                 this.setCenterY(this.getCenterY() + this.Yoffset);
 
         } else if (id == 2) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius()) && this.getCenterX() + this.Xoffset > this.getRadius())
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - 5) && this.getCenterX() + this.Xoffset > this.getRadius() + 5)
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - 5 && this.getCenterY() + this.Yoffset < Height - this.getRadius())
+            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - 5 && this.getCenterY() + this.Yoffset < Height - this.getRadius() - 5)
                 this.setCenterY(this.getCenterY() + this.Yoffset);
-
         }
-
     }
 
     public void addPoint() {
@@ -199,12 +190,13 @@ public class Player extends Circle {
         this.score = score;
     }
 
-    public int getXVelocity() {
-        return xVelocity;
+
+    public void setVelocity(double velocity) {
+        Velocity = velocity;
     }
 
-    public int getYVelocity() {
-        return yVelocity;
+    public double getVelocity() {
+        return Velocity;
     }
 }
 
