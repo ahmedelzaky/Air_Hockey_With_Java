@@ -24,7 +24,10 @@ import java.io.FileNotFoundException;
 public class Game extends Application {
     final static int Height = 700;
     final static int Width = (int) (Height * 0.5);
-    double angle;
+    private double angle;
+
+    private int frameTime = 5;
+
     private Player p1 = new Player(30, 1, 90, 57, 255, 20);
     private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
     private Ball ball = new Ball();
@@ -121,23 +124,23 @@ public class Game extends Application {
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        ballAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> checkCollision()));
+        ballAnimation = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> checkCollision()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
-        Timeline loading = new Timeline(new KeyFrame(Duration.millis(5), e -> loadingAnimation()));
+        Timeline loading = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> loadingAnimation()));
         loading.setCycleCount(200);
         loading.play();
 
-        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(5), e -> gameReset()));
+        Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> gameReset()));
         resetChecker.setCycleCount(Timeline.INDEFINITE);
         resetChecker.play();
 
-        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(5), e -> checkScore()));
+        Timeline gameOver = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> checkScore()));
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
 
-        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(5), e -> {
+        Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
             closeCheck(stage);
             miniCheck();
         }));

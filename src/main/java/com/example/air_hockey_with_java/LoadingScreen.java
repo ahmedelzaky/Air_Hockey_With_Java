@@ -38,7 +38,7 @@ public class LoadingScreen extends BorderPane {
         HBox hbox = new HBox();
         hbox.getChildren().add(label);
         hbox.setAlignment(Pos.CENTER);
-        hbox.setTranslateY(-300);
+        hbox.setTranslateY(-(Height / 2 - 50));
         label.setFont(Font.font("Arial", 18));
         label.setTextFill(Color.RED);
 
@@ -47,13 +47,11 @@ public class LoadingScreen extends BorderPane {
         this.setStyle("-fx-background-color : black;");
 
 
-        FadeTransition textFad = new FadeTransition(Duration.millis(400),label);
+        FadeTransition textFad = new FadeTransition(Duration.millis(400), label);
         textFad.setFromValue(.3);
         textFad.setToValue(1);
         textFad.setCycleCount(10);
         textFad.play();
-
-
 
 
     }
