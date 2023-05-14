@@ -76,9 +76,9 @@ public class Player extends Circle {
 
         if (id == 1) {
 
-            if (event.getCode() == KeyCode.I || event.getCode() == KeyCode.K) {
+            if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
                 this.Yoffset = 0;
-            } else if (event.getCode() == KeyCode.J || event.getCode() == KeyCode.L) {
+            } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
                 this.Xoffset = 0;
             }
 
@@ -102,23 +102,21 @@ public class Player extends Circle {
 
         if (id == 1) {
             if (event.isShiftDown()) {
-                step = 10;
+                step = 3;
                 Velocity = 1.5 * step;
             }
             switch (event.getCode()) {
-                case I:
+                case UP:
                     this.Yoffset = -step;
-
-
                     break;
-                case K:
+                case DOWN:
                     this.Yoffset = step;
 
                     break;
-                case J:
+                case LEFT:
                     this.Xoffset = -step;
                     break;
-                case L:
+                case RIGHT:
                     this.Xoffset = step;
                     break;
                 default:

@@ -94,9 +94,9 @@ public class Game extends Application {
         stage.show();
 
 
-   /*     scene.setOnMouseMoved(e -> {
-            p1.setCenterY(e.getY());
-            p1.setCenterX(e.getX());
+   /*     scene.setOnMouseClicked(e -> {
+            ball.setCenterY(e.getY());
+            ball.setCenterX(e.getX());
         });*/
 
         scene.setOnKeyPressed(e -> {
@@ -108,7 +108,7 @@ public class Game extends Application {
             p2.keyReleased(e);
         });
         //toggle menu
-        menuBtn.setOnKeyReleased(e -> {
+        game.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 isClicked();
             }
@@ -150,7 +150,7 @@ public class Game extends Application {
     }
 
     public void checkCollision() {
-
+        game.requestFocus();
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
         if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
