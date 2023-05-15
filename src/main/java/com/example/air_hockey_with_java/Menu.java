@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,7 +32,8 @@ public class Menu extends GridPane {
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
 
     private boolean resetValue = false;
-
+    private Text p1status = new Text(100, 200, "");
+    private Text p2status = new Text(100, 530, "");
 
     Menu() throws FileNotFoundException {
         // music Button
@@ -102,9 +104,14 @@ public class Menu extends GridPane {
         this.add(resetBtn, 0, 0);
         resetBtn.setTranslateX(recWidth / 2 - 75);
 
-       //  Media sound = new Media(getClass().getResource("Clown.mp3").toString());
-       //  MediaPlayer mediaPlayer = new MediaPlayer(sound);
-       //  mediaPlayer.play();
+        this.p1status.setTranslateY((double) -Height / 2 + 100);
+        this.p1status.setTranslateX(50);
+        this.p2status.setTranslateY((double) Height / 2 - 100);
+        this.p2status.setTranslateX(50);
+
+        //  Media sound = new Media(getClass().getResource("Clown.mp3").toString());
+        //  MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        //  mediaPlayer.play();
 
         musicBtn.setOnAction(e -> {
             mute = !mute;
@@ -162,6 +169,21 @@ public class Menu extends GridPane {
         return resetValue;
     }
 
+    public void setP1status(Text p1status) {
+        this.p1status = p1status;
+    }
+
+    public void setP2status(Text p2status) {
+        this.p2status = p2status;
+    }
+
+    public Text getP1status() {
+        return p1status;
+    }
+
+    public Text getP2status() {
+        return p2status;
+    }
 
     public void setResetValue(boolean resetValue) {
         this.resetValue = resetValue;

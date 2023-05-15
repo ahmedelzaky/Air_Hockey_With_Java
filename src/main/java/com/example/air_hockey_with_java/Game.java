@@ -33,8 +33,7 @@ public class Game extends Application {
     private Ball ball = new Ball();
     private Text p1Score = new Text();
     private Text p2Score = new Text();
-    private Text p1status = new Text(100, 200, "");
-    private Text p2status = new Text(100, 530, "");
+
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
     private Timeline ballAnimation;
     private Timeline playerAnimation;
@@ -293,7 +292,7 @@ public class Game extends Application {
             p1Score.setText(String.valueOf(p1.getScore()));
             p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2);
-            game.getChildren().removeAll(p1status, p2status);
+            menu.getChildren().removeAll(menu.getP1status(), menu.getP2status());
             game.setEffect(null);
             mainPane.getChildren().remove(menu);
             clicked = !clicked;
@@ -304,28 +303,28 @@ public class Game extends Application {
 
     public void checkScore() {
         if (p1.getScore() == 7) {
-            p1status.setText("You Win");
-            p1status.setFont(fnt);
-            p1status.setStroke(Color.BLUE);
-            p2status.setText("You Lose");
-            p2status.setFont(fnt);
-            p2status.setStroke(Color.RED);
+            menu.getP1status().setText("You Win");
+            menu.getP1status().setFont(fnt);
+            menu.getP1status().setStroke(Color.BLUE);
+            menu.getP2status().setText("You Lose");
+            menu.getP2status().setFont(fnt);
+            menu.getP2status().setStroke(Color.RED);
             try {
-                game.getChildren().addAll(p1status, p2status);
+                menu.getChildren().addAll(menu.getP1status(), menu.getP2status());
                 mainPane.getChildren().add(menu);
             } catch (Exception ignored) {
             }
             playerAnimation.pause();
             ballAnimation.pause();
         } else if (p2.getScore() == 7) {
-            p1status.setText("You Lose");
-            p1status.setFont(fnt);
-            p1status.setStroke(Color.RED);
-            p2status.setText("You Win");
-            p2status.setFont(fnt);
-            p2status.setStroke(Color.BLUE);
+            menu.getP1status().setText("You Lose");
+            menu.getP1status().setFont(fnt);
+            menu.getP1status().setStroke(Color.RED);
+            menu.getP2status().setText("You Win");
+            menu.getP2status().setFont(fnt);
+            menu.getP2status().setStroke(Color.BLUE);
             try {
-                game.getChildren().addAll(p1status, p2status);
+                menu.getChildren().addAll(menu.getP1status(), menu.getP2status());
                 mainPane.getChildren().add(menu);
             } catch (Exception ignored) {
 
@@ -333,7 +332,7 @@ public class Game extends Application {
             playerAnimation.pause();
             ballAnimation.pause();
         } else {
-            game.getChildren().removeAll(p1status, p2status);
+            menu.getChildren().removeAll(menu.getP1status(), menu.getP2status());
         }
     }
 
