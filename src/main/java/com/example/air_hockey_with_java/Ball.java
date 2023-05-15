@@ -53,28 +53,32 @@ public class Ball extends Circle {
         if(getXVelocity()>=0){
             for(double i=0; i<getXVelocity(); i+=.5){
                 if (getCenterX() <= Width - getRadius()) {
-                newCenterX = getCenterX() + .5;
-                setCenterX(newCenterX);
-           }}
+                    newCenterX = getCenterX() + .5;
+                    setCenterX(newCenterX);
+                }
+           }
         }else{
             for(double i=getXVelocity(); i<0; i+=.5) {
                 if (getCenterX() - getRadius() >= 0 ) {
-                newCenterX = getCenterX() - .5;
-                setCenterX(newCenterX);
-            }}
+                    newCenterX = getCenterX() - .5;
+                    setCenterX(newCenterX);
+                }
+            }
         }
         if(getYVelocity()>=0){
             for(double i=0; i<getYVelocity(); i+=.5){
-                if ( getCenterY() <= Height - getRadius()){
-                newCenterY = getCenterY() + .5;
-                setCenterY(newCenterY);
-            }}
+                if ( getCenterY() <= Height - getRadius()) {
+                    newCenterY = getCenterY() + .5;
+                    setCenterY(newCenterY);
+                }
+            }
         }else{
             for(double i=getYVelocity(); i<0; i+=.5){
-                if (getCenterY() - getRadius() >= 0 ){
-                newCenterY = getCenterY() - .5;
-                setCenterY(newCenterY);
-            }}
+                if (getCenterY() - getRadius() >= 0 ) {
+                    newCenterY = getCenterY() - .5;
+                    setCenterY(newCenterY);
+                }
+            }
         }
 
     }
