@@ -66,8 +66,6 @@ public class Player extends Circle {
         this.setEffect(bloom);
         bloomAnimation = new Timeline(new KeyFrame(Duration.millis(200)));
         bloomAnimation.play();
-
-
     }
 
 

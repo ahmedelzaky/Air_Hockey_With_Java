@@ -52,7 +52,7 @@ public class GameFrame extends Pane {
 
 
     private Arc gArc(int y, int a1) {
-        Arc arc = new Arc(175, y, 50, 50, a1, 180);
+        Arc arc = new Arc((double) Width / 2, y, 50, 50, a1, 180);
         arc.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
         return arc;
     }

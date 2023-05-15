@@ -80,7 +80,6 @@ public class Ball extends Circle {
                 }
             }
         }
-
     }
 
     public void rest(int y) {

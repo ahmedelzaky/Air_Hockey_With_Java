@@ -67,9 +67,9 @@ public class Menu extends GridPane {
 
         //Restart Button
         Button resetBtn = new Button("Restart");
-        resetBtn.setPrefSize(100, 25);
+        resetBtn.setPrefSize(150, 25);
         resetBtn.setTextFill(Color.WHITE);
-        resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
+        resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-width:5;" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
         resetBtn.setFont(fnt);
         double recWidth = Width - 100;
         double recHeight = Height - 550;
@@ -100,7 +100,7 @@ public class Menu extends GridPane {
         this.add(musicBox, 0, 0);
 
         this.add(resetBtn, 0, 0);
-        resetBtn.setTranslateX(recWidth / 2 - 50);
+        resetBtn.setTranslateX(recWidth / 2 - 75);
 
        //  Media sound = new Media(getClass().getResource("Clown.mp3").toString());
        //  MediaPlayer mediaPlayer = new MediaPlayer(sound);

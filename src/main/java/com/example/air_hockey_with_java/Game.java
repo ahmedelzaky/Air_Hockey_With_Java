@@ -5,9 +5,11 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,12 +24,10 @@ import java.io.FileNotFoundException;
 
 
 public class Game extends Application {
-    final static int Height = 700;
-    final static int Width = (int) (Height * 0.5);
+    protected final static int Height = 700;
+    protected final static int Width = (int) (Height * 0.5);
     private double angle;
-
     private int frameTime = 5;
-
     private Player p1 = new Player(30, 1, 90, 57, 255, 20);
     private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
     private Ball ball = new Ball();
@@ -41,6 +41,10 @@ public class Game extends Application {
     private boolean clicked = false;
     private Menu menu = new Menu();
     private GameFrame game = new GameFrame();
+
+    private GaussianBlur blurEffect = new GaussianBlur();
+
+    Pane mainPane;
 
     private LoadingScreen loadingScreen = new LoadingScreen();
 
@@ -83,7 +87,10 @@ public class Game extends Application {
         loadingScreen.animationPlay();
 
 
-        Scene scene = new Scene(game, Width, Height);
+        mainPane = new Pane();
+        mainPane.getChildren().add(game);
+
+        Scene scene = new Scene(mainPane, Width, Height);
 
         // Add the icon to the list of icons for the stage
         Image icon = new Image(new FileInputStream("images\\icon.png"));
@@ -94,10 +101,10 @@ public class Game extends Application {
         stage.show();
 
 
-   /*     scene.setOnMouseClicked(e -> {
-            ball.setCenterY(e.getY());
-            ball.setCenterX(e.getX());
-        });*/
+//       scene.setOnMouseMoved(e -> {
+//            ball.setCenterY(e.getY());
+//            ball.setCenterX(e.getX());
+//        });
 
         scene.setOnKeyPressed(e -> {
             p1.keyPressed(e);
@@ -119,8 +126,7 @@ public class Game extends Application {
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
             p1.Move();
             p2.Move();
-        })
-        );
+        }));
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
 
@@ -253,13 +259,15 @@ public class Game extends Application {
     public void isClicked() {
         if (!clicked) {
             clicked = !clicked;
-            game.getChildren().add(menu);
+            game.setEffect(blurEffect);
+            mainPane.getChildren().add(menu);
             playerAnimation.pause();
             ballAnimation.pause();
 
         } else {
             clicked = !clicked;
-            game.getChildren().remove(menu);
+            game.setEffect(null);
+            mainPane.getChildren().remove(menu);
             playerAnimation.play();
             ballAnimation.play();
         }
@@ -285,7 +293,9 @@ public class Game extends Application {
             p1Score.setText(String.valueOf(p1.getScore()));
             p2Score.setText(String.valueOf(p2.getScore()));
             ball.rest(Height / 2);
-            game.getChildren().removeAll(menu, p1status, p2status);
+            game.getChildren().removeAll(p1status, p2status);
+            game.setEffect(null);
+            mainPane.getChildren().remove(menu);
             clicked = !clicked;
             playerAnimation.play();
             ballAnimation.play();
@@ -301,7 +311,8 @@ public class Game extends Application {
             p2status.setFont(fnt);
             p2status.setStroke(Color.RED);
             try {
-                game.getChildren().addAll(menu, p1status, p2status);
+                game.getChildren().addAll(p1status, p2status);
+                mainPane.getChildren().add(menu);
             } catch (Exception ignored) {
             }
             playerAnimation.pause();
@@ -314,7 +325,8 @@ public class Game extends Application {
             p2status.setFont(fnt);
             p2status.setStroke(Color.BLUE);
             try {
-                game.getChildren().addAll(menu, p1status, p2status);
+                game.getChildren().addAll(p1status, p2status);
+                mainPane.getChildren().add(menu);
             } catch (Exception ignored) {
 
             }
@@ -334,7 +346,8 @@ public class Game extends Application {
 
     public void miniCheck() {
         if (menu.isMinimize()) {
-            game.getChildren().remove(menu);
+            mainPane.getChildren().remove(menu);
+            game.setEffect(null);
             menu.setMini(false);
             playerAnimation.play();
             ballAnimation.play();
