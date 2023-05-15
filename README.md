@@ -14,7 +14,7 @@
 
 ### How to play 
 
-p1 moves with W,A,S,D
+p1 moves with W,A,S,D <br>
 p2 moves with ↑,↓,→,←
 
 have fun 😘
