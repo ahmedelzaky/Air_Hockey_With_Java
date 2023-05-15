@@ -54,6 +54,7 @@ public class LoadingScreen extends BorderPane {
         textFad.play();
 
 
+
     }
 
 

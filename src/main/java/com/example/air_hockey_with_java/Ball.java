@@ -26,7 +26,7 @@ public class Ball extends Circle {
                 0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.rgb(252, 243, 64, .5)),
                 new Stop(0.25, Color.rgb(252, 243, 64)),
-                new Stop(0.3, Color.rgb(252, 243, 64)),
+                new Stop(0.5, Color.rgb(252, 243, 64)),
                 new Stop(0.75, Color.rgb(252, 243, 64)),
                 new Stop(1, Color.rgb(252, 243, 64, .5)));
 
@@ -48,10 +48,39 @@ public class Ball extends Circle {
     }
 
     public void move() {
-        double newCenterX = getCenterX() + getXVelocity();
-        double newCenterY = getCenterY() + getYVelocity();
-        setCenterX(newCenterX);
-        setCenterY(newCenterY);
+        double newCenterX ;
+        double newCenterY ;
+        if(getXVelocity()>=0){
+            for(double i=0; i<getXVelocity(); i+=.5){
+                if (getCenterX() <= Width - getRadius()) {
+                System.out.println("x "+getXVelocity());
+                newCenterX = getCenterX() + .5;
+                setCenterX(newCenterX);
+           }}
+        }else{
+            for(double i=getXVelocity(); i<0; i+=.5) {
+                if (getCenterX() - getRadius() >= 0 ) {
+                System.out.println("x " + getXVelocity());
+                newCenterX = getCenterX() - .5;
+                setCenterX(newCenterX);
+            }}
+        }
+        if(getYVelocity()>=0){
+            for(double i=0; i<getYVelocity(); i+=.5){
+                if ( getCenterY() <= Height - getRadius()){
+                System.out.println("y "+getYVelocity());
+                newCenterY = getCenterY() + .5;
+                setCenterY(newCenterY);
+            }}
+        }else{
+            for(double i=getYVelocity(); i<0; i+=.5){
+                if (getCenterY() - getRadius() >= 0 ){
+                System.out.println("y "+getYVelocity());
+                newCenterY = getCenterY() - .5;
+                setCenterY(newCenterY);
+            }}
+        }
+
     }
 
     public void rest(int y) {
