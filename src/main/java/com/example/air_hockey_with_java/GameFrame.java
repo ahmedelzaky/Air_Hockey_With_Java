@@ -16,6 +16,7 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class GameFrame extends Pane {
 
     private double strokeWidth = 5;
+    private int arcRadius = 50;
 
     GameFrame() {
         //Background Color
@@ -52,7 +53,7 @@ public class GameFrame extends Pane {
 
 
     private Arc gArc(int y, int a1) {
-        Arc arc = new Arc((double) Width / 2, y, 50, 50, a1, 180);
+        Arc arc = new Arc((double) Width / 2, y, arcRadius, arcRadius, a1, 180);
         arc.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
         return arc;
     }
@@ -74,8 +75,7 @@ public class GameFrame extends Pane {
     }
 
     public int getArcRadius() {
-        int arcRadius = 50;
-        return arcRadius - 2;
+        return arcRadius;
     }
 
     public double getStrokeWidth() {
