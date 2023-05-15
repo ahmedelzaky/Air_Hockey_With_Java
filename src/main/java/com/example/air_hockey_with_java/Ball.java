@@ -13,10 +13,8 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class Ball extends Circle {
-
     private double xVelocity = 0;
     private double yVelocity = 0;
-
 
     Ball() {
         this.setCenterX((double) Width / 2);
@@ -37,7 +35,6 @@ public class Ball extends Circle {
 
     }
 
-
     public boolean intersects(Player player) {
         double ballCenterX = getCenterX();
         double ballCenterY = getCenterY();
@@ -48,33 +45,33 @@ public class Ball extends Circle {
     }
 
     public void move() {
-        double newCenterX ;
-        double newCenterY ;
-        if(getXVelocity()>=0){
-            for(double i=0; i<getXVelocity(); i+=.5){
+        double newCenterX;
+        double newCenterY;
+        if (getXVelocity() >= 0) {
+            for (double i = 0; i < getXVelocity(); i += .5) {
                 if (getCenterX() <= Width - getRadius()) {
                     newCenterX = getCenterX() + .5;
                     setCenterX(newCenterX);
                 }
-           }
-        }else{
-            for(double i=getXVelocity(); i<0; i+=.5) {
-                if (getCenterX() - getRadius() >= 0 ) {
+            }
+        } else {
+            for (double i = getXVelocity(); i < 0; i += .5) {
+                if (getCenterX() - getRadius() >= 0) {
                     newCenterX = getCenterX() - .5;
                     setCenterX(newCenterX);
                 }
             }
         }
-        if(getYVelocity()>=0){
-            for(double i=0; i<getYVelocity(); i+=.5){
-                if ( getCenterY() <= Height - getRadius()) {
+        if (getYVelocity() >= 0) {
+            for (double i = 0; i < getYVelocity(); i += .5) {
+                if (getCenterY() <= Height - getRadius()) {
                     newCenterY = getCenterY() + .5;
                     setCenterY(newCenterY);
                 }
             }
-        }else{
-            for(double i=getYVelocity(); i<0; i+=.5){
-                if (getCenterY() - getRadius() >= 0 ) {
+        } else {
+            for (double i = getYVelocity(); i < 0; i += .5) {
+                if (getCenterY() - getRadius() >= 0) {
                     newCenterY = getCenterY() - .5;
                     setCenterY(newCenterY);
                 }

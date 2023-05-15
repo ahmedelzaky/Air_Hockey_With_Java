@@ -16,10 +16,8 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class LoadingScreen extends BorderPane {
-
     private Label label = new Label("Loading...");
     private ProgressBar loadingBar = new ProgressBar();
-
     private double loadingP = .01;
     private Timeline loadingAnimation;
 
@@ -34,6 +32,7 @@ public class LoadingScreen extends BorderPane {
             loadingP += .01;
         })
         );
+
         loadingAnimation.setCycleCount(100);
         HBox hbox = new HBox();
         hbox.getChildren().add(label);
@@ -52,18 +51,13 @@ public class LoadingScreen extends BorderPane {
         textFad.setToValue(1);
         textFad.setCycleCount(10);
         textFad.play();
-
-
-
     }
-
 
     public void animationPlay() {
         loadingAnimation.play();
     }
 
     public boolean finish() {
-
         return loadingP >= 1;
     }
 

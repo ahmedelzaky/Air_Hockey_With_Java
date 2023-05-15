@@ -14,7 +14,6 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
-
     private double strokeWidth = 5;
     private int arcRadius = 50;
 
@@ -25,7 +24,6 @@ public class GameFrame extends Pane {
         //center line
         Line line = new Line(0, (double) Height / 2, Width, (double) Height / 2);
         line.setStyle("-fx-stroke: #EDE4D9;" + "-fx-stroke-width: 2;");
-
 
         //center circle
         Circle c = new Circle();
@@ -50,7 +48,6 @@ public class GameFrame extends Pane {
         this.getChildren().add(gArc(Height, 0));
 
     }
-
 
     private Arc gArc(int y, int a1) {
         Arc arc = new Arc((double) Width / 2, y, arcRadius, arcRadius, a1, 180);

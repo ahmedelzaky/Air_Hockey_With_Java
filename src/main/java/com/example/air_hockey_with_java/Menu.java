@@ -169,14 +169,6 @@ public class Menu extends GridPane {
         return resetValue;
     }
 
-    public void setP1status(Text p1status) {
-        this.p1status = p1status;
-    }
-
-    public void setP2status(Text p2status) {
-        this.p2status = p2status;
-    }
-
     public Text getP1status() {
         return p1status;
     }

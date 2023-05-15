@@ -34,11 +34,9 @@ public class Player extends Circle {
         super(radius);
         this.id = id;
         this.x = ((double) Width / 2);
-
         this.setCenterX((double) Width / 2);
         this.setCenterY(Y);
         this.y = this.getCenterY();
-
 
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .5)));
 
@@ -73,24 +71,18 @@ public class Player extends Circle {
 
 
         if (id == 1) {
-
             if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
                 this.Yoffset = 0;
             } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
                 this.Xoffset = 0;
             }
-
-
         } else if (id == 2) {
-
             if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.S) {
                 this.Yoffset = 0;
             } else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.D) {
                 this.Xoffset = 0;
             }
-
         }
-
     }
 
 
@@ -184,11 +176,6 @@ public class Player extends Circle {
 
     public void setScore(int score) {
         this.score = score;
-    }
-
-
-    public void setVelocity(double velocity) {
-        Velocity = velocity;
     }
 
     public double getVelocity() {

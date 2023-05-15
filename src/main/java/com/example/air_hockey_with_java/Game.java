@@ -43,7 +43,7 @@ public class Game extends Application {
 
     private GaussianBlur blurEffect = new GaussianBlur();
 
-    Pane mainPane;
+    private Pane mainPane;
 
     private LoadingScreen loadingScreen = new LoadingScreen();
 
@@ -122,7 +122,7 @@ public class Game extends Application {
         menuBtn.setOnMouseClicked(e -> isClicked());
 
 
-        playerAnimation = new Timeline(new KeyFrame(Duration.millis(5), e -> {
+        playerAnimation = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
             p1.Move();
             p2.Move();
         }));
@@ -257,14 +257,14 @@ public class Game extends Application {
 
     public void isClicked() {
         if (!clicked) {
-            clicked = !clicked;
+            clicked = true;
             game.setEffect(blurEffect);
             mainPane.getChildren().add(menu);
             playerAnimation.pause();
             ballAnimation.pause();
 
         } else {
-            clicked = !clicked;
+            clicked = false;
             game.setEffect(null);
             mainPane.getChildren().remove(menu);
             playerAnimation.play();
