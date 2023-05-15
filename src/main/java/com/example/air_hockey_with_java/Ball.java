@@ -53,14 +53,12 @@ public class Ball extends Circle {
         if(getXVelocity()>=0){
             for(double i=0; i<getXVelocity(); i+=.5){
                 if (getCenterX() <= Width - getRadius()) {
-                System.out.println("x "+getXVelocity());
                 newCenterX = getCenterX() + .5;
                 setCenterX(newCenterX);
            }}
         }else{
             for(double i=getXVelocity(); i<0; i+=.5) {
                 if (getCenterX() - getRadius() >= 0 ) {
-                System.out.println("x " + getXVelocity());
                 newCenterX = getCenterX() - .5;
                 setCenterX(newCenterX);
             }}
@@ -68,14 +66,12 @@ public class Ball extends Circle {
         if(getYVelocity()>=0){
             for(double i=0; i<getYVelocity(); i+=.5){
                 if ( getCenterY() <= Height - getRadius()){
-                System.out.println("y "+getYVelocity());
                 newCenterY = getCenterY() + .5;
                 setCenterY(newCenterY);
             }}
         }else{
             for(double i=getYVelocity(); i<0; i+=.5){
                 if (getCenterY() - getRadius() >= 0 ){
-                System.out.println("y "+getYVelocity());
                 newCenterY = getCenterY() - .5;
                 setCenterY(newCenterY);
             }}
