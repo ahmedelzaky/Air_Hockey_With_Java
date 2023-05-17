@@ -14,6 +14,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
@@ -21,10 +23,14 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class StartMenu extends Pane {
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
     private Button start;
+    private Ball mBall;
+    private boolean play = false;
+    private boolean addMenu = false;
+
 
     StartMenu() {
         GameFrame mGame = new GameFrame();
-        Ball mBall = new Ball();
+        mBall = new Ball();
         mBall.setYVelocity(Math.random() * 10);
         mBall.setXVelocity(Math.random() * 10);
         mGame.getChildren().add(mBall);
@@ -49,15 +55,45 @@ public class StartMenu extends Pane {
         rectangle.setStroke(Color.rgb(200, 34, 255, .8));
         rectangle.setStrokeWidth(5);
 
-        this.getChildren().addAll(start, rectangle);
+        this.getChildren().addAll(rectangle, start);
 
-        start.setOnAction(e -> {
+
+        Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
+            mBall.move();
+            Check();
+            this.requestFocus();
+        }));
+        ballAnimation.setCycleCount(Timeline.INDEFINITE);
+        ballAnimation.play();
+
+        start.setOnMouseClicked(e -> {
+            setPlay(true);
+            addMenu = true;
         });
+    }
 
+    public void Check() {
+        // check if the ball hit the top or bottom side
+        if (mBall.getCenterY() - mBall.getRadius() <= 0 || mBall.getCenterY() >= Height - mBall.getRadius()) {
+            mBall.setYVelocity(-mBall.getYVelocity());
+        }
+        // check if the ball hit the right or left side
+        if (mBall.getCenterX() - mBall.getRadius() <= 0 || mBall.getCenterX() >= Width - mBall.getRadius()) {
+            mBall.setXVelocity(-mBall.getXVelocity());
+        }
     }
 
 
-    public void getStart(Stage stage, Scene scene) {
-        stage.setScene(scene);
+    public boolean getPlay() {
+        return play;
     }
+
+    public void setPlay(boolean play) {
+        this.play = play;
+    }
+
+    public boolean isAddMenu() {
+        return addMenu;
+    }
+
 }

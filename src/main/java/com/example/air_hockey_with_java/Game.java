@@ -39,6 +39,7 @@ public class Game extends Application {
     private Timeline playerAnimation;
     private boolean clicked = false;
     private Menu menu = new Menu();
+    private StartMenu startMenu = new StartMenu();
     private GameFrame game = new GameFrame();
 
     private GaussianBlur blurEffect = new GaussianBlur();
@@ -82,12 +83,13 @@ public class Game extends Application {
 
         counter.getChildren().addAll(p1Score, menuBtn, p2Score);
         game.getChildren().add(counter);
-        game.getChildren().add(loadingScreen);
         loadingScreen.animationPlay();
 
 
         mainPane = new Pane();
         mainPane.getChildren().add(game);
+        startMenu.getChildren().add(loadingScreen);
+        mainPane.getChildren().add(startMenu);
 
         Scene scene = new Scene(mainPane, Width, Height);
 
@@ -145,6 +147,12 @@ public class Game extends Application {
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
 
+        Timeline startChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
+            start();
+        }));
+        startChecker.setCycleCount(Timeline.INDEFINITE);
+        startChecker.play();
+
         Timeline closeAndMiniChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
             closeCheck(stage);
             miniCheck();
@@ -152,6 +160,15 @@ public class Game extends Application {
         closeAndMiniChecker.setCycleCount(Timeline.INDEFINITE);
         closeAndMiniChecker.play();
 
+    }
+
+    private void start() {
+        if (startMenu.getPlay()) {
+            startMenu.setPlay(false);
+            mainPane.getChildren().remove(startMenu);
+            playerAnimation.play();
+            ballAnimation.play();
+        }
     }
 
     public void checkCollision() {
@@ -253,31 +270,33 @@ public class Game extends Application {
         }
         // move the ball
         ball.move();
+
     }
 
     public void isClicked() {
-        if (!clicked) {
-            clicked = true;
-            game.setEffect(blurEffect);
-            mainPane.getChildren().add(menu);
-            playerAnimation.pause();
-            ballAnimation.pause();
+        if (startMenu.isAddMenu()) {
+            if (!clicked) {
+                clicked = true;
+                game.setEffect(blurEffect);
+                mainPane.getChildren().add(menu);
+                playerAnimation.pause();
+                ballAnimation.pause();
 
-        } else {
-            clicked = false;
-            game.setEffect(null);
-            mainPane.getChildren().remove(menu);
-            playerAnimation.play();
-            ballAnimation.play();
+            } else {
+                clicked = false;
+                game.setEffect(null);
+                mainPane.getChildren().remove(menu);
+                playerAnimation.play();
+                ballAnimation.play();
+            }
         }
+
 
     }
 
     public void loadingAnimation() {
         if (loadingScreen.finish()) {
-            game.getChildren().remove(loadingScreen);
-            playerAnimation.play();
-            ballAnimation.play();
+            startMenu.getChildren().remove(loadingScreen);
             loadingScreen.setLoadingP(0);
         }
     }
