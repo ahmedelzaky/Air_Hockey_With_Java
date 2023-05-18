@@ -1,0 +1,140 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Ball {
+  ~ Ball(): 
+  - xVelocity: double
+  - yVelocity: double
+  + move(): void
+  + setYVelocity(double): void
+  + intersects(Player): boolean
+  + setXVelocity(double): void
+  + rest(int): void
+  + getYVelocity(): double
+  + getXVelocity(): double
+}
+class Game {
+  + Game(): 
+  - fnt: Font
+  - p2: Player
+  - p1Score: Text
+  - game: GameFrame
+  - p2Score: Text
+  - ballAnimation: Timeline
+  - mainPane: Pane
+  # Width: int
+  - blurEffect: GaussianBlur
+  - playerAnimation: Timeline
+  - loadingScreen: LoadingScreen
+  - p1: Player
+  - startMenu: StartMenu
+  - menu: Menu
+  # Height: int
+  - frameTime: int
+  - ball: Ball
+  - clicked: boolean
+  - angle: double
+  + gameReset(): void
+  + checkScore(): void
+  + isClicked(): void
+  + miniCheck(): void
+  + main(String[]): void
+  + checkCollision(): void
+  + start(Stage): void
+  - start(): void
+  + closeCheck(Stage): void
+  + loadingAnimation(): void
+}
+class GameFrame {
+  ~ GameFrame(): 
+  - strokeWidth: double
+  - arcRadius: double
+  - gArc(int, int): Arc
+  + getArcRadius(): double
+  + getStrokeWidth(): double
+  - gline(int, int, int, int): Line
+}
+class LoadingScreen {
+  ~ LoadingScreen(): 
+  - label: Label
+  - loadingAnimation: Timeline
+  - loadingBar: ProgressBar
+  - loadingP: double
+  + setLoadingP(double): void
+  + finish(): boolean
+  + animationPlay(): void
+}
+class Menu {
+  ~ Menu(): 
+  - close: boolean
+  - mini: boolean
+  - MiniClicked: boolean
+  - musicBtn: Button
+  - fnt: Font
+  - recWidth: double
+  - p1status: Text
+  - mute: boolean
+  - iconSize: int
+  - resetValue: boolean
+  - p2status: Text
+  + getP1status(): Text
+  + isResetValue(): boolean
+  + getP2status(): Text
+  + getRecWidth(): double
+  + close(): void
+  + minimize(): void
+  + setMini(boolean): void
+  + reset(): void
+  + setResetValue(boolean): void
+  + isClose(): boolean
+  + isMiniClicked(): boolean
+  + getMusicBtn(): Button
+  + isMinimize(): boolean
+}
+class Player {
+  ~ Player(double, int, int, int, int, int): 
+  - id: int
+  - bloom: Bloom
+  - y: double
+  - Velocity: double
+  - x: double
+  - bloomAnimation: Timeline
+  - Xoffset: double
+  - gameFrame: GameFrame
+  - score: int
+  - Yoffset: double
+  + keyReleased(KeyEvent): void
+  + addPoint(): void
+  + keyPressed(KeyEvent): void
+  + rest(): void
+  + setScore(int): void
+  + getVelocity(): double
+  + hit(): void
+  + Move(): void
+  + getScore(): int
+}
+class StartMenu {
+  ~ StartMenu(Menu): 
+  - fnt: Font
+  - start: Button
+  - mBall: Ball
+  - play: boolean
+  - addMenu: boolean
+  + setPlay(boolean): void
+  + isAddMenu(): boolean
+  + Check(): void
+  + getPlay(): boolean
+}
+
+Game          "1" *-[#bbbbbb,plain]-> "ball\n1" Ball          
+Game          "1" *-[#bbbbbb,plain]-> "game\n1" GameFrame     
+Game          "1" *-[#bbbbbb,plain]-> "loadingScreen\n1" LoadingScreen 
+Game          "1" *-[#bbbbbb,plain]-> "menu\n1" Menu          
+Game          "1" *-[#bbbbbb,plain]-> "p1\n1" Player        
+Game          "1" *-[#bbbbbb,plain]-> "startMenu\n1" StartMenu     
+Player        "1" *-[#bbbbbb,plain]-> "gameFrame\n1" GameFrame     
+StartMenu     "1" *-[#bbbbbb,plain]-> "mBall\n1" Ball          
+@enduml
