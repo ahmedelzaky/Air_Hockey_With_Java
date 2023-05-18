@@ -28,7 +28,7 @@ public class StartMenu extends Pane {
     private boolean addMenu = false;
 
 
-    StartMenu() {
+    StartMenu(Menu menu) {
         GameFrame mGame = new GameFrame();
         mBall = new Ball();
         mBall.setYVelocity(Math.random() * 10);
@@ -47,6 +47,8 @@ public class StartMenu extends Pane {
         start.setLayoutY(Height / 2 - 25);
         double recWidth = Width - 100;
         double recHeight = Height - 550;
+
+
         //Create a Rectangle to add button on it
         Rectangle rectangle = new Rectangle(recWidth, recHeight);
         rectangle.setLayoutX((double) Width / 2 - recWidth / 2);
@@ -55,8 +57,9 @@ public class StartMenu extends Pane {
         rectangle.setStroke(Color.rgb(200, 34, 255, .8));
         rectangle.setStrokeWidth(5);
 
-        this.getChildren().addAll(rectangle, start);
-
+        this.getChildren().addAll(rectangle, start, menu.getMusicBtn());
+        menu.getMusicBtn().setLayoutX(Width/2 + recWidth/2 - 50);
+        menu.getMusicBtn().setLayoutY(Height / 2 - recHeight / 2 );
 
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();

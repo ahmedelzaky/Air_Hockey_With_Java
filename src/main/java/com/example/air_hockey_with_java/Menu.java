@@ -28,7 +28,8 @@ public class Menu extends GridPane {
     private boolean close = false;
     private boolean mini = true;
     private int iconSize = 30;
-
+    private Button musicBtn;
+    private double recWidth;
 
     private boolean MiniClicked = false;
     private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
@@ -39,7 +40,7 @@ public class Menu extends GridPane {
 
     Menu() throws FileNotFoundException {
         // music Button
-        Button musicBtn = new Button();
+        musicBtn = new Button();
         Image muteImg = new Image(new FileInputStream("images\\mute.png"));
         ImageView muteView = new ImageView(muteImg);
         Image unmuteImg = new Image(new FileInputStream("images\\unmute.png"));
@@ -75,7 +76,7 @@ public class Menu extends GridPane {
         resetBtn.setTextFill(Color.WHITE);
         resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-width:5;" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
         resetBtn.setFont(fnt);
-        double recWidth = Width - 100;
+        recWidth = Width - 100;
         double recHeight = Height - 550;
 
         //Create a Rectangle to add button on it
@@ -97,11 +98,6 @@ public class Menu extends GridPane {
         controlBox.getChildren().addAll(closeBtn, miniBtn);
         this.add(controlBox, 0, 0);
 
-        HBox musicBox = new HBox();
-        musicBox.getChildren().add(musicBtn);
-        musicBox.setTranslateX(recWidth - 45);
-        this.add(musicBox, 0, 0);
-
         this.add(resetBtn, 0, 0);
         resetBtn.setTranslateX(recWidth / 2 - 75);
 
@@ -110,10 +106,10 @@ public class Menu extends GridPane {
         this.p2status.setTranslateY((double) Height / 2 - 100);
         this.p2status.setTranslateX(50);
 
-          Media sound = new Media(getClass().getResource("/Clown.mp3").toString());
-          MediaPlayer mediaPlayer = new MediaPlayer(sound);
-          mediaPlayer.setVolume(.5);
-          mediaPlayer.play();
+        Media sound = new Media(getClass().getResource("/Clown.mp3").toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setVolume(.5);
+        mediaPlayer.play();
 
         musicBtn.setOnAction(e -> {
             mute = !mute;
@@ -181,5 +177,13 @@ public class Menu extends GridPane {
 
     public void setResetValue(boolean resetValue) {
         this.resetValue = resetValue;
+    }
+
+    public Button getMusicBtn() {
+        return musicBtn;
+    }
+
+    public double getRecWidth() {
+        return recWidth;
     }
 }

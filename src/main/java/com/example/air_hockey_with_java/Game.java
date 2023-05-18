@@ -9,6 +9,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,7 +40,7 @@ public class Game extends Application {
     private Timeline playerAnimation;
     private boolean clicked = false;
     private Menu menu = new Menu();
-    private StartMenu startMenu = new StartMenu();
+    private StartMenu startMenu = new StartMenu(menu);
     private GameFrame game = new GameFrame();
 
     private GaussianBlur blurEffect = new GaussianBlur();
@@ -166,6 +167,10 @@ public class Game extends Application {
         if (startMenu.getPlay()) {
             startMenu.setPlay(false);
             mainPane.getChildren().remove(startMenu);
+            HBox musicBox = new HBox();
+            musicBox.getChildren().add(menu.getMusicBtn());
+            musicBox.setTranslateX(menu.getRecWidth() - 45);
+            menu.add(musicBox, 0, 0);
             playerAnimation.play();
             ballAnimation.play();
         }
