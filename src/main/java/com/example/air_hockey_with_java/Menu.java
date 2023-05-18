@@ -13,6 +13,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -108,9 +110,9 @@ public class Menu extends GridPane {
         this.p2status.setTranslateY((double) Height / 2 - 100);
         this.p2status.setTranslateX(50);
 
-        //  Media sound = new Media(getClass().getResource("Clown.mp3").toString());
-        //  MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        //  mediaPlayer.play();
+          Media sound = new Media(getClass().getResource("/Clown.mp3").toString());
+          MediaPlayer mediaPlayer = new MediaPlayer(sound);
+          mediaPlayer.play();
 
         musicBtn.setOnAction(e -> {
             mute = !mute;

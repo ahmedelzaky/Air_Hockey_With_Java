@@ -4,6 +4,7 @@ module com.example.air_hockey_with_java {
 
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
+    requires javafx.media;
 
     opens com.example.air_hockey_with_java to javafx.fxml;
     exports com.example.air_hockey_with_java;
