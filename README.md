@@ -75,7 +75,7 @@ The Air Hockey Game was developed by:
 <li> Ahmed El Zaki 
 <li> Ahmed Gad 
 <li> Akram Hesam Ahmed
-<li> Abd Elmeged  
+<li> Ahmed Abd Elmeged  
 <li> Ahmed Ebrahim 
 </ul>
 
