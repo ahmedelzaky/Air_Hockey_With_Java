@@ -81,8 +81,6 @@ public class Menu extends GridPane {
 
         //Create a Rectangle to add button on it
         Rectangle rectangle = new Rectangle(recWidth, recHeight);
-        rectangle.setLayoutX((double) Width / 2 - recWidth / 2);
-        rectangle.setLayoutY((double) Height / 2 - recHeight / 2);
         rectangle.setFill(Color.rgb(200, 34, 255, .2));
         rectangle.setStroke(Color.rgb(200, 34, 255, .8));
         rectangle.setStrokeWidth(5);
