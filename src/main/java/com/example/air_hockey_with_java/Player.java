@@ -23,6 +23,7 @@ public class Player extends Circle {
     private int score = 0;
     private Timeline bloomAnimation;
     private Bloom bloom;
+    private GameFrame gameFrame = new GameFrame();
 
     private double Xoffset = 0;
     private double Yoffset = 0;
@@ -153,15 +154,15 @@ public class Player extends Circle {
 
     public void Move() {
         if (id == 1) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - 5) && this.getCenterX() + this.Xoffset > this.getRadius() + 5)
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - gameFrame.getStrokeWidth()) && this.getCenterX() + this.Xoffset > this.getRadius() + gameFrame.getStrokeWidth())
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset > this.getRadius() + 5 && this.getCenterY() + this.Yoffset + this.getRadius() - 5 < (double) Height / 2)
+            if (this.getCenterY() + this.Yoffset > this.getRadius() + gameFrame.getStrokeWidth() && this.getCenterY() + this.Yoffset + this.getRadius() - gameFrame.getStrokeWidth() < (double) Height / 2)
                 this.setCenterY(this.getCenterY() + this.Yoffset);
 
         } else if (id == 2) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - 5) && this.getCenterX() + this.Xoffset > this.getRadius() + 5)
+            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - gameFrame.getStrokeWidth()) && this.getCenterX() + this.Xoffset > this.getRadius() + gameFrame.getStrokeWidth())
                 this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - 5 && this.getCenterY() + this.Yoffset < Height - this.getRadius() - 5)
+            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - gameFrame.getStrokeWidth() && this.getCenterY() + this.Yoffset < Height - this.getRadius() - gameFrame.getStrokeWidth())
                 this.setCenterY(this.getCenterY() + this.Yoffset);
         }
     }
