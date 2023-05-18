@@ -14,7 +14,8 @@ The Air Hockey Game is a simple implementation of the classic air hockey game us
 ## Requirements
 
 <ul>
-<li>Java Development Kit (JDK) 20 or higher
+<li>Java Development Kit (JDK) 20 or higher for intellij version
+<li>OR Java Development Kit (JDK) 8 or higher for netbeans version
 <li>JavaFX library
 </ul>
 
