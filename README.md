@@ -79,7 +79,7 @@ The Air Hockey Game was developed by:
 <li> Ahmed Ebrahim 
 </ul>
 
-as a project for the Object-Oriented Programming course at the Zagazig University.
+as a project for the Object-Oriented Programming course at Zagazig University.
   
 ## Demo
   
