@@ -1,5 +1,5 @@
-# Air Hockey Game 
-![image](https://img.shields.io/github/last-commit/ahmedelzaky/Air_Hockey_With_Java)<br>
+# Air Hockey Game
+
 The Air Hockey Game is a simple implementation of the classic air hockey game using JavaFX. It allows two players to compete against each other in a virtual air hockey match.
 
 ## Features
