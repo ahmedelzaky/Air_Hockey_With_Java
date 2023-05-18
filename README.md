@@ -80,8 +80,14 @@ The Air Hockey Game was developed by:
 </ul>
 
 as a project for the Object-Oriented Programming course at the Zagazig University.
+  
+## Demo
+  
 
-### imgs from the game
+https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/3786c56a-8928-43cc-a9d4-39a7daf0424f
+
+
+## imgs from the game
 
 ![image](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/a7d3f172-7d0f-4f54-9695-d89eaf5bef85)
 
