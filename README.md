@@ -94,3 +94,8 @@ https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/3786c56a-892
 ![image](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/6f42fd5a-bd5e-445f-bc66-cbd3e74e4634)
 
 ![image](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/fb2951cf-314f-4c76-abce-3b943cdc8339)
+  
+  ## Uml Diagram
+  
+  ![Air_Hockey_With_Java](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/e10b241e-32af-4f92-a51f-224f37001738)
+
