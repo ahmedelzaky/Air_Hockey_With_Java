@@ -109,8 +109,10 @@ public class Game extends Application {
 //        });
 
         scene.setOnKeyPressed(e -> {
-            p1.keyPressed(e);
-            p2.keyPressed(e);
+            if (startMenu.isMove()) {
+                p1.keyPressed(e);
+                p2.keyPressed(e);
+            }
         });
         scene.setOnKeyReleased(e -> {
             p1.keyReleased(e);

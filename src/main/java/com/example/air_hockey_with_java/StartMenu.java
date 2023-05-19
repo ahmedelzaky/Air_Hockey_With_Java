@@ -26,6 +26,7 @@ public class StartMenu extends Pane {
     private Ball mBall;
     private boolean play = false;
     private boolean addMenu = false;
+    private boolean move = false;
 
 
     StartMenu(Menu menu) {
@@ -58,8 +59,8 @@ public class StartMenu extends Pane {
         rectangle.setStrokeWidth(5);
 
         this.getChildren().addAll(rectangle, start, menu.getMusicBtn());
-        menu.getMusicBtn().setLayoutX(Width/2 + recWidth/2 - 50);
-        menu.getMusicBtn().setLayoutY(Height / 2 - recHeight / 2 );
+        menu.getMusicBtn().setLayoutX(Width / 2 + recWidth / 2 - 50);
+        menu.getMusicBtn().setLayoutY(Height / 2 - recHeight / 2);
 
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();
@@ -93,10 +94,14 @@ public class StartMenu extends Pane {
 
     public void setPlay(boolean play) {
         this.play = play;
+        this.move = true;
     }
 
     public boolean isAddMenu() {
         return addMenu;
     }
 
+    public boolean isMove() {
+        return move;
+    }
 }

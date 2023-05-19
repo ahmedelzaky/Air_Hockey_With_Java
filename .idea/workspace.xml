@@ -10,7 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58062ae-744d-4516-a39d-8cb1fc3a7a61" name="Changes" comment="V1.5">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/StartMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,6 +141,7 @@
       <workItem from="1684436260722" duration="2231000" />
       <workItem from="1684438742259" duration="405000" />
       <workItem from="1684445025863" duration="20000" />
+      <workItem from="1684499525367" duration="404000" />
     </task>
     <task id="LOCAL-00001" summary="V0.35">
       <created>1682880710675</created>
