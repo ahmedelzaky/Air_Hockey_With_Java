@@ -106,6 +106,7 @@ public class Menu extends GridPane {
 
         Media sound = new Media(getClass().getResource("/Clown.mp3").toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(.5);
         mediaPlayer.play();
 
