@@ -64,7 +64,7 @@ public class StartMenu extends Pane {
 
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();
-            Check();
+            checkCollision();
             this.requestFocus();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -76,7 +76,7 @@ public class StartMenu extends Pane {
         });
     }
 
-    public void Check() {
+    public void checkCollision() {
         // check if the ball hit the top or bottom side
         if (mBall.getCenterY() - mBall.getRadius() <= 0 || mBall.getCenterY() >= Height - mBall.getRadius()) {
             mBall.setYVelocity(-mBall.getYVelocity());
