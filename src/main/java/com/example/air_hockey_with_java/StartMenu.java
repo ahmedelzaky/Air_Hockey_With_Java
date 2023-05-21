@@ -44,8 +44,8 @@ public class StartMenu extends Pane {
         start.setTextFill(Color.WHITE);
         start.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-width:5;" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
         start.setFont(fnt);
-        start.setLayoutX(Width / 2 - 75);
-        start.setLayoutY(Height / 2 - 25);
+        start.setLayoutX((double) Width / 2 - 75);
+        start.setLayoutY((double) Height / 2 - 25);
         double recWidth = Width - 100;
         double recHeight = Height - 550;
 
@@ -59,12 +59,12 @@ public class StartMenu extends Pane {
         rectangle.setStrokeWidth(5);
 
         this.getChildren().addAll(rectangle, start, menu.getMusicBtn());
-        menu.getMusicBtn().setLayoutX(Width / 2 + recWidth / 2 - 50);
-        menu.getMusicBtn().setLayoutY(Height / 2 - recHeight / 2);
+        menu.getMusicBtn().setLayoutX((double) Width / 2 + recWidth / 2 - 50);
+        menu.getMusicBtn().setLayoutY((double) Height / 2 - recHeight / 2);
 
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();
-            checkCollision();
+
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
         ballAnimation.play();
@@ -74,18 +74,6 @@ public class StartMenu extends Pane {
             addMenu = true;
         });
     }
-
-    public void checkCollision() {
-        // check if the ball hit the top or bottom side
-        if (mBall.getCenterY() - mBall.getRadius() <= 0 || mBall.getCenterY() >= Height - mBall.getRadius()) {
-            mBall.setYVelocity(-mBall.getYVelocity());
-        }
-        // check if the ball hit the right or left side
-        if (mBall.getCenterX() - mBall.getRadius() <= 0 || mBall.getCenterX() >= Width - mBall.getRadius()) {
-            mBall.setXVelocity(-mBall.getXVelocity());
-        }
-    }
-
 
     public boolean getPlay() {
         return play;

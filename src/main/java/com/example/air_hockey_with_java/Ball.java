@@ -20,13 +20,7 @@ public class Ball extends Circle {
         this.setCenterX((double) Width / 2);
         this.setCenterY((double) Height / 2);
         this.setRadius(15);
-        RadialGradient gradientFill = new RadialGradient(
-                0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.rgb(252, 243, 64, .5)),
-                new Stop(0.25, Color.rgb(252, 243, 64)),
-                new Stop(0.5, Color.rgb(252, 243, 64)),
-                new Stop(0.75, Color.rgb(252, 243, 64)),
-                new Stop(1, Color.rgb(252, 243, 64, .5)));
+        RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(252, 243, 64, .5)), new Stop(0.25, Color.rgb(252, 243, 64)), new Stop(0.5, Color.rgb(252, 243, 64)), new Stop(0.75, Color.rgb(252, 243, 64)), new Stop(1, Color.rgb(252, 243, 64, .5)));
 
         Bloom bloom = new Bloom();
         bloom.setThreshold(.6);
@@ -45,6 +39,16 @@ public class Ball extends Circle {
     }
 
     public void move() {
+
+        // check if the ball hit the top or bottom side
+        if (this.getCenterY() - this.getRadius() <= 0 || this.getCenterY() >= Height - this.getRadius()) {
+            this.setYVelocity(-this.getYVelocity());
+        }
+        // check if the ball hit the right or left side
+        if (this.getCenterX() - this.getRadius() <= 0 || this.getCenterX() >= Width - this.getRadius()) {
+            this.setXVelocity(-this.getXVelocity());
+        }
+
         double newCenterX;
         double newCenterY;
         if (getXVelocity() >= 0) {

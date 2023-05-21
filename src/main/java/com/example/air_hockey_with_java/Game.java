@@ -87,9 +87,8 @@ public class Game extends Application {
         loadingScreen.animationPlay();
 
 
-        mainPane = new Pane();
-        mainPane.getChildren().add(game);
         startMenu.getChildren().add(loadingScreen);
+        mainPane = new Pane();
         mainPane.getChildren().add(startMenu);
 
         Scene scene = new Scene(mainPane, Width, Height);
@@ -169,6 +168,7 @@ public class Game extends Application {
         if (startMenu.getPlay()) {
             startMenu.setPlay(false);
             mainPane.getChildren().remove(startMenu);
+            mainPane.getChildren().add(game);
             HBox musicBox = new HBox();
             musicBox.getChildren().add(menu.getMusicBtn());
             musicBox.setTranslateX(menu.getRecWidth() - 45);
@@ -214,14 +214,7 @@ public class Game extends Application {
                 ball.rest(Height / 2 + 50);
             }
         }
-        // check if the ball hit the top or bottom side
-        if (ball.getCenterY() - ball.getRadius() <= 0 || ball.getCenterY() >= Height - ball.getRadius()) {
-            ball.setYVelocity(-ball.getYVelocity());
-        }
-        // check if the ball hit the right or left side
-        if (ball.getCenterX() - ball.getRadius() <= 0 || ball.getCenterX() >= Width - ball.getRadius()) {
-            ball.setXVelocity(-ball.getXVelocity());
-        }
+
         if (ball.intersects(p1)) {
             p1.hit();
             //check if the ball hit the player in the middle
