@@ -65,7 +65,6 @@ public class StartMenu extends Pane {
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();
             checkCollision();
-            this.requestFocus();
         }));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
         ballAnimation.play();
