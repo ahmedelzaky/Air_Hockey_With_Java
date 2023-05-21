@@ -27,7 +27,7 @@ public class LoadingScreen extends BorderPane {
         loadingBar.setProgress(0);
         loadingBar.setPrefSize(Width - 50, 20);
         loadingBar.setStyle("-fx-accent: #FF3131 ");
-        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(10), e -> {
+        loadingAnimation = new Timeline(new KeyFrame(Duration.millis(20), e -> {
             loadingBar.setProgress(loadingP);
             loadingP += .01;
         })

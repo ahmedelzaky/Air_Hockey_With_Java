@@ -113,32 +113,33 @@ public class Game extends Application {
                 p2.keyPressed(e);
             }
         });
+
         scene.setOnKeyReleased(e -> {
             p1.keyReleased(e);
             p2.keyReleased(e);
         });
+
         //toggle menu
         game.setOnKeyReleased(e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 isClicked();
             }
         });
-        menuBtn.setOnMouseClicked(e -> isClicked());
 
+        menuBtn.setOnMouseClicked(e -> isClicked());
 
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
             p1.Move();
             p2.Move();
         }));
-        playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
+        playerAnimation.setCycleCount(Timeline.INDEFINITE);
 
         ballAnimation = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> checkCollision()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
 
-
         Timeline loading = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> loadingAnimation()));
-        loading.setCycleCount(200);
+        loading.setCycleCount(500);
         loading.play();
 
         Timeline resetChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> gameReset()));
@@ -152,6 +153,7 @@ public class Game extends Application {
         Timeline startChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
             start();
         }));
+
         startChecker.setCycleCount(Timeline.INDEFINITE);
         startChecker.play();
 
@@ -159,6 +161,7 @@ public class Game extends Application {
             closeCheck(stage);
             miniCheck();
         }));
+
         closeAndMiniChecker.setCycleCount(Timeline.INDEFINITE);
         closeAndMiniChecker.play();
 
@@ -196,8 +199,8 @@ public class Game extends Application {
                 p2.rest();
                 ball.rest(Height / 2 - 50);
             }
-
         }
+
         if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
@@ -242,6 +245,7 @@ public class Game extends Application {
 
             }
         }
+
         if (ball.intersects(p2)) {
             p2.hit();
 
@@ -265,12 +269,10 @@ public class Game extends Application {
                     ball.setXVelocity((Math.cos(angle) * p2.getVelocity()));
                     ball.setYVelocity((Math.sin(angle) * p2.getVelocity()));
                 }
-
             }
         }
         // move the ball
         ball.move();
-
     }
 
     public void isClicked() {
@@ -290,8 +292,6 @@ public class Game extends Application {
                 ballAnimation.play();
             }
         }
-
-
     }
 
     public void loadingAnimation() {
@@ -372,7 +372,6 @@ public class Game extends Application {
             if (menu.isMiniClicked()) {
                 clicked = !clicked;
             }
-
         }
     }
 

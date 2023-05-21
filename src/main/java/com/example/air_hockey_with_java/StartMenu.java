@@ -49,7 +49,6 @@ public class StartMenu extends Pane {
         double recWidth = Width - 100;
         double recHeight = Height - 550;
 
-
         //Create a Rectangle to add button on it
         Rectangle rectangle = new Rectangle(recWidth, recHeight);
         rectangle.setLayoutX((double) Width / 2 - recWidth / 2);
@@ -64,8 +63,8 @@ public class StartMenu extends Pane {
 
         Timeline ballAnimation = new Timeline(new KeyFrame(Duration.millis(16.5), e -> {
             mBall.move();
-
         }));
+
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
         ballAnimation.play();
 
