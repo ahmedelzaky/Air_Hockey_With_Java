@@ -98,5 +98,5 @@ https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/3786c56a-892
   
   ## Uml Diagram
   
-  ![Air_Hockey_With_Java](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/e10b241e-32af-4f92-a51f-224f37001738)
+![Air_Hockey_With_Java](https://github.com/ahmedelzaky/Air_Hockey_With_Java/assets/89663624/516b4f7b-908e-4c78-bff5-95b5c6c7b4cc)
 
