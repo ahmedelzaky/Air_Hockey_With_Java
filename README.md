@@ -27,7 +27,7 @@ The Air Hockey Game is a simple implementation of the classic air hockey game us
 <li>Compile the source code using the following command:
 
 ```css
-javac --module-path <path_to_javafx_lib> --add-modules javafx.controls,javafx.fxml Main.java
+javac --module-path <path_to_javafx_lib> --add-modules javafx.controls,javafx.fxml Game.java
 ```
 
 Replace <path_to_javafx_lib> with the path to your JavaFX library.
@@ -35,10 +35,12 @@ Replace <path_to_javafx_lib> with the path to your JavaFX library.
 <li>Run the compiled program using the following command:
 
 ```css
-java --module-path <path_to_javafx_lib> --add-modules javafx.controls,javafx.fxml Main
+java --module-path <path_to_javafx_lib> --add-modules javafx.controls,javafx.fxml Game
 ```
 
 Again, replace <path_to_javafx_lib> with the path to your JavaFX library.
+  
+  - OR just use ide😊
 
 </ol>
 
