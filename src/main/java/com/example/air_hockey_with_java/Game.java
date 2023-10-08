@@ -25,29 +25,28 @@ import java.io.FileNotFoundException;
 
 
 public class Game extends Application {
-    protected final static int Height = 700;
-    protected final static int Width = (int) (Height * 0.5);
-    private double angle;
-    private int frameTime = 5;
-    private Player p1 = new Player(30, 1, 90, 57, 255, 20);
-    private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
-    private Ball ball = new Ball();
-    private Text p1Score = new Text();
-    private Text p2Score = new Text();
+    protected final static double Height = 700;
+    protected final static double Width = (Height * 0.5);
 
-    private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
+    private final Ball ball = new Ball();
+    private final Player p1 = new Player(30, 1, 90, 57, 255, 20);
+    private Player p2 = new Player(30, 2, Height - 90, 15, 240, 252);
+    private final Text p1Score = new Text();
+    private final Text p2Score = new Text();
+
+    private final Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 40);
     private Timeline ballAnimation;
     private Timeline playerAnimation;
     private boolean clicked = false;
-    private Menu menu = new Menu();
-    private StartMenu startMenu = new StartMenu(menu);
-    private GameFrame game = new GameFrame();
+    private final Menu menu = new Menu();
+    private final StartMenu startMenu = new StartMenu(menu);
+    private final GameFrame game = new GameFrame();
 
-    private GaussianBlur blurEffect = new GaussianBlur();
+    private final GaussianBlur blurEffect = new GaussianBlur();
 
     private Pane mainPane;
 
-    private LoadingScreen loadingScreen = new LoadingScreen();
+    private final LoadingScreen loadingScreen = new LoadingScreen();
 
 
     public Game() throws FileNotFoundException {
@@ -69,7 +68,7 @@ public class Game extends Application {
         VBox counter = new VBox(5);
         counter.setPrefWidth(140);
         counter.setLayoutX(Width - 35);
-        counter.setLayoutY((double) Height / 2 - 85);
+        counter.setLayoutY(Height / 2 - 85);
         // menu Button
         Button menuBtn = new Button();
         Image menuImg = new Image(new FileInputStream("images\\menu64.png"));
@@ -128,9 +127,18 @@ public class Game extends Application {
 
         menuBtn.setOnMouseClicked(e -> isClicked());
 
+        int frameTime = 5;
         playerAnimation = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
-            p1.Move();
-            p2.Move();
+            try {
+                p1.Move();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            try {
+                p2.Move();
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
         }));
 
         playerAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -150,9 +158,7 @@ public class Game extends Application {
         gameOver.setCycleCount(Timeline.INDEFINITE);
         gameOver.play();
 
-        Timeline startChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> {
-            start();
-        }));
+        Timeline startChecker = new Timeline(new KeyFrame(Duration.millis(frameTime), e -> start()));
 
         startChecker.setCycleCount(Timeline.INDEFINITE);
         startChecker.play();
@@ -168,8 +174,21 @@ public class Game extends Application {
     }
 
     private void start() {
-        if (startMenu.getPlay()) {
-            startMenu.setPlay(false);
+        if (startMenu.getPlay() == 1) {
+            startMenu.setPlay(0);
+            mainPane.getChildren().remove(startMenu);
+            mainPane.getChildren().add(game);
+            HBox musicBox = new HBox();
+            musicBox.getChildren().add(menu.getMusicBtn());
+            musicBox.setTranslateX(menu.getRecWidth() - 45);
+            menu.add(musicBox, 0, 0);
+            playerAnimation.play();
+            ballAnimation.play();
+        } else if (startMenu.getPlay() == 2) {
+            startMenu.setPlay(0);
+            game.getChildren().remove(p2);
+            p2 = new AIPlayer(30, 2, Height - 90, 15, 240, 252, ball);
+            game.getChildren().add(p2);
             mainPane.getChildren().remove(startMenu);
             mainPane.getChildren().add(game);
             HBox musicBox = new HBox();
@@ -184,9 +203,11 @@ public class Game extends Application {
     public void checkCollision() {
         game.requestFocus();
         //  System.out.println(p1.getScore() + " : " + p2.getScore());
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
+        if (ball.getCenterX() < Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() - ball.getRadius() <= 0) {
             try {
+                playerAnimation.pause();
                 Thread.sleep(500); // sleep for .5 seconds
+                playerAnimation.play();
             } catch (InterruptedException e) {
                 // handle interrupted exception
             }
@@ -201,7 +222,7 @@ public class Game extends Application {
             }
         }
 
-        if (ball.getCenterX() < (double) Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > (double) Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
+        if (ball.getCenterX() < Width / 2 + game.getArcRadius() - ball.getRadius() && ball.getCenterX() > Width / 2 - game.getArcRadius() + ball.getRadius() && ball.getCenterY() + ball.getRadius() >= Height) {
             try {
                 Thread.sleep(500); // sleep for .5 seconds
             } catch (InterruptedException e) {
@@ -218,6 +239,7 @@ public class Game extends Application {
             }
         }
 
+        double angle;
         if (ball.intersects(p1)) {
             p1.hit();
             //check if the ball hit the player in the middle

@@ -17,8 +17,8 @@ public class Ball extends Circle {
     private double yVelocity = 0;
 
     Ball() {
-        this.setCenterX((double) Width / 2);
-        this.setCenterY((double) Height / 2);
+        this.setCenterX(Width / 2);
+        this.setCenterY(Height / 2);
         this.setRadius(15);
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(252, 243, 64, .5)), new Stop(0.25, Color.rgb(252, 243, 64)), new Stop(0.5, Color.rgb(252, 243, 64)), new Stop(0.75, Color.rgb(252, 243, 64)), new Stop(1, Color.rgb(252, 243, 64, .5)));
 
@@ -83,9 +83,9 @@ public class Ball extends Circle {
         }
     }
 
-    public void rest(int y) {
+    public void rest(double y) {
 
-        this.setCenterX((double) Width / 2);
+        this.setCenterX(Width / 2);
         this.setCenterY(y);
         this.xVelocity = 0;
         this.yVelocity = 0;

@@ -23,19 +23,18 @@ public class Player extends Circle {
     private int score = 0;
     private Timeline bloomAnimation;
     private Bloom bloom;
-    private GameFrame gameFrame = new GameFrame();
 
-    private double Xoffset = 0;
-    private double Yoffset = 0;
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     private double y;
     private double x;
 
-    Player(double radius, int id, int Y, int R, int G, int B) {
+    Player(double radius, int id, double Y, int R, int G, int B) {
         super(radius);
         this.id = id;
-        this.x = ((double) Width / 2);
-        this.setCenterX((double) Width / 2);
+        this.x = (Width / 2);
+        this.setCenterX(Width / 2);
         this.setCenterY(Y);
         this.y = this.getCenterY();
 
@@ -73,15 +72,15 @@ public class Player extends Circle {
 
         if (id == 1) {
             if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
-                this.Yoffset = 0;
+                this.yOffset = 0;
             } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
-                this.Xoffset = 0;
+                this.xOffset = 0;
             }
         } else if (id == 2) {
             if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.S) {
-                this.Yoffset = 0;
+                this.yOffset = 0;
             } else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.D) {
-                this.Xoffset = 0;
+                this.xOffset = 0;
             }
         }
     }
@@ -97,21 +96,12 @@ public class Player extends Circle {
                 Velocity = 1.5 * step;
             }
             switch (event.getCode()) {
-                case UP:
-                    this.Yoffset = -step;
-                    break;
-                case DOWN:
-                    this.Yoffset = step;
-
-                    break;
-                case LEFT:
-                    this.Xoffset = -step;
-                    break;
-                case RIGHT:
-                    this.Xoffset = step;
-                    break;
-                default:
-                    break;
+                case UP -> this.yOffset = -step;
+                case DOWN -> this.yOffset = step;
+                case LEFT -> this.xOffset = -step;
+                case RIGHT -> this.xOffset = step;
+                default -> {
+                }
             }
 
         } else if (id == 2) {
@@ -121,25 +111,15 @@ public class Player extends Circle {
                 Velocity = 1.5 * step;
             }
             switch (event.getCode()) {
-                case W:
-                    this.Yoffset = -step;
-                    break;
-                case S:
-                    this.Yoffset = step;
-
-                    break;
-                case A:
-                    this.Xoffset = -step;
-                    break;
-                case D:
-                    this.Xoffset = step;
-                    break;
-                default:
-                    break;
+                case W -> this.yOffset = -step;
+                case S -> this.yOffset = step;
+                case A -> this.xOffset = -step;
+                case D -> this.xOffset = step;
+                default -> {
+                }
             }
         }
     }
-
 
     public void rest() {
         this.setCenterY(y);
@@ -152,18 +132,18 @@ public class Player extends Circle {
     }
 
 
-    public void Move() {
+    public void Move() throws InterruptedException {
         if (id == 1) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - gameFrame.getStrokeWidth()) && this.getCenterX() + this.Xoffset > this.getRadius() + gameFrame.getStrokeWidth())
-                this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset > this.getRadius() + gameFrame.getStrokeWidth() && this.getCenterY() + this.Yoffset + this.getRadius() - gameFrame.getStrokeWidth() < (double) Height / 2)
-                this.setCenterY(this.getCenterY() + this.Yoffset);
+            if (this.getCenterX() + this.xOffset < (Width - this.getRadius() - GameFrame.getStrokeWidth()) && this.getCenterX() + this.xOffset > this.getRadius() + GameFrame.getStrokeWidth())
+                this.setCenterX(this.getCenterX() + this.xOffset);
+            if (this.getCenterY() + this.yOffset > this.getRadius() + GameFrame.getStrokeWidth() && this.getCenterY() + this.yOffset + this.getRadius() - GameFrame.getStrokeWidth() < Height / 2)
+                this.setCenterY(this.getCenterY() + this.yOffset);
 
         } else if (id == 2) {
-            if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - gameFrame.getStrokeWidth()) && this.getCenterX() + this.Xoffset > this.getRadius() + gameFrame.getStrokeWidth())
-                this.setCenterX(this.getCenterX() + this.Xoffset);
-            if (this.getCenterY() + this.Yoffset - this.getRadius() > ((double) Height / 2) - gameFrame.getStrokeWidth() && this.getCenterY() + this.Yoffset < Height - this.getRadius() - gameFrame.getStrokeWidth())
-                this.setCenterY(this.getCenterY() + this.Yoffset);
+            if (this.getCenterX() + this.xOffset < (Width - this.getRadius() - GameFrame.getStrokeWidth()) && this.getCenterX() + this.xOffset > this.getRadius() + GameFrame.getStrokeWidth())
+                this.setCenterX(this.getCenterX() + this.xOffset);
+            if (this.getCenterY() + this.yOffset - this.getRadius() > (Height / 2) - GameFrame.getStrokeWidth() && this.getCenterY() + this.yOffset < Height - this.getRadius() - GameFrame.getStrokeWidth())
+                this.setCenterY(this.getCenterY() + this.yOffset);
         }
     }
 
