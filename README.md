@@ -20,7 +20,8 @@ The Air Hockey Game is a simple implementation of the classic air hockey game us
 </ul>
 
 ## How to Run
-
+### you can download exe from this link
+<a href="https://drive.google.com/file/d/1dGmFukdYq2kX87NRTAmYB9pUjXnhP_x0/view?usp=drive_link"> download </a>
 <ol>
 
 <li>Make sure you have Java and JavaFX installed on your system.
