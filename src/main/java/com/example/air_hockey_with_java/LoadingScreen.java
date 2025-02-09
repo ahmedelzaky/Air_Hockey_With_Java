@@ -16,10 +16,9 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class LoadingScreen extends BorderPane {
-    private Label label = new Label("Loading...");
-    private ProgressBar loadingBar = new ProgressBar();
+    private final ProgressBar loadingBar = new ProgressBar();
     private double loadingP = .01;
-    private Timeline loadingAnimation;
+    private final Timeline loadingAnimation;
 
     LoadingScreen() {
         this.setPrefSize(Width, Height);
@@ -35,9 +34,10 @@ public class LoadingScreen extends BorderPane {
 
         loadingAnimation.setCycleCount(100);
         HBox hbox = new HBox();
+        Label label = new Label("Loading...");
         hbox.getChildren().add(label);
         hbox.setAlignment(Pos.CENTER);
-        hbox.setTranslateY(-(Height / 2 - 50));
+        hbox.setTranslateY(-((double) Height / 2 - 50));
         label.setFont(Font.font("Arial", 18));
         label.setTextFill(Color.RED);
 

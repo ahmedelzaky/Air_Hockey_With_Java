@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55a55f27-7704-4468-8b81-ed358f6b94df" name="Changes" comment=" V1.71" />
+    <list default="true" id="55a55f27-7704-4468-8b81-ed358f6b94df" name="Changes" comment=" V1.71">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/LoadingScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/air_hockey_with_java/StartMenu.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,32 +29,42 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2Qo1QkH66vseG1N7wOUUlkuOY8S" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Game.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/git/Air_Hockey_With_Java",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.42413792",
-    "settings.editor.selected.configurable": "project.scopes",
+    "settings.editor.selected.configurable": "preferences.general",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -73,6 +93,14 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.19416.15" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.19416.15" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -92,6 +120,10 @@
       <workItem from="1689769104517" duration="51000" />
       <workItem from="1689769181089" duration="261000" />
       <workItem from="1689769456156" duration="491000" />
+      <workItem from="1733073752042" duration="19000" />
+      <workItem from="1733680874758" duration="419000" />
+      <workItem from="1733683660248" duration="46000" />
+      <workItem from="1739132042020" duration="8778000" />
     </task>
     <task id="LOCAL-00001" summary=" V1.71">
       <created>1689769931149</created>
@@ -109,5 +141,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=" V1.71" />
     <option name="LAST_COMMIT_MESSAGE" value=" V1.71" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

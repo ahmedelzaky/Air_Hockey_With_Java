@@ -1,6 +1,5 @@
 package com.example.air_hockey_with_java;
 
-import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,6 +13,9 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
@@ -21,15 +23,17 @@ public class Player extends Circle {
     private final int id;
     private double Velocity;
     private int score = 0;
-    private Timeline bloomAnimation;
-    private Bloom bloom;
-    private GameFrame gameFrame = new GameFrame();
+    private final Timeline bloomAnimation;
+    private final Bloom bloom;
+    private final GameFrame gameFrame = new GameFrame();
+    private final Map<KeyCode, Boolean> keys = new TreeMap<>();
+
 
     private double Xoffset = 0;
     private double Yoffset = 0;
 
-    private double y;
-    private double x;
+    private final double y;
+    private final double x;
 
     Player(double radius, int id, int Y, int R, int G, int B) {
         super(radius);
@@ -39,23 +43,22 @@ public class Player extends Circle {
         this.setCenterY(Y);
         this.y = this.getCenterY();
 
+        if (id == 1) {
+            keys.putAll(Map.of(KeyCode.UP, false, KeyCode.DOWN, false, KeyCode.LEFT, false, KeyCode.RIGHT, false, KeyCode.SHIFT, false));
+        } else if (id == 2) {
+            keys.putAll(Map.of(KeyCode.W, false, KeyCode.S, false, KeyCode.A, false, KeyCode.D, false, KeyCode.CONTROL, false));
+        }
+
         RadialGradient gradientFill = new RadialGradient(0, 0, 0.5, 0.5, 0.5, true, CycleMethod.NO_CYCLE, new Stop(0, Color.rgb(0, 0, 0, 1)), new Stop(0.25, Color.rgb(0, 0, 0, 1)), new Stop(0.3, Color.rgb(0, 0, 0, 1)), new Stop(0.75, Color.rgb(R, G, B, 1)), new Stop(1, Color.rgb(R, G, B, .5)));
 
         bloom = new Bloom();
         bloom.setThreshold(.6);
         this.setEffect(bloom);
         this.setFill(gradientFill);
-
-        Timeline hitAnimationChecker = new Timeline(new KeyFrame(Duration.millis(16), e -> {
-            try {
-                if (bloomAnimation.getStatus() != Animation.Status.RUNNING) {
-                    this.setEffect(bloom);
-                }
-            } catch (Exception ignored) {
-            }
-        }));
-        hitAnimationChecker.setCycleCount(Timeline.INDEFINITE);
-        hitAnimationChecker.play();
+        bloomAnimation = new Timeline(new KeyFrame(Duration.millis(200)));
+        bloomAnimation.setOnFinished(event -> {
+            this.setEffect(this.bloom);
+        });
     }
 
 
@@ -63,83 +66,82 @@ public class Player extends Circle {
         Bloom bloom = new Bloom();
         bloom.setThreshold(0.1);
         this.setEffect(bloom);
-        bloomAnimation = new Timeline(new KeyFrame(Duration.millis(200)));
         bloomAnimation.play();
     }
 
 
     public void keyReleased(KeyEvent event) {
-
-
-        if (id == 1) {
-            if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
-                this.Yoffset = 0;
-            } else if (event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.RIGHT) {
-                this.Xoffset = 0;
-            }
-        } else if (id == 2) {
-            if (event.getCode() == KeyCode.W || event.getCode() == KeyCode.S) {
-                this.Yoffset = 0;
-            } else if (event.getCode() == KeyCode.A || event.getCode() == KeyCode.D) {
-                this.Xoffset = 0;
-            }
+        keys.put(event.getCode(), false);
+        if (!event.isShiftDown()) {
+            keys.put(KeyCode.SHIFT, false);
+        }
+        if (!event.isControlDown()) {
+            keys.put(KeyCode.CONTROL, false);
         }
     }
 
 
     public void keyPressed(KeyEvent event) {
-        int step = 2;
-        Velocity = 1.5 * step;
+        if (event.isShiftDown()) {
+            keys.put(KeyCode.SHIFT, true);
+        }
+        keys.put(event.getCode(), true);
 
+        if (event.isControlDown()) {
+            keys.put(KeyCode.CONTROL, true);
+        }
+        keys.put(event.getCode(), true);
+
+    }
+
+    public void calculateOffsets() {
+        int step = 5;
         if (id == 1) {
-            if (event.isShiftDown()) {
-                step = 3;
-                Velocity = 1.5 * step;
+            if (keys.get(KeyCode.SHIFT)) {
+                step = (int) (step * 1.5);
             }
-            switch (event.getCode()) {
-                case UP:
-                    this.Yoffset = -step;
-                    break;
-                case DOWN:
-                    this.Yoffset = step;
-
-                    break;
-                case LEFT:
-                    this.Xoffset = -step;
-                    break;
-                case RIGHT:
-                    this.Xoffset = step;
-                    break;
-                default:
-                    break;
+            if (keys.get(KeyCode.UP) && keys.get(KeyCode.DOWN)) {
+                this.Yoffset = 0;
+            } else if (keys.get(KeyCode.UP)) {
+                this.Yoffset = -step;
+            } else if (keys.get(KeyCode.DOWN)) {
+                this.Yoffset = step;
+            } else {
+                this.Yoffset = 0;
             }
-
-        } else if (id == 2) {
-
-            if (event.isControlDown()) {
-                step = 3;
-                Velocity = 1.5 * step;
+            if (keys.get(KeyCode.LEFT) && keys.get(KeyCode.RIGHT)) {
+                this.Xoffset = 0;
+            } else if (keys.get(KeyCode.LEFT)) {
+                this.Xoffset = -step;
+            } else if (keys.get(KeyCode.RIGHT)) {
+                this.Xoffset = step;
+            } else {
+                this.Xoffset = 0;
             }
-            switch (event.getCode()) {
-                case W:
-                    this.Yoffset = -step;
-                    break;
-                case S:
-                    this.Yoffset = step;
-
-                    break;
-                case A:
-                    this.Xoffset = -step;
-                    break;
-                case D:
-                    this.Xoffset = step;
-                    break;
-                default:
-                    break;
+        } else {
+            if (keys.get(KeyCode.CONTROL)) {
+                step = (int) (step * 1.5);
+            }
+            if (keys.get(KeyCode.W) && keys.get(KeyCode.S)) {
+                this.Yoffset = 0;
+            } else if (keys.get(KeyCode.W)) {
+                this.Yoffset = -step;
+            } else if (keys.get(KeyCode.S)) {
+                this.Yoffset = step;
+            } else {
+                this.Yoffset = 0;
+            }
+            if (keys.get(KeyCode.A) && keys.get(KeyCode.D)) {
+                this.Xoffset = 0;
+            } else if (keys.get(KeyCode.A)) {
+                this.Xoffset = -step;
+            } else if (keys.get(KeyCode.D)) {
+                this.Xoffset = step;
+            } else {
+                this.Xoffset = 0;
             }
         }
     }
-
 
     public void rest() {
         this.setCenterY(y);
@@ -153,6 +155,8 @@ public class Player extends Circle {
 
 
     public void Move() {
+        calculateOffsets();
+        Velocity = Math.sqrt(Math.pow(this.Xoffset, 2) + Math.pow(this.Yoffset, 2));
         if (id == 1) {
             if (this.getCenterX() + this.Xoffset < (Width - this.getRadius() - gameFrame.getStrokeWidth()) && this.getCenterX() + this.Xoffset > this.getRadius() + gameFrame.getStrokeWidth())
                 this.setCenterX(this.getCenterX() + this.Xoffset);

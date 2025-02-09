@@ -6,18 +6,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
@@ -27,16 +27,14 @@ public class Menu extends GridPane {
     private boolean mute = false;
     private boolean close = false;
     private boolean mini = true;
-    private int iconSize = 30;
-    private Button musicBtn;
-    private double recWidth;
+    private final Button musicBtn;
+    private final double recWidth;
 
     private boolean MiniClicked = false;
-    private Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
 
     private boolean resetValue = false;
-    private Text p1status = new Text(100, 200, "");
-    private Text p2status = new Text(100, 530, "");
+    private final Text p1status = new Text(100, 200, "");
+    private final Text p2status = new Text(100, 530, "");
 
     Menu() throws FileNotFoundException {
         // music Button
@@ -45,6 +43,7 @@ public class Menu extends GridPane {
         ImageView muteView = new ImageView(muteImg);
         Image unmuteImg = new Image(new FileInputStream("images\\unmute.png"));
         ImageView unmuteView = new ImageView(unmuteImg);
+        int iconSize = 30;
         muteView.setFitHeight(iconSize);
         muteView.setFitWidth(iconSize);
         unmuteView.setFitHeight(iconSize);
@@ -75,6 +74,7 @@ public class Menu extends GridPane {
         resetBtn.setPrefSize(150, 25);
         resetBtn.setTextFill(Color.WHITE);
         resetBtn.setStyle("-fx-background-color:  transparent;" + "-fx-border-color:  rgb(200, 34, 255 , .6);" + "-fx-border-width:5;" + "-fx-border-radius:50;" + "-fx-cursor: pointer;");
+        Font fnt = Font.font("Time New Roman", FontWeight.BOLD, FontPosture.ITALIC, 20);
         resetBtn.setFont(fnt);
         recWidth = Width - 100;
         double recHeight = Height - 550;
@@ -104,7 +104,7 @@ public class Menu extends GridPane {
         this.p2status.setTranslateY((double) Height / 2 - 100);
         this.p2status.setTranslateX(50);
 
-        Media sound = new Media(getClass().getResource("/Clown.mp3").toString());
+        Media sound = new Media(Objects.requireNonNull(getClass().getResource("/Clown.mp3")).toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(.5);

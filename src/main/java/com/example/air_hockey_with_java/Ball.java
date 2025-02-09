@@ -15,6 +15,8 @@ import static com.example.air_hockey_with_java.Game.Width;
 public class Ball extends Circle {
     private double xVelocity = 0;
     private double yVelocity = 0;
+    private double friction = 1;
+    private long lastTime = System.currentTimeMillis();
 
     Ball() {
         this.setCenterX((double) Width / 2);
@@ -29,13 +31,46 @@ public class Ball extends Circle {
 
     }
 
-    public boolean intersects(Player player) {
+    public boolean intersects(Circle player) {
         double ballCenterX = getCenterX();
         double ballCenterY = getCenterY();
         double playerCenterX = player.getCenterX();
         double playerCenterY = player.getCenterY();
         double distance = Math.sqrt(Math.pow(ballCenterX - playerCenterX, 2) + Math.pow(ballCenterY - playerCenterY, 2));
         return distance <= getRadius() + player.getRadius();
+    }
+
+    public void checkCollision(Player player) {
+        if (intersects(player)) {
+            player.hit();
+            //check if the ball hit the player in the middle
+            if (this.getCenterX() - player.getCenterX() == 0) {
+                //check if the ball hit the player from behind
+                if (this.getCenterY() < player.getCenterY()) {
+                    this.setXVelocity(0);
+                    this.setYVelocity(player.getVelocity() != 0 ? -player.getVelocity() : -this.yVelocity);
+                } else {
+                    this.setXVelocity(0);
+                    this.setYVelocity(player.getVelocity() != 0 ? player.getVelocity() : -this.yVelocity);
+                }
+            } else {
+                if (player.getVelocity() == 0) {
+                    xVelocity = -xVelocity;
+                    yVelocity = -yVelocity;
+                } else {
+                    // calc angle of collision
+                    double angle = Math.atan((this.getCenterY() - player.getCenterY()) / (this.getCenterX() - player.getCenterX()));
+
+                    if (this.getCenterX() < player.getCenterX()) {
+                        this.setXVelocity(-player.getVelocity() - 1, angle);
+                        this.setYVelocity(-player.getVelocity() - 1, angle);
+                    } else {
+                        this.setXVelocity(player.getVelocity() + 1, angle);
+                        this.setYVelocity(player.getVelocity() + 1, angle);
+                    }
+                }
+            }
+        }
     }
 
     public void move() {
@@ -81,6 +116,11 @@ public class Ball extends Circle {
                 }
             }
         }
+        if (System.currentTimeMillis() - lastTime > 50) {
+            lastTime = System.currentTimeMillis();
+            setXVelocity(getXVelocity() * friction);
+            setYVelocity(getYVelocity() * friction);
+        }
     }
 
     public void rest(int y) {
@@ -101,8 +141,20 @@ public class Ball extends Circle {
         this.xVelocity = xVelocity;
     }
 
+    public void setXVelocity(double xVelocity, double angle) {
+        this.xVelocity = (Math.cos(angle) * xVelocity);
+    }
+
     public void setYVelocity(double yVelocity) {
         this.yVelocity = yVelocity;
+    }
+
+    public void setYVelocity(double yVelocity, double angle) {
+        this.yVelocity = (Math.sin(angle) * yVelocity);
+    }
+
+    public void setFriction(double friction) {
+        this.friction = friction;
     }
 
 
@@ -112,6 +164,10 @@ public class Ball extends Circle {
 
     public double getYVelocity() {
         return yVelocity;
+    }
+
+    public double getFriction() {
+        return friction;
     }
 
 }

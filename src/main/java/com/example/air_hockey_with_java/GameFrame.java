@@ -14,8 +14,8 @@ import static com.example.air_hockey_with_java.Game.Height;
 import static com.example.air_hockey_with_java.Game.Width;
 
 public class GameFrame extends Pane {
-    private double strokeWidth = 5;
-    private double arcRadius = ((double) 1 / 5) * (double) Width;
+    private final double strokeWidth = 5;
+    private final double arcRadius = ((double) 1 / 5) * (double) Width;
 
     GameFrame() {
         //Background Color
